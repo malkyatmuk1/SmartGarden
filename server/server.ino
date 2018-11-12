@@ -1,8 +1,12 @@
+
+
+#include <dht.h>
+
+
 #include <EEPROM.h>
 #include <vector>
 #include<Hash.h>
 #include <ESP8266WiFi.h>
-
 using namespace std;
 
  struct person 
@@ -13,6 +17,9 @@ using namespace std;
   char perm;
 };
 
+#define DHTTYPE DHT11
+#define DHTPIN 16
+
 #define user_start  78
 #define user_step  sizeof(person)
 #define passAP_start  68
@@ -22,7 +29,12 @@ using namespace std;
 #define wifipass_start 0
 #define wifipass_stop 31
 #define usercount 10
+#define  B ((float)3435)
 
+unsigned int EchoPin = 2;           // connect Pin 2(Arduino digital io) to Echo at US-015
+unsigned int TrigPin = 3;           // connect Pin 3(Arduino digital io) to Trig at US-015
+unsigned long Time_Echo_us = 0;
+unsigned long Len_mm  = 0;
 char ssid[64];
 char password[64];
 const char passAp[]="12345678";
@@ -32,6 +44,7 @@ const char ssidWiFi[]="JohnAndWillow";
 vector<String> commands;
 person list[10];
 byte listofflags[10]; 
+String str;
 
 vector<String> splitString(String line, char c);
 void writePassAp(String pass);
@@ -52,7 +65,8 @@ WiFiServer server(3030);
 WiFiClient client;
 
 int pin= A0;
-
+dht DHT;
+uint32_t delayMS;
 
 void setup() {
   
@@ -62,7 +76,12 @@ void setup() {
   WiFi.softAP(ssidAp,passAp);
   EEPROM.begin(512);
   pinMode(pin, INPUT); 
-  
+  pinMode(EchoPin, INPUT);                    //Set EchoPin as input, to receive measure result from US-015
+  pinMode(TrigPin, OUTPUT);        
+ 
+   
+  /*
+  int count=user_start;
   for(int i=0;i<10;i++)
   {
     readPerson(count,&list[i]);
@@ -75,6 +94,8 @@ void setup() {
     Serial.println(listofflags[i]);
   }
   printlist();
+  */
+  /*
   
   int br=0;
   //connect to WiFi
@@ -85,49 +106,63 @@ void setup() {
   }
   if(br==5) Serial.println("connection failed");
   Serial.print("IP Address: "); Serial.println(WiFi.localIP());
+
   server.begin();
-  
+  */
 }
 
 void loop() {
+    digitalWrite(TrigPin, HIGH);              //begin to send a high pulse, then US-015 begin to measure the distance
+    delayMicroseconds(50);                    //set this high pulse width as 50us (>10us)
+    digitalWrite(TrigPin, LOW);               //end this high pulse
+    
+    Time_Echo_us = pulseIn(EchoPin, HIGH);               //calculate the pulse width at EchoPin, 
+    if((Time_Echo_us < 60000) && (Time_Echo_us > 1))     //a valid pulse width should be between (1, 60000).
+    {
+      Len_mm = (Time_Echo_us*34/100)/2;      //calculate the distance by pulse width, Len_mm = (Time_Echo_us * 0.34mm/us) / 2 (mm)
+      Serial.print("Present Distance is: ");  //output result to Serial monitor
+      Serial.print(Len_mm, DEC);            //output result to Serial monitor
+      Serial.println("mm");                 //output result to Serial monitor
+    }
+    delay(100);                            
+
   client = server.available();
   if(client)
   {
       str=client.readStringUntil('\r\n');
       commands=splitString(str,' ');
+       
       if(commands[0]=="getTemperature")
       {
-        client.println(getTemp(pin));        
+        
       } 
+      else if (commands[0]=="getHumidityOrTemp")
+      {
+        
+      }
   }
 }
-vector<String> splitString(String line, char c)
+double getHumidityOrTemp(boolean isHumidity)
 {
-    vector<String> str;
-    
-    String curr_string = "";
-    
-    for(int i = 0; i < line.length(); i++)
-    {
-      if(line[i] == c)
-      {
-
-        str.push_back(curr_string);
-        curr_string = "";
-      }
-     
-      else curr_string+=line[i];
-      Serial.println(line[i]);
-    }
-
-    str.push_back(curr_string);
-    return str;
+  int chk = DHT.read11(DHTPIN);
+  delay(2000);
+  if(isHumidity)
+  {
+    return DHT.humidity;
+  }
+  else return DHT.temperature;
 }
 double getTemp(int pin)
 {
-  int tmp;
+  double tmp;
+  double r,temperature,ut, Ri=4530.0, E=1.00;
+  
   tmp = analogRead (A0);
-  r = ((1023.0*R0)/(float)tmp)-R0;
+  ut=double(tmp/1024);
+  //Serial.println(tmp);
+  r = (double)(ut*Ri)/(E-ut);
+  //Serial.print("r= ");
+ // Serial.println(r);
   temperature = B/log(r/0.09919) - 273.15;
   return temperature;
 }

@@ -43,9 +43,10 @@
         android:text="Give us some Valuable \n information"
         android:textColor="@color/greyText"
         android:layout_gravity="center_horizontal"
+
         android:gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="100dp"
         android:fontFamily="@font/titillium_weblight"
         android:textSize="20dp"
 
@@ -76,23 +77,34 @@
         android:layout_marginTop="10dp"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="Forgot Password?"
-        android:textColor="@color/blue"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="70dp"
-        />
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="18dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal">
+
+        <View
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/selected_dot" />
+
+        <View
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/default_dot" />
+    </LinearLayout>
     <Button
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:background="@drawable/button"
         android:drawableRight="@drawable/right_arrow_button"
         android:paddingRight="20dp"
-        android:text="Sign in"
+        android:text="Next"
         android:textSize="15dp"
         android:textColor="@color/white"
         android:layout_gravity="center_horizontal"
@@ -104,7 +116,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Create an account? Sign up"
+        android:text="Already have an account? Sign in"
         android:textColor="@color/blue"
         android:textStyle="bold"
         android:layout_marginTop="10dp"

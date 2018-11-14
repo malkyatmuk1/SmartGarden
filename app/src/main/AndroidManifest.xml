@@ -20,6 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".UPorIn"/>
+        <activity android:name=".SignUp"/>
+        <activity android:name=".SignUpSecond"/>
     </application>
 
 </manifest>

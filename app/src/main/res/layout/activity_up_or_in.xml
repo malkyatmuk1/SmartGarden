@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Start"
+    tools:context=".UPorIn"
     android:orientation="vertical"
     android:gravity="center_vertical">
 
@@ -30,6 +30,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:background="@drawable/button"
+        android:id="@+id/SignInButton"
         android:drawableRight="@drawable/right_arrow_button"
         android:paddingRight="20dp"
         android:text="Sign in"
@@ -44,6 +45,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:background="@drawable/button"
+        android:id="@+id/SignUpButton"
         android:drawableRight="@drawable/right_arrow_button"
         android:paddingRight="20dp"
         android:text="Sign up"

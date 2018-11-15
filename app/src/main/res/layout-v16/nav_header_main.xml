@@ -2,29 +2,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
     android:id="@+id/header"
     xmlns:src="http://schemas.android.com/tools"
-    android:background="@drawable/gradient_blue_green"
+    android:background="@none"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:theme="@style/ThemeOverlay.AppCompat"
     android:weightSum="1">
-    <ImageButton
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:src="@drawable/left_arrow_button"
-        android:layout_margin="10dp"
-        android:background="@null"
-        />
-    <ImageView
-        android:id="@+id/profilpicture"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/avatar"
-        android:layout_marginTop="10dp"
-        />
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:stretchColumns="1">
+
+        <TableRow>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:paddingLeft="10dp"
+                android:background="@null"
+                android:src="@drawable/left_arrow_button"
+
+
+                />
+
+            <ImageView
+                android:id="@+id/profilpicture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:src="@drawable/avatar"
+                android:layout_gravity="center"
+                />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:background="@null"
+                android:src="@drawable/settings"
+                android:layout_gravity="center|right"
+                />
+
+        </TableRow>
+    </TableLayout>
     <TextView
         android:id="@+id/usernameprofil"
         android:layout_width="wrap_content"

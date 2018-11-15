@@ -22,6 +22,8 @@
         <activity android:name=".UPorIn" android:theme="@style/generalnotitle"/>
         <activity android:name=".SignUp" android:theme="@style/generalnotitle"/>
         <activity android:name=".SignUpSecond" android:theme="@style/generalnotitle"/>
+        <activity android:name=".Start_menu" android:theme="@style/generalnotitle"/>
+
     </application>
 
 </manifest>

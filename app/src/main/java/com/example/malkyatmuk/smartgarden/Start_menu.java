@@ -21,17 +21,20 @@ public class Start_menu extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_drawer_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        toolbar.setNavigationIcon(R.drawable.left_arrow_aqua);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         View txtusern=(View) navigationView.getHeaderView(0);
         TextView txt= (TextView) txtusern.findViewById(R.id.usernameprofil);
-        txt.setText(Global.username.toString());
+        //txt.setText(Global.username.toString());
         navigationView.setNavigationItemSelectedListener(this);
         displaySelectedScreen(R.id.nav_menu1);
     }

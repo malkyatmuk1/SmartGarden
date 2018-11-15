@@ -6,14 +6,19 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="drawerArrowStyle">@style/hamburger</item>
 
     </style>
     <style name="generalnotitle" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowNoTitle">true</item>
+        <item name="drawerArrowStyle">@style/hamburger</item>
     </style>
     <style name="whitetext" parent="Theme.AppCompat.NoActionBar">
         <item name="android:textSize">25dp</item>
 
+    </style>
+    <style name="hamburger" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@color/aqua</item>
     </style>
 
 </resources>

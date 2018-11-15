@@ -24,7 +24,7 @@ public class SignUp extends AppCompatActivity {
     View.OnClickListener NextButtonListener=new View.OnClickListener() {
 
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), SignUpSecond.class);
+            Intent intent = new Intent(view.getContext(), Start_menu.class);
             startActivity(intent);
             finish();
         }

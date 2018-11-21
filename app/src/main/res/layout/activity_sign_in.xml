@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:text="Sign In"
         android:textAllCaps="true"
+        android:textStyle="bold"
         android:fontFamily="@font/tt_corals_thin_demo"
         android:textColor="@color/aqua"
         android:textSize="40dp"
@@ -41,27 +42,33 @@
         android:fontFamily="@font/titillium_weblight"
         android:textSize="20dp"/>
     <EditText
+        android:id="@+id/username"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/edittext"
-        android:text="User Name"
+        android:hint="User Name"
+        android:textColorHint="@color/blue"
         android:textColor="@color/blue"
         android:textSize="15dp"
         android:paddingLeft="30dp"
         android:fontFamily="@font/titillium_weblight"/>
     <EditText
+        android:id="@+id/password"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/edittext"
-        android:text="Password"
+        android:hint="Password"
+        android:textColorHint="@color/blue"
+        android:inputType="textPassword"
         android:textColor="@color/blue"
         android:textSize="15dp"
         android:paddingLeft="30dp"
         android:fontFamily="@font/titillium_weblight"
         android:layout_marginTop="10dp" />
     <TextView
+        android:id="@+id/forgotpassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
@@ -71,6 +78,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="70dp" />
     <Button
+        android:id="@+id/SignInButton"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:background="@drawable/button"
@@ -84,6 +92,7 @@
         android:textAlignment="gravity"
         android:textAllCaps="false" />
     <TextView
+        android:id="@+id/createnewaccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

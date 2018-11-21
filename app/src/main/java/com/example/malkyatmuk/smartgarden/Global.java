@@ -29,9 +29,7 @@ public class Global extends Application {
     public static boolean checkProgress=false;
     public static boolean goback;
 
-
     public static ArrayList<String> users= new ArrayList<String>();
-
 
     public String getUsername() {
         return username;

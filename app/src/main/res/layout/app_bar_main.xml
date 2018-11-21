@@ -5,14 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.malkyatmuk.smartgarden.Start_menu"
-    android:orientation="vertical"
-    >
-
+    android:orientation="vertical">
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:elevation="0dp">
-
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -24,13 +21,8 @@
             android:background="@drawable/actionbar_layer_list"
             android:theme="@style/generalnotitle"
             android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
-
-            />
-
-
+            android:gravity="center_horizontal"/>
     </android.support.design.widget.AppBarLayout>
-
     <include
         layout="@layout/content_main"
         android:layout_width="wrap_content"

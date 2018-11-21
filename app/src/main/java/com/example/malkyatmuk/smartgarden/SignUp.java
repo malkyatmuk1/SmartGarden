@@ -19,7 +19,6 @@ public class SignUp extends AppCompatActivity {
         Button nextButton= (Button) findViewById(R.id.nextButton);
         nextButton.setOnClickListener(NextButtonListener);
 
-
     }
     View.OnClickListener NextButtonListener=new View.OnClickListener() {
 
@@ -29,6 +28,5 @@ public class SignUp extends AppCompatActivity {
             finish();
         }
     };
-
 }
 

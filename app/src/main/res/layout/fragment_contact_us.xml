@@ -8,32 +8,22 @@
     android:gravity="center"
     android:layout_gravity="center_horizontal"
     android:orientation="vertical"
-    android:theme="@style/ThemeOverlay.AppCompat"
-
-    >
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Please let us know what issues you're facing and we'll get back soon"
-    android:lines="2"
-    android:textColor="@color/colorPrimaryDark"
-    android:layout_gravity="center"
-    android:fontFamily="@font/titillium_weblight"
-    android:layout_margin="30dp"
-    android:textStyle="bold"
-    android:textSize="15dp"
-
-    />
+    android:theme="@style/ThemeOverlay.AppCompat">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please let us know what issues you're facing and we'll get back soon"
+        android:lines="2"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_gravity="center"
+        android:fontFamily="@font/titillium_weblight"
+        android:layout_margin="30dp"
+        android:textStyle="bold"
+        android:textSize="15dp"/>
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
-        android:elevation="4dp"
-        android:outlineProvider="bounds"
-        android:paddingTop="2dp"
-        android:layout_marginTop="2dp"
+        android:elevation="5dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/edittext_white"
         >
@@ -48,33 +38,35 @@
             android:maxLines="1"
             android:background="@drawable/edittext_white"
             android:layout_gravity="center"
-
+            android:inputType="textEmailAddress"/>
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="6dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/edittext_white"
+        android:layout_marginTop="20dp">
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Tell us more"
+            android:textColorHint="@color/hint"
+            android:padding="15dp"
+            android:textColor="@color/greyText"
+            android:lines="4"
+            android:maxLines="4"
+            android:gravity="start"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edittext_white"
             />
     </FrameLayout>
-
-    <EditText
+    <Button
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="Tell us more"
-        android:textColorHint="@color/hint"
-        android:shadowColor="@color/hint"
-        android:shadowRadius="1.0"
-        android:padding="15dp"
-        android:textColor="@color/greyText"
-        android:lines="4"
-        android:maxLines="4"
-       android:gravity="start"
-        android:layout_margin="15dp"
-        android:background="@drawable/edittext"
-
-        />
-<Button
-    android:layout_width="300dp"
-    android:layout_height="50dp"
-    android:background="@drawable/button"
-    android:textColor="@color/white"
-    android:text="Submit"
-    android:layout_marginTop="150dp"
-    />
-
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+        android:textColor="@color/white"
+        android:text="Submit"
+        android:layout_marginTop="150dp"
+        android:textAllCaps="false"/>
 </LinearLayout>

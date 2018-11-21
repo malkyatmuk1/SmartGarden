@@ -21,7 +21,6 @@ public class Start extends AppCompatActivity {
         Button LetsGoButton= (Button) findViewById(R.id.letsGo);
         LetsGoButton.setOnClickListener(LetsGoButtonListener);
 
-
     }
     View.OnClickListener LetsGoButtonListener=new View.OnClickListener() {
 

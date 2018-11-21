@@ -20,7 +20,6 @@ public class MyAddress extends Fragment {
        super.onCreateView(inflater, container, savedInstanceState);
 
         View  myFragmentView = inflater.inflate(R.layout.fragment_myaddress, container, false);
-
         return myFragmentView;
 
     }
@@ -29,8 +28,5 @@ public class MyAddress extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle("My Address");
-
-
-
     }
 }

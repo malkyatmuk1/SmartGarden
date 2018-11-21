@@ -21,8 +21,6 @@ public class UPorIn extends AppCompatActivity {
         beforeGreen.setText(Html.fromHtml(first + second+ third));
         Button SignUpButton= (Button) findViewById(R.id.SignUpButton);
         SignUpButton.setOnClickListener(SignUpButtonListener);
-
-
     }
     View.OnClickListener SignUpButtonListener=new View.OnClickListener() {
 
@@ -32,6 +30,4 @@ public class UPorIn extends AppCompatActivity {
             finish();
         }
     };
-
-
 }

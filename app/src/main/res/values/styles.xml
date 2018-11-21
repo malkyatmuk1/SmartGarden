@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -7,24 +6,24 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="drawerArrowStyle">@style/hamburger</item>
-
     </style>
+
     <style name="generalnotitle" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="drawerArrowStyle">@style/hamburger</item>
-    <item name="android:title">@style/ToolBar</item>
+        <item name="android:title">@style/ToolBar</item>
     </style>
+
     <style name="whitetext" parent="Theme.AppCompat.NoActionBar">
         <item name="android:textSize">25dp</item>
-
     </style>
+
     <style name="hamburger" parent="@style/Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@color/aqua</item>
     </style>
+
     <style name="ToolBar" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:gravity">center_horizontal</item>
-
-
     </style>
 
 </resources>

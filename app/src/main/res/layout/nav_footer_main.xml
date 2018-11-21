@@ -8,8 +8,6 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat">
-
-
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +15,6 @@
         android:layout_marginRight="30dp"
         android:background="@null"
         android:src="@drawable/logout" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,8 +24,5 @@
         android:text="Logout"
         android:textSize="25dp"
         android:textStyle="bold"
-        android:layout_marginRight="10dp"
-        />
-
-
+        android:layout_marginRight="10dp" />
 </LinearLayout>

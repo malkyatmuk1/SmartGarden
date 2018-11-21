@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,9 +8,7 @@
     android:gravity="center_vertical"
     android:orientation="vertical"
     tools:context=".SignUpSecond"
-    android:scrollbars="vertical"
-    >
-
+    android:scrollbars="vertical">
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +17,6 @@
         android:layout_marginBottom="20dp"
         android:background="@color/white"
         android:src="@drawable/left_arrow_button" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,36 +26,29 @@
         android:textAllCaps="true"
         android:textColor="@color/aqua"
         android:textSize="40dp" />
-
     <View
         android:layout_width="100dp"
         android:layout_height="2dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:background="@drawable/gradient_blue_green" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-
         android:fontFamily="@font/titillium_weblight"
         android:gravity="center_horizontal"
         android:text="Now fill your Login \n information"
         android:textColor="@color/greyText"
-        android:textSize="20dp"
-
-        />
-
+        android:textSize="20dp"/>
     <ImageView
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="15dp"
         android:src="@drawable/avatar" />
-
     <EditText
         android:layout_width="300dp"
         android:layout_height="50dp"
@@ -72,7 +60,6 @@
         android:paddingLeft="30dp"
         android:textColorHint="@color/blue"
         android:textSize="15dp" />
-
     <EditText
         android:layout_width="300dp"
         android:layout_height="50dp"
@@ -86,7 +73,6 @@
         android:paddingLeft="30dp"
         android:textColorHint="@color/blue"
         android:textSize="15dp" />
-
     <EditText
         android:layout_width="300dp"
         android:layout_height="50dp"
@@ -100,21 +86,18 @@
         android:paddingLeft="30dp"
         android:textColorHint="@color/blue"
         android:textSize="15dp" />
-
     <LinearLayout
         android:layout_width="100dp"
         android:layout_height="18dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:gravity="center_horizontal">
-
         <View
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:background="@drawable/default_dot" />
-
         <View
             android:layout_width="15dp"
             android:layout_height="15dp"
@@ -122,7 +105,6 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/selected_dot" />
     </LinearLayout>
-
     <Button
         android:layout_width="300dp"
         android:layout_height="50dp"
@@ -136,7 +118,6 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="15dp" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -7,19 +7,14 @@
         <item
             android:id="@+id/my_address"
             android:icon="@drawable/location"
-            android:title="My Address"
-
-        />
+            android:title="My Address"/>
         <item
             android:id="@+id/garden_items"
             android:icon="@drawable/agriculture"
-            android:title="My Garden Items"
-            />
-
-
+            android:title="My Garden Items" />
     </group>
 
-    <item android:title="Other" />
+   <item android:title="Other" />
    <group android:checkableBehavior="single" android:id="@+id/second">
         <item
             android:id="@+id/contact_us"
@@ -33,7 +28,5 @@
             android:id="@+id/about_us"
             android:icon="@drawable/aboutus"
             android:title="About Us" />
-
     </group>
-
 </menu>

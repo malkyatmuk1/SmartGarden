@@ -12,13 +12,14 @@ import android.view.ViewGroup;
  * Created by malkyatmuk on 11/17/18.
  */
 
-public class Contact_Us extends Fragment {
+public class About_Us extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        View  myFragmentView = inflater.inflate(R.layout.fragment_contact_us, container, false);
+        View  myFragmentView = inflater.inflate(R.layout.fragment_about_us, container, false);
         return myFragmentView;
 
     }
@@ -26,6 +27,6 @@ public class Contact_Us extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
-        getActivity().setTitle("Contact Us");
+        getActivity().setTitle("About Us");
     }
 }

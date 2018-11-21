@@ -5,13 +5,13 @@
     <group android:checkableBehavior="single" android:id="@+id/first">
 
         <item
-            android:id="@+id/nav_menu1"
+            android:id="@+id/my_address"
             android:icon="@drawable/location"
             android:title="My Address"
 
         />
         <item
-            android:id="@+id/nav_menu2"
+            android:id="@+id/garden_items"
             android:icon="@drawable/agriculture"
             android:title="My Garden Items"
             />
@@ -22,15 +22,15 @@
     <item android:title="Other" />
    <group android:checkableBehavior="single" android:id="@+id/second">
         <item
-            android:id="@+id/nav_settings"
+            android:id="@+id/contact_us"
             android:icon="@drawable/contact"
             android:title="Contact Us"/>
         <item
             android:title="Share"
             android:icon="@drawable/share"
-            android:id="@+id/nav_signout"/>
+            android:id="@+id/share"/>
         <item
-            android:id="@+id/nav_admin"
+            android:id="@+id/about_us"
             android:icon="@drawable/aboutus"
             android:title="About Us" />
 

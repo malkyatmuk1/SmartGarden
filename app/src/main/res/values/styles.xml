@@ -12,6 +12,7 @@
     <style name="generalnotitle" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="drawerArrowStyle">@style/hamburger</item>
+    <item name="android:title">@style/ToolBar</item>
     </style>
     <style name="whitetext" parent="Theme.AppCompat.NoActionBar">
         <item name="android:textSize">25dp</item>
@@ -19,6 +20,11 @@
     </style>
     <style name="hamburger" parent="@style/Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@color/aqua</item>
+    </style>
+    <style name="ToolBar" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:gravity">center_horizontal</item>
+
+
     </style>
 
 </resources>

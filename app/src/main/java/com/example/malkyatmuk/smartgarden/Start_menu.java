@@ -1,5 +1,8 @@
 package com.example.malkyatmuk.smartgarden;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -16,12 +19,14 @@ import android.widget.TextView;
 public class Start_menu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_drawer_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -30,13 +35,16 @@ public class Start_menu extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         toolbar.setNavigationIcon(R.drawable.left_arrow_aqua);
+        toolbar.setTitleTextColor(Color.parseColor("#67f7d1"));
+
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         View txtusern=(View) navigationView.getHeaderView(0);
         TextView txt= (TextView) txtusern.findViewById(R.id.usernameprofil);
         //txt.setText(Global.username.toString());
         navigationView.setNavigationItemSelectedListener(this);
-        displaySelectedScreen(R.id.nav_menu1);
+        displaySelectedScreen(R.id.my_address);
     }
 
     @Override
@@ -68,36 +76,31 @@ public class Start_menu extends AppCompatActivity
         //creating fragment object
         Fragment fragment = null;
         //initializing the fragment object which is selected
-      /*  switch (itemId) {
-            case R.id.nav_menu1:
+        switch (itemId) {
+            case R.id.my_address:
+               fragment = new MyAddress();
+                break;
+            case R.id.garden_items:
 
-             //   fragment = new Profil();
+               //     fragment = new Client_Door();
+
                 break;
-            case R.id.nav_menu2:
-                if(Global.permission!='d')
-                    fragment = new Client_Door();
-                else {Toast toast= Toast.makeText(this,"You don't have permissions!", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP| Gravity.CENTER, 0, 0);
-                    toast.show();}
+            case R.id.contact_us:
+
+                    fragment = new Contact_Us();
+
                 break;
-            case R.id.nav_admin:
-                if(Global.permission=='a')
-                    fragment = new Client_List();
-                else {Toast toast= Toast.makeText(this,"You don't have permissions!", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP| Gravity.CENTER, 0, 0);
-                toast.show();}
-                break;
-            case R.id.nav_signout:
+            case R.id.share:
                 Intent intent = new Intent();
                 intent.setClassName("com.example.malkyatmuk.smartgarden","com.example.malkyatmuk.smartgarden.Signin");
                 startActivity(intent);
                 finish();
                 break;
-            case R.id.nav_settings:
-                fragment=new Settings();
+            case R.id.about_us:
+              //  fragment=new Settings();
                 break;
         }
-        */
+
 
         //replacing the fragment
         if (fragment != null) {

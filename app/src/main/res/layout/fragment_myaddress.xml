@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:id="@+id/fragment_address"
+    tools:context=".MyAddress"
+    >
+    <android.support.v7.widget.CardView
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        app:cardCornerRadius="20dp"
+
+        >
+
+
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Address"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                />
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_gravity="center_horizontal"
+
+                android:background="@drawable/gradient_blue_green" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IMPORTANT: CardView’s shadows will be clipped if it reaches to the parent view’s borders or padding area. To prevent it, either add padding and "
+            android:textColor="@color/greyText"
+            android:lines="5"
+            android:layout_margin="3dp"
+            />
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp"
+        android:text="Edit"
+        android:fontFamily="@font/titillium_weblight"
+        android:textAllCaps="false"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        />
+
+
+
+</LinearLayout>

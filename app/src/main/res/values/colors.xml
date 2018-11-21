@@ -8,4 +8,5 @@
     <color name="greenText">#449b4e</color>
     <color name="aqua">#67f7d1</color>
     <color name="blue">#185a9d</color>
+    <color name="hint">#c7c7c7</color>
 </resources>

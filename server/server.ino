@@ -1,12 +1,9 @@
-
-
 #include <dht.h>
-
-
 #include <EEPROM.h>
 #include <vector>
-#include<Hash.h>
+#include <Hash.h>
 #include <ESP8266WiFi.h>
+#include <ESP8266WebServer.h>
 using namespace std;
 
  struct person 
@@ -80,7 +77,7 @@ void setup() {
   pinMode(TrigPin, OUTPUT);        
  
    
-  /*
+  
   int count=user_start;
   for(int i=0;i<10;i++)
   {
@@ -94,9 +91,20 @@ void setup() {
     Serial.println(listofflags[i]);
   }
   printlist();
-  */
-  /*
+ /*   String ssidpass;
+  ssidpass=readWifi();
+  Serial.println(ssidpass);
+ commands=splitString(ssidpass,' ');
+ // //readWifi
+ 
+
+ commands[1].toCharArray(ssid,32);
+ commands[0].toCharArray(password,32);
+ 
+Serial.println(ssid);
+Serial.println(password);
   
+  */
   int br=0;
   //connect to WiFi
   while(WiFi.begin(ssid, password)!=WL_CONNECTED && br<5)
@@ -108,10 +116,106 @@ void setup() {
   Serial.print("IP Address: "); Serial.println(WiFi.localIP());
 
   server.begin();
-  */
+  
 }
 
-void loop() {
+void loop()
+{ 
+  client=server.available();
+  if(ip.length()==0 || flagChangedWifi) {GetExxternalIP(ip);flagChangedWifi=false;}
+  if(client)
+  {
+    Serial.println("connected to client");
+    str=client.readStringUntil('\r\n');
+    commands=splitString(str,' ');
+
+    if(commands[0]=="ip") client.println(ip);
+    else if(commands[0]=="signUp")
+    {
+
+      person p;
+      commands[1].toCharArray(p.username,sizeof(commands[1]));
+      char salt[13];
+      for(int i=0;i<12;i++)salt[i]=char(random(33,126));
+      salt[12]=0;
+      commands[2]+=salt;
+      strncpy(p.salt,salt,12);
+      sha1(commands[2]).toCharArray(p.pass_hash,20);
+      bool haveUser=false;
+      int br=0;
+      for(int i=0;i<10;i++)
+      {
+        if(listofflags[i]==1)
+        {
+          br++;
+          if(!strncmp(p.username,list[i].username,10)){haveUser=true;break;}
+        }
+      }
+      if (br==0) p.perm='a';
+      if(!haveUser)
+      {
+        for(int i=0;i<10;i++)
+        {
+          if(listofflags[i]==0)
+          {
+            strncpy(list[i].username,p.username,10);
+            strncpy(list[i].pass_hash,p.pass_hash,20);
+            strncpy(list[i].salt,salt,12);
+            list[i].perm=p.perm;
+            writePerson(user_start+i*user_step, &p);
+            listofflags[i]=1;
+            break;
+          }
+        }
+        printlist();
+        EEPROM.commit();
+        cient.println("truesignup");
+      }
+      else client.println("thereIsAPerson");   
+    }
+    else if(commands[0]=="signIn")
+    {
+      char perm1;
+      person p;
+      char passh[20];
+      commands[1].toCharArray(p.username,10);
+      char* pass;
+      char salt[12];
+      commands[2].toCharArray(pass,commands[2].length());
+      perm1=isHavingPermission(p.username,commands[2]);
+      if(perm1!='x') client.println(perm1);
+      else client.println("noPermission");
+    }
+    else if(commands[0]=="setWifi")
+    {
+      //TODO
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
     digitalWrite(TrigPin, HIGH);              //begin to send a high pulse, then US-015 begin to measure the distance
     delayMicroseconds(50);                    //set this high pulse width as 50us (>10us)
     digitalWrite(TrigPin, LOW);               //end this high pulse

@@ -1,12 +1,15 @@
 package com.example.malkyatmuk.smartgarden;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -19,7 +22,7 @@ import java.net.Socket;
  * Created by malkyatmuk on 11/12/18.
  */
 
-public class SignIn extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
+public class SignIn extends Activity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
     EditText usernameEditText, passwordEditText;
     TextView forgotPasswordTextView, createNewAccountTextView;
@@ -31,6 +34,7 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.Connect
     private static final int SERVERPORT = 3030;
     private static String SERVER_IP;
     public String send;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +60,10 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.Connect
             Global.username = usernameEditText.getText().toString();
             Global.password = passwordEditText.getText().toString();
             if(!Global.users.contains(usernameEditText.getText().toString()))Global.users.add(usernameEditText.getText().toString());
-            if (check.isChecked()) {
-                SERVER_IP=Global.directip;
+            if (false) {
+
+  //check is checked
+                //              SERVER_IP=Global.directip;
                 //Global.setIP(Global.directip, getApplicationContext());
             } else {
                 if (Global.ip.isEmpty()) {
@@ -105,5 +111,20 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.Connect
         }
 
     };
+
+    @Override
+    public void onConnected(Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
 }
 

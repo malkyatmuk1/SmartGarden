@@ -19,8 +19,7 @@ import java.net.Socket;
  * Created by malkyatmuk on 11/12/18.
  */
 
-public class SignIn extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
+public class SignIn extends AppCompatActivity  {
     EditText usernameEditText, passwordEditText;
     TextView forgotPasswordTextView, createNewAccountTextView;
     Button signInButton;
@@ -56,7 +55,7 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.Connect
             Global.username = usernameEditText.getText().toString();
             Global.password = passwordEditText.getText().toString();
             if(!Global.users.contains(usernameEditText.getText().toString()))Global.users.add(usernameEditText.getText().toString());
-            if (check.isChecked()) {
+            if (true) {
                 SERVER_IP=Global.directip;
                 //Global.setIP(Global.directip, getApplicationContext());
             } else {

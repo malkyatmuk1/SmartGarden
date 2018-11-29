@@ -47,7 +47,7 @@ public class SignIn extends AppCompatActivity {
         forgotPasswordTextView= (TextView) findViewById(R.id.forgotpassword);
         createNewAccountTextView= (TextView) findViewById(R.id.createnewaccount);
         signInButton=(Button) findViewById(R.id.SignInButton);
-        signInButton.setOnClickListener(SignInButtonListener);
+        signInButton.setOnClickListener(NextButtonListener);
     }
     View.OnClickListener NextButtonListener=new View.OnClickListener() {
 

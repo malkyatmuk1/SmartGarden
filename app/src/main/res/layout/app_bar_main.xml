@@ -4,12 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/transparent"
     tools:context="com.example.malkyatmuk.smartgarden.Start_menu"
     android:orientation="vertical">
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:elevation="0dp">
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -21,11 +18,14 @@
             android:background="@drawable/actionbar_layer_list"
             android:theme="@style/generalnotitle"
             android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"/>
-    </android.support.design.widget.AppBarLayout>
+            android:gravity="center_horizontal"
+            />
+
+
     <include
         layout="@layout/content_main"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        />
 </LinearLayout>
 

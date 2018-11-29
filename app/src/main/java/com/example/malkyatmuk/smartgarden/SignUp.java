@@ -23,7 +23,7 @@ public class SignUp extends Activity {
     View.OnClickListener NextButtonListener=new View.OnClickListener() {
 
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), Start_menu.class);
+            Intent intent = new Intent(view.getContext(), SignUpSecond.class);
             startActivity(intent);
             finish();
         }

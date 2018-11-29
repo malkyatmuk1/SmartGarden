@@ -3,6 +3,7 @@ package com.example.malkyatmuk.smartgarden;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +24,7 @@ import java.net.Socket;
  */
 
 
-public class SignIn extends AppCompatActivity  {
+public class SignIn extends AppCompatActivity {
 
     EditText usernameEditText, passwordEditText;
     TextView forgotPasswordTextView, createNewAccountTextView;
@@ -62,7 +63,10 @@ public class SignIn extends AppCompatActivity  {
             Global.password = passwordEditText.getText().toString();
             if(!Global.users.contains(usernameEditText.getText().toString()))Global.users.add(usernameEditText.getText().toString());
 
+            if (true) {
+                SERVER_IP=Global.directip;
                 //Global.setIP(Global.directip, getApplicationContext());
+               //Global.setIP(Global.directip, getApplicationContext());
             } else {
                 if (Global.ip.isEmpty()) {
                     //  WifiDialog wifidialog=new WifiDialog();
@@ -110,19 +114,5 @@ public class SignIn extends AppCompatActivity  {
 
     };
 
-    @Override
-    public void onConnected(Bundle bundle) {
-
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-
-    }
 }
 

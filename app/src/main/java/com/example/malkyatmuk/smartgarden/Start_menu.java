@@ -91,13 +91,10 @@ public class Start_menu extends AppCompatActivity
 
                 break;
             case R.id.share:
-                Intent intent = new Intent();
-                intent.setClassName("com.example.malkyatmuk.smartgarden","com.example.malkyatmuk.smartgarden.Signin");
-                startActivity(intent);
-                finish();
+
                 break;
             case R.id.about_us:
-              //  fragment=new Settings();
+              fragment=new About_Us();
                 break;
         }
 

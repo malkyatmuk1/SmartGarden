@@ -21,12 +21,22 @@ public class UPorIn extends AppCompatActivity {
         beforeGreen.setText(Html.fromHtml(first + second+ third));
         Button SignUpButton= (Button) findViewById(R.id.SignUpButton);
         SignUpButton.setOnClickListener(SignUpButtonListener);
+        Button SignInButton= (Button) findViewById(R.id.SignInButton);
+        SignInButton.setOnClickListener(SignInButtonListener);
 
     }
     View.OnClickListener SignUpButtonListener=new View.OnClickListener() {
 
         public void onClick(View view) {
             Intent intent = new Intent(view.getContext(), SignUp.class);
+            startActivity(intent);
+            finish();
+        }
+    };
+    View.OnClickListener SignInButtonListener=new View.OnClickListener() {
+
+        public void onClick(View view) {
+            Intent intent = new Intent(view.getContext(), SignIn.class);
             startActivity(intent);
             finish();
         }

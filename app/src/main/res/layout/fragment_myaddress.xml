@@ -27,7 +27,9 @@
                 android:text="Address"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:paddingLeft="20dp"
+                />
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="2dp"
@@ -39,7 +41,9 @@
                 android:text="IMPORTANT: CardView’s shadows will be clipped if it reaches to the parent view’s borders or padding area. To prevent it, either add padding and "
                 android:textColor="@color/greyText"
                 android:lines="5"
-                android:layout_margin="3dp" />
+                android:layout_margin="3dp"
+                android:paddingLeft="20dp"
+                />
         </LinearLayout>
     </android.support.v7.widget.CardView>
     <Button

@@ -10,13 +10,13 @@
     tools:context=".SignUpSecond"
     android:scrollbars="vertical">
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="left"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="20dp"
         android:background="@color/white"
-        android:src="@drawable/left_arrow_button" />
+        android:src="@drawable/left_arrow_aqua" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
         android:layout_width="100dp"
         android:layout_height="18dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:gravity="center_horizontal">
         <View
             android:layout_width="15dp"
@@ -109,7 +109,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/button"
         android:drawableRight="@drawable/right_arrow_button"
         android:paddingRight="20dp"

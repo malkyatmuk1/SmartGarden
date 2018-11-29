@@ -8,10 +8,10 @@
     tools:context=".SignUp"
     android:orientation="vertical"
     android:gravity="center_vertical">
-    <ImageButton android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="left"
-        android:src="@drawable/left_arrow_button"
+        android:src="@drawable/left_arrow_aqua"
         android:background="@color/white"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="40dp" />
@@ -38,7 +38,7 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="80dp"
         android:fontFamily="@font/titillium_weblight"
         android:textSize="20dp"/>
     <EditText
@@ -102,5 +102,7 @@
         android:text="Already have an account? Sign in"
         android:textColor="@color/blue"
         android:textStyle="bold"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        />
 </LinearLayout>

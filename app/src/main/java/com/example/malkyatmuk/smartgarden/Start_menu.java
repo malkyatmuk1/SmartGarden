@@ -82,7 +82,7 @@ public class Start_menu extends AppCompatActivity
                 break;
             case R.id.garden_items:
 
-               //     fragment = new Client_Door();
+                fragment = new Plant_List();
 
                 break;
             case R.id.contact_us:

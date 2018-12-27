@@ -1,12 +1,17 @@
 package com.example.malkyatmuk.smartgarden;
 
 
+import android.app.ActionBar;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toolbar;
 
 /**
  * Created by malkyatmuk on 11/17/18.
@@ -27,6 +32,7 @@ public class About_Us extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
-        getActivity().setTitle("About Us");
-    }
+        getActivity().setTheme(R.style.MyActionBar);
+        getActivity().setTitle("My Address");
+        }
 }

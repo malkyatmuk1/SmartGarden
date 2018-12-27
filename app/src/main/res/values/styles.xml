@@ -17,6 +17,17 @@
     <style name="whitetext" parent="Theme.AppCompat.NoActionBar">
         <item name="android:textSize">25dp</item>
     </style>
+    <style name="MyActionBar"
+        parent="@style/Widget.AppCompat.ActionBar">
+        <item name="background">@android:color/transparent</item>
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
+    <style name="CustomActionBar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+        <!-- Support library compatibility -->
+        <item name="windowActionBarOverlay">true</item>
+    </style>
 
     <style name="hamburger" parent="@style/Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@color/aqua</item>

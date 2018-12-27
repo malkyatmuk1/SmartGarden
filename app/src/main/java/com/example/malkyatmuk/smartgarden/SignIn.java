@@ -1,6 +1,5 @@
 package com.example.malkyatmuk.smartgarden;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,9 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -47,7 +43,7 @@ public class SignIn extends AppCompatActivity {
         forgotPasswordTextView= (TextView) findViewById(R.id.forgotpassword);
         createNewAccountTextView= (TextView) findViewById(R.id.createnewaccount);
         signInButton=(Button) findViewById(R.id.SignInButton);
-        signInButton.setOnClickListener(SignInButtonListener);
+        signInButton.setOnClickListener(NextButtonListener);
     }
     View.OnClickListener NextButtonListener=new View.OnClickListener() {
 

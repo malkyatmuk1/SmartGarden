@@ -1,4 +1,7 @@
-#include <dht.h>
+#include <DHTesp.h>
+
+
+
 #include <EEPROM.h>
 #include <vector>
 #include <Hash.h>
@@ -28,10 +31,12 @@ using namespace std;
 #define usercount 10
 #define  B ((float)3435)
 
+DHTesp dht;
 unsigned int EchoPin = 2;           // connect Pin 2(Arduino digital io) to Echo at US-015
 unsigned int TrigPin = 3;           // connect Pin 3(Arduino digital io) to Trig at US-015
 unsigned long Time_Echo_us = 0;
 unsigned long Len_mm  = 0;
+//user-info
 char ssid[64];
 char password[64];
 const char passAp[]="12345678";
@@ -42,7 +47,10 @@ vector<String> commands;
 person list[10];
 byte listofflags[10]; 
 String str;
+bool flagChangedWifi= true;
+String ip="";
 
+//all methods
 vector<String> splitString(String line, char c);
 void writePassAp(String pass);
 void writeWifi(String passWifi,String ssidWifi);
@@ -54,7 +62,8 @@ void printlist();
 void printt(char* s,int n);
 void GetExternalIP(String* s);
 String readWifi();
-double getTemp(int pin);
+double getTemp();
+void EEPROMNull();
 
 //create wifi server listen on a given port
 WiFiServer server(3030);
@@ -62,8 +71,9 @@ WiFiServer server(3030);
 WiFiClient client;
 
 int pin= A0;
-dht DHT;
+//dht DHT;
 uint32_t delayMS;
+
 
 void setup() {
   
@@ -76,8 +86,8 @@ void setup() {
   pinMode(EchoPin, INPUT);                    //Set EchoPin as input, to receive measure result from US-015
   pinMode(TrigPin, OUTPUT);        
  
-   
-  
+     
+ 
   int count=user_start;
   for(int i=0;i<10;i++)
   {
@@ -91,8 +101,10 @@ void setup() {
     Serial.println(listofflags[i]);
   }
   printlist();
- /*   String ssidpass;
-  ssidpass=readWifi();
+
+  /*
+    String ssidpass;
+ // ssidpass=readWifi();
   Serial.println(ssidpass);
  commands=splitString(ssidpass,' ');
  // //readWifi
@@ -103,26 +115,27 @@ void setup() {
  
 Serial.println(ssid);
 Serial.println(password);
-  
-  */
-  int br=0;
-  //connect to WiFi
-  while(WiFi.begin(ssid, password)!=WL_CONNECTED && br<5)
-  {
-    Serial.print('.');
-    br++;
-  }
-  if(br==5) Serial.println("connection failed");
-  Serial.print("IP Address: "); Serial.println(WiFi.localIP());
+*/
 
+  //connect to WiFi
+  int br=0;
+  Serial.println("here");
+  WiFi.begin(ssidWiFi,passWiFi);
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.print("IP Address: "); Serial.println(WiFi.localIP());
   server.begin();
-  
+   
 }
 
 void loop()
 { 
   client=server.available();
-  if(ip.length()==0 || flagChangedWifi) {GetExxternalIP(ip);flagChangedWifi=false;}
+  if(ip.length()==0 || flagChangedWifi) {GetExternalIP(ip);flagChangedWifi=false;  Serial.println(ip);}
+
   if(client)
   {
     Serial.println("connected to client");
@@ -152,6 +165,7 @@ void loop()
         }
       }
       if (br==0) p.perm='a';
+      else p.perm='x';
       if(!haveUser)
       {
         for(int i=0;i<10;i++)
@@ -169,7 +183,7 @@ void loop()
         }
         printlist();
         EEPROM.commit();
-        cient.println("truesignup");
+        client.println("truesignup");
       }
       else client.println("thereIsAPerson");   
     }
@@ -190,30 +204,18 @@ void loop()
     {
       //TODO
     }
+    else if (commands[0]=="getTemp")
+    {
+      
+      client.println(String(getTemp()));
+    }
+    else if(commands[0]=="Humidity")
+    {
+      if(commands[1]=="true")client.println(getHumidityOrTemp(true));
+      else if(commands[1]=="false")client.println(getHumidityOrTemp(false));
+    }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*
 
   
     digitalWrite(TrigPin, HIGH);              //begin to send a high pulse, then US-015 begin to measure the distance
@@ -228,35 +230,23 @@ void loop()
       Serial.print(Len_mm, DEC);            //output result to Serial monitor
       Serial.println("mm");                 //output result to Serial monitor
     }
-    delay(100);                            
-
-  client = server.available();
-  if(client)
-  {
-      str=client.readStringUntil('\r\n');
-      commands=splitString(str,' ');
-       
-      if(commands[0]=="getTemperature")
-      {
-        
-      } 
-      else if (commands[0]=="getHumidityOrTemp")
-      {
-        
-      }
-  }
+    delay(100);   
+    */                         
 }
+
+
 double getHumidityOrTemp(boolean isHumidity)
 {
-  int chk = DHT.read11(DHTPIN);
-  delay(2000);
+  dht.setup(DHTPIN, DHTesp::DHT11);
+  
   if(isHumidity)
   {
-    return DHT.humidity;
+    return dht.getHumidity();
   }
-  else return DHT.temperature;
+  else return dht.getTemperature();
 }
-double getTemp(int pin)
+
+double getTemp()
 {
   double tmp;
   double r,temperature,ut, Ri=4530.0, E=1.00;
@@ -412,7 +402,7 @@ void printt(char* s,int n)
   for(int i=0;i<n;i++)
   {
     if(s[i]==0)break;
-    Serial.print(s[i]);
+    Serial.print(char(s[i]));
   }
   Serial.println();
 }
@@ -446,4 +436,9 @@ WiFiClient client;
   {
     //Serial.println("connection failedpopop");
   }
+}
+void EEPROMNull()
+{
+  for(int i=0;i<512;i++)EEPROM.write(i,0);
+  EEPROM.commit();
 }

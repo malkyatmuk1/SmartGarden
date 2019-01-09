@@ -1,26 +1,16 @@
 package com.example.malkyatmuk.smartgarden;
 
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.Socket;
 
 public class Plant_List extends Fragment {
 
@@ -46,6 +36,9 @@ public class Plant_List extends Fragment {
         readPlants(view,true);
         Global.plants.add("tanq");
         Global.plants.add("ivan");
+      Global.plants.add("iva");
+      Global.plants.add ("kuku");
+      Global.plants.add ("kuku1");
         Adapter adapter = new Adapter(getContext(),Global.plants);
         listView.setAdapter(adapter);
         return view;

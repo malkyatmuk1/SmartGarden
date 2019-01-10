@@ -85,7 +85,7 @@ void setup() {
   pinMode(pin, INPUT); 
   pinMode(EchoPin, INPUT);                    //Set EchoPin as input, to receive measure result from US-015
   pinMode(TrigPin, OUTPUT);        
- 
+
      
  
   int count=user_start;
@@ -143,7 +143,7 @@ void loop()
     commands=splitString(str,' ');
 
     if(commands[0]=="ip") client.println(ip);
-    else if(commands[0]=="signUp")
+    else if(commands[0]=="signup")
     {
 
       person p;
@@ -156,17 +156,20 @@ void loop()
       sha1(commands[2]).toCharArray(p.pass_hash,20);
       bool haveUser=false;
       int br=0;
+      //isHavingAUser
       for(int i=0;i<10;i++)
       {
         if(listofflags[i]==1)
         {
           br++;
+          //return 0 if the two arrays are equal
           if(!strncmp(p.username,list[i].username,10)){haveUser=true;break;}
         }
       }
       if (br==0) p.perm='a';
-      else p.perm='x';
-      if(!haveUser)
+      else p.perm='n';
+      if(br==10) client.println("falsesignup.There is not free space.");
+      else if(!haveUser)
       {
         for(int i=0;i<10;i++)
         {
@@ -181,13 +184,13 @@ void loop()
             break;
           }
         }
-        printlist();
-        EEPROM.commit();
-        client.println("truesignup");
+      printlist();
+      EEPROM.commit();
+      client.println("truesignup");
       }
       else client.println("thereIsAPerson");   
     }
-    else if(commands[0]=="signIn")
+    else if(commands[0]=="signin")
     {
       char perm1;
       person p;
@@ -197,13 +200,140 @@ void loop()
       char salt[12];
       commands[2].toCharArray(pass,commands[2].length());
       perm1=isHavingPermission(p.username,commands[2]);
-      if(perm1!='x') client.println(perm1);
-      else client.println("noPermission");
+      if(perm1!='i' && perm1!='n') client.println(perm1);
+      else if(perm1=='i') client.println("IncorrectPass");
+      else client.println("NoPermission");
     }
     else if(commands[0]=="setWifi")
     {
       //TODO
     }
+    else if(commands[0]=="setPermission")
+    {
+      char nameuser[10];
+      String str;
+      bool flag=0;
+      person p;
+      char passh[20];
+      
+      commands[1].toCharArray(nameuser,10);   
+      commands[3].toCharArray(p.username,10);   
+      
+     
+      String pass=commands[4];
+      char salt[12];
+      strncpy(salt,list[0].salt,12);
+      //printt(salt,12);
+      salt[12]='\0';
+      pass+=salt;
+      sha1(pass).toCharArray(passh,20); 
+      //setPermission name perm nameadmin passadmin
+      
+      char username1[10];
+      commands[1].toCharArray(username1,10);
+      String permission=commands[2];
+      char perm1=permission[0];
+      if(!strncmp(passh,list[0].pass_hash,20)&&!strncmp(list[0].username,p.username,10)){flag=1;}
+        else flag=0;
+      for(int i=0;i<10;i++)
+      {
+        if(!strncmp(list[i].username,username1,10))
+        {         
+          if(flag==1)
+          {
+            list[i].perm=perm1;
+            EEPROM.write(permission_start+i*user_step,perm1);
+            EEPROM.commit();
+            Serial.println(EEPROM.read(permission_start+i*user_step));
+            client.println(perm1);
+            break;
+          }
+        }
+      }
+    }
+    else if(commands[0]=="list")
+    {
+      char nameuser[10];
+      String str;
+      char perm1;
+      bool flag=0;
+      person p;
+      char passh[20];
+      
+      commands[1].toCharArray(p.username,10);
+      commands[1].toCharArray(nameuser,10);      
+      
+      Serial.println(nameuser);
+      
+      if(isHavingPermission(p.username,commands[2])=='a')flag=1;
+      else flag=0; 
+     //if is admin make the list 
+     if(flag==1)
+     {
+      for(int i=0;i<10;i++)
+      {
+        //if the flag is 1 in the list with flags and the user is not an admin then we print username and permission
+       if(listofflags[i]==1 && list[i].perm!='a')
+       {
+          str=str+list[i].username;
+         str+=' ';
+         str+=list[i].perm;
+         Serial.println(str);
+         client.println(str);
+         str="";
+       }
+      }
+     }
+     else client.println("you are not admin");
+      client.println("stop");
+    }
+    else if(commands[0]=="del")
+    {
+      char username1[10];
+       bool flag=0;
+      String str;
+      char perm1;
+      person p;
+      char passh[20];
+
+      commands[1].toCharArray(username1,10);    
+      commands[2].toCharArray(p.username,10);
+      
+      Serial.println(commands[3]);
+      String pass=commands[3];
+      char salt[12];
+      strncpy(salt,list[0].salt,12);
+      //printt(salt,12);
+       salt[12]='\0';
+       pass+=salt;
+       sha1(pass).toCharArray(passh,20); 
+       
+       //check if the user is admin
+       
+       if(!strncmp(passh,list[0].pass_hash,20)&&!strncmp(list[0].username,p.username,10)){ flag=1;}
+       else flag=0;
+             Serial.print(flag);
+      for(int i=1;i<10;i++)
+     {
+         Serial.println(username1);
+          Serial.println(list[i].username);
+       if(!strncmp(list[i].username,username1,10)&& flag==1) 
+       {
+        int start_fordel=user_start+i*user_step;
+        listofflags[i]=0;
+        for(int j=0;j<user_step;j++)EEPROM.write(start_fordel+j,0);
+        EEPROM.commit(); 
+        int count=user_start;
+        for(int i=0;i<10;i++)
+        {
+          readPerson(count, &list[i]);
+          count+=user_step;
+        }
+        printlist();
+        break;
+      }
+     }
+    } 
     else if (commands[0]=="getTemp")
     {
       
@@ -214,6 +344,7 @@ void loop()
       if(commands[1]=="true")client.println(getHumidityOrTemp(true));
       else if(commands[1]=="false")client.println(getHumidityOrTemp(false));
     }
+    
   }
 /*
 
@@ -380,7 +511,8 @@ char isHavingPermission(char* usernamePerson,String passwordPerson)
           else flag=0;
     }
   if(flag==1)return perm1;
-  else return 'x';
+  //incorrectpass
+  else return 'i';
        
 }
 void printlist()

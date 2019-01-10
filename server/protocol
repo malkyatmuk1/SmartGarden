@@ -1,0 +1,43 @@
+signup username password
+return:
+1)truesignup
+2)thereIsAPerson
+3)falsesignup.There is not free space.
+-----------------------------
+signin username password
+return:
+1)IncorrectPass
+2)NoPermission
+3)Permission:
+- a , for admin
+- u , for user
+----------------------------
+setWifi
+//TODO
+----------------------------
+setPermission user permission adminUsername adminPassword
+return:
+1)permission
+----------------------------
+list adminUsername adminPassword
+return: 
+1)
+you are not admin
+stop
+2) 
+list of users
+stop
+---------------------------
+del username adminUsername adminPassword
+return: nothing
+---------------------------
+getTemp
+return:
+1) temperature
+---------------------------
+Humidity true or false
+return:
+1) true:
+	humidity
+2) false:
+	temperature

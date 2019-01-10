@@ -8,7 +8,9 @@
     tools:context=".Start"
     android:orientation="vertical"
     android:gravity="center_vertical">
-    <ImageButton android:layout_width="50dp"
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="left"
         android:src="@drawable/left_arrow_aqua"
@@ -67,16 +69,7 @@
         android:paddingLeft="30dp"
         android:fontFamily="@font/titillium_weblight"
         android:layout_marginTop="10dp" />
-    <TextView
-        android:id="@+id/forgotpassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="Forgot Password?"
-        android:textColor="@color/blue"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="70dp" />
+
     <Button
         android:id="@+id/SignInButton"
         android:layout_width="300dp"
@@ -92,7 +85,7 @@
         android:textAlignment="gravity"
         android:textAllCaps="false" />
     <TextView
-        android:id="@+id/createnewaccount"
+        android:id="@+id/createNewAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -23,8 +24,9 @@ import java.net.Socket;
 public class SignIn extends AppCompatActivity {
 
     EditText usernameEditText, passwordEditText;
-    TextView forgotPasswordTextView, createNewAccountTextView;
+    TextView createNewAccountTextView;
     Button signInButton;
+    ImageButton backButton;
 
     Thread thr;
     private Socket clientSocket;
@@ -38,13 +40,33 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        usernameEditText= (EditText) findViewById(R.id.username);
-        passwordEditText= (EditText) findViewById(R.id.password);
-        forgotPasswordTextView= (TextView) findViewById(R.id.forgotpassword);
-        createNewAccountTextView= (TextView) findViewById(R.id.createnewaccount);
-        signInButton=(Button) findViewById(R.id.SignInButton);
+        usernameEditText = (EditText) findViewById(R.id.username);
+        passwordEditText = (EditText) findViewById(R.id.password);
+        createNewAccountTextView = (TextView) findViewById(R.id.createNewAccount);
+        signInButton = (Button) findViewById(R.id.SignInButton);
         signInButton.setOnClickListener(NextButtonListener);
+        backButton = (ImageButton) findViewById(R.id.backButton);
+        backButton.setOnClickListener(BackButtonListener);
+        createNewAccountTextView = (TextView) findViewById(R.id.createNewAccount);
+        createNewAccountTextView.setOnClickListener(CreateNewAccountListener);
+
     }
+    View.OnClickListener CreateNewAccountListener=new View.OnClickListener() {
+
+        public void onClick(View view) {
+            Intent intent = new Intent(view.getContext(), SignUp.class);
+            startActivity(intent);
+            finish();
+        }
+    };
+    View.OnClickListener BackButtonListener=new View.OnClickListener() {
+
+        public void onClick(View view) {
+            Intent intent = new Intent(view.getContext(), UPorIn.class);
+            startActivity(intent);
+            finish();
+        }
+    };
     View.OnClickListener NextButtonListener=new View.OnClickListener() {
 
         public void onClick(View view) {

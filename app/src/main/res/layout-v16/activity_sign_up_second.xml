@@ -51,6 +51,7 @@
         android:layout_marginBottom="15dp"
         android:src="@drawable/avatar" />
     <EditText
+        android:id="@+id/usernameEditText"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
@@ -62,6 +63,7 @@
         android:textColorHint="@color/blue"
         android:textSize="15dp" />
     <EditText
+        android:id="@+id/firstpassEditText"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
@@ -75,6 +77,7 @@
         android:textColorHint="@color/blue"
         android:textSize="15dp" />
     <EditText
+        android:id="@+id/secondpassEditText"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
@@ -107,6 +110,7 @@
             android:background="@drawable/selected_dot" />
     </LinearLayout>
     <Button
+        android:id="@+id/signupButton"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"

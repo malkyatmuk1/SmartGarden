@@ -1,16 +1,24 @@
 package com.example.malkyatmuk.smartgarden;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -19,12 +27,13 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class SignUpSecond extends AppCompatActivity {
+public class SignUpSecond extends Activity {
     ImageButton backButton;
     Button signUpButton;
     TextView signedUp;
-    EditText usernameEditText, passwordEditText, secondpassEditText;
+    EditText usernameEditText;
 
+    TextInputEditText passwordEditText, secondpassEditText;
     Thread thr;
     private Socket clientSocket;
     public String modifiedSentence;
@@ -35,8 +44,10 @@ public class SignUpSecond extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_second);
         usernameEditText=(EditText) findViewById(R.id.usernameEditText);
-        passwordEditText =(EditText) findViewById(R.id.firstpassEditText);
-        secondpassEditText= (EditText) findViewById(R.id.secondpassEditText);
+        passwordEditText =(TextInputEditText) findViewById(R.id.firstpassEditText);
+        secondpassEditText= (TextInputEditText) findViewById(R.id.secondpassEditText);
+        passwordEditText.addTextChangedListener(textWatcherPassAgain);
+        secondpassEditText.addTextChangedListener(textWatcherPass);
         backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(BackButtonListener);
         signUpButton= (Button) findViewById(R.id.signupButton);
@@ -58,10 +69,73 @@ public class SignUpSecond extends AppCompatActivity {
             finish();
         }
     };
+    TextWatcher textWatcherPass= new TextWatcher() {
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+           String txt = passwordEditText.getText().toString();
+           String txt2 = secondpassEditText.getText().toString();
+
+            if (passwordEditText.length() < 5)
+            {
+                passwordEditText.setHint("Your password is too short!");
+            }
+            if(passwordEditText.length()<5)
+                passwordEditText.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+            else {passwordEditText.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);passwordEditText.setHint("Password");}
+            if(txt.length()==0)
+            {
+                passwordEditText.setHint("Password");
+                passwordEditText.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+                secondpassEditText.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+            }
+        }
+    };
+    TextWatcher textWatcherPassAgain = new TextWatcher() {
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+        @Override
+        public void afterTextChanged(Editable arg0) {
+            String txt = passwordEditText.getText().toString();
+            String txt2 = secondpassEditText.getText().toString();
+
+            if (!txt2.equals(txt)) {
+                secondpassEditText.setHint("The two passwords don't match!");
+                passwordEditText.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                secondpassEditText.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+
+            } else {
+                secondpassEditText.setHint("The two passwords match!");
+                passwordEditText.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+                secondpassEditText.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+            }
+
+
+            if(txt2.length()==0) {
+                secondpassEditText.setHint("Rewrite your password");
+                passwordEditText.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+                secondpassEditText.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+            }
+        }
+    };
     View.OnClickListener signupButtonListener= new View.OnClickListener(){
 
-        public void onClick(View view){
-             new Thread(new Runnable() {
+        public void onClick(final View view){
+            Log.d("tanq","predi");
+              new Thread(new Runnable() {
+
                 @Override
                 public void run() {
                     try {
@@ -87,8 +161,8 @@ public class SignUpSecond extends AppCompatActivity {
                         }
                         else if(modifiedSentence.equals("thereIsAPerson"))
                         {
-                           usernameEditText.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
-                           usernameEditText.setHint("There is a person with this username");
+                            usernameEditText.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                            usernameEditText.setHint("There is a person with this username");
                         }
                         else
                         {
@@ -101,9 +175,9 @@ public class SignUpSecond extends AppCompatActivity {
                     catch (IOException e) {
                         System.out.println("Exception " + e);
                     }
+                    return;
                 }
             }).start();
         }
     };
-
 }

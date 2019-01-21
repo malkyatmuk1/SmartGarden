@@ -7,6 +7,8 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -46,8 +48,8 @@ public class SignUpSecond extends Activity {
         usernameEditText=(EditText) findViewById(R.id.usernameEditText);
         passwordEditText =(TextInputEditText) findViewById(R.id.firstpassEditText);
         secondpassEditText= (TextInputEditText) findViewById(R.id.secondpassEditText);
-        passwordEditText.addTextChangedListener(textWatcherPassAgain);
-        secondpassEditText.addTextChangedListener(textWatcherPass);
+        passwordEditText.addTextChangedListener(textWatcherPass);
+        secondpassEditText.addTextChangedListener(textWatcherPassAgain);
         backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(BackButtonListener);
         signUpButton= (Button) findViewById(R.id.signupButton);
@@ -89,12 +91,12 @@ public class SignUpSecond extends Activity {
             }
             if(passwordEditText.length()<5)
                 passwordEditText.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
-            else {passwordEditText.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);passwordEditText.setHint("Password");}
+            else {passwordEditText.setBackgroundResource(R.drawable.edittext);passwordEditText.setHint("Password");}
             if(txt.length()==0)
             {
                 passwordEditText.setHint("Password");
-                passwordEditText.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-                secondpassEditText.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+                passwordEditText.setBackgroundResource(R.drawable.edittext);
+                secondpassEditText.setBackgroundResource(R.drawable.edittext);
             }
         }
     };
@@ -116,17 +118,17 @@ public class SignUpSecond extends Activity {
                 passwordEditText.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
                 secondpassEditText.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
 
-            } else {
+            } else if(txt.equals(txt2) && txt.length()>=5 && txt2.length()>=5) {
                 secondpassEditText.setHint("The two passwords match!");
-                passwordEditText.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-                secondpassEditText.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+                passwordEditText.setBackgroundResource(R.drawable.edittext);
+                secondpassEditText.setBackgroundResource(R.drawable.edittext);
             }
 
 
             if(txt2.length()==0) {
                 secondpassEditText.setHint("Rewrite your password");
-                passwordEditText.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-                secondpassEditText.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+                passwordEditText.setBackgroundResource(R.drawable.edittext);
+                secondpassEditText.setBackgroundResource(R.drawable.edittext);
             }
         }
     };

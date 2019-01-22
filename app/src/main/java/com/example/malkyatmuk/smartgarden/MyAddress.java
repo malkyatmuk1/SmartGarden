@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 public class MyAddress extends Fragment {
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {

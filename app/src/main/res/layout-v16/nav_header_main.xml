@@ -11,6 +11,7 @@
     android:theme="@style/ThemeOverlay.AppCompat"
     android:weightSum="1">
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/table"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -18,6 +19,7 @@
         android:stretchColumns="1">
         <TableRow android:layout_height="wrap_content">
             <ImageButton
+                android:id="@+id/slideMenu"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center|left"
@@ -43,7 +45,7 @@
         </TableRow>
     </TableLayout>
     <TextView
-        android:id="@+id/usernameprofil"
+        android:id="@+id/usernameProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Username"
@@ -51,6 +53,7 @@
         android:textColor="@color/white"
         android:fontFamily="@font/titillium_weblight" />
     <TextView
+        android:id="@+id/adressProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Address"

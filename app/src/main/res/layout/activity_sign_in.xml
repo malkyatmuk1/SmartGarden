@@ -40,9 +40,20 @@
         android:textColor="@color/greyText"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="70dp"
         android:fontFamily="@font/titillium_weblight"
         android:textSize="20dp"/>
+    <TextView
+        android:id="@+id/incorrectUserOrPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Incorrect username or password"
+        android:textColor="#FF0000"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/titillium_weblight"
+        android:visibility="visible"
+        android:textSize="15dp"/>
     <EditText
         android:id="@+id/username"
         android:layout_width="300dp"

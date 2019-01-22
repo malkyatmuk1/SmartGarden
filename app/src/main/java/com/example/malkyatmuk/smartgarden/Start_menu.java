@@ -3,6 +3,7 @@ package com.example.malkyatmuk.smartgarden;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -12,8 +13,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 public class Start_menu extends AppCompatActivity
@@ -41,12 +46,32 @@ public class Start_menu extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         View txtusern=(View) navigationView.getHeaderView(0);
-        TextView txt= (TextView) txtusern.findViewById(R.id.usernameprofil);
+        TableLayout tableLayout=(TableLayout) txtusern.findViewById(R.id.table);
+        TableRow row=(TableRow)  tableLayout.getChildAt(0);
+        TextView txtUsername= (TextView) txtusern.findViewById(R.id.usernameProfile);
+        //TextView txtAdress=(TextView) txtAdress.findViewById(R.id.adressProfile);
+
+        txtUsername.setText(Global.username);
+
+
         //txt.setText(Global.username.toString());
+
+        ImageButton slideMenuButton=(ImageButton) row.findViewById(R.id.slideMenu);
+        slideMenuButton.setOnClickListener(SlideMenuListener);
+
         navigationView.setNavigationItemSelectedListener(this);
         displaySelectedScreen(R.id.my_address);
     }
 
+    View.OnClickListener SlideMenuListener=new View.OnClickListener() {
+
+        public void onClick(View view) {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+            drawer.closeDrawer(Gravity.LEFT,true);
+            //finish();
+        }
+    };
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

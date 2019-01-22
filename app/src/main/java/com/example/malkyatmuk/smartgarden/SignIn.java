@@ -1,18 +1,25 @@
 package com.example.malkyatmuk.smartgarden;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 
@@ -24,7 +31,7 @@ import java.net.Socket;
 public class SignIn extends AppCompatActivity {
 
     EditText usernameEditText, passwordEditText;
-    TextView createNewAccountTextView;
+    TextView createNewAccountTextView, incorrectUserOrPass;
     Button signInButton;
     ImageButton backButton;
 
@@ -44,12 +51,12 @@ public class SignIn extends AppCompatActivity {
         passwordEditText = (EditText) findViewById(R.id.password);
         createNewAccountTextView = (TextView) findViewById(R.id.createNewAccount);
         signInButton = (Button) findViewById(R.id.SignInButton);
-        signInButton.setOnClickListener(NextButtonListener);
+        signInButton.setOnClickListener(SignInButtonListener);
         backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(BackButtonListener);
         createNewAccountTextView = (TextView) findViewById(R.id.createNewAccount);
         createNewAccountTextView.setOnClickListener(CreateNewAccountListener);
-
+        incorrectUserOrPass=(TextView) findViewById(R.id.incorrectUserOrPass);
     }
     View.OnClickListener CreateNewAccountListener=new View.OnClickListener() {
 
@@ -67,6 +74,7 @@ public class SignIn extends AppCompatActivity {
             finish();
         }
     };
+    /*
     View.OnClickListener NextButtonListener=new View.OnClickListener() {
 
         public void onClick(View view) {
@@ -74,49 +82,84 @@ public class SignIn extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-    };
+    };*/
     View.OnClickListener SignInButtonListener = new View.OnClickListener() {
         public void onClick(final View v) {
+
             Global.username = usernameEditText.getText().toString();
             Global.password = passwordEditText.getText().toString();
-            if(!Global.users.contains(usernameEditText.getText().toString()))Global.users.add(usernameEditText.getText().toString());
+            if (!Global.users.contains(usernameEditText.getText().toString()))
+                Global.users.add(usernameEditText.getText().toString());
+
 
             if (true) {
-                SERVER_IP=Global.directip;
+                SERVER_IP = Global.directip;
                 //Global.setIP(Global.directip, getApplicationContext());
-               //Global.setIP(Global.directip, getApplicationContext());
+                //Global.setIP(Global.directip, getApplicationContext());
             } else {
                 if (Global.ip.isEmpty()) {
                     //  WifiDialog wifidialog=new WifiDialog();
                     // wifidialog.show(getFragmentManager(),"wifi");
                     //TODO
                 }
-                SERVER_IP=Global.ip;
+                SERVER_IP = Global.ip;
                 Global.setIP(Global.ip, getApplicationContext());
             }
 
-            thr = new Thread(new Runnable() {
+            new Thread(new Runnable() {
+
                 @Override
                 public void run() {
                     try {
-                        InetAddress ip = InetAddress.getByName(SERVER_IP);
+                        //Log.d("dani","tuk");
                         //Thread.sleep(2000);
-                        clientSocket = new Socket(ip, SERVERPORT);
+                        clientSocket = new Socket(Global.ip, SERVERPORT);
+                        /*
+                                    send = "signin " + usernameEditText.getText() + " " + passwordEditText.getText() + '\n';
+                                    incorrectUserOrPass.setText(send);
+                                    incorrectUserOrPass.setVisibility(View.VISIBLE);
+                            this put here force the program to shut down after clicking on signin button
+                         */
                         send = "signin " + usernameEditText.getText() + " " + passwordEditText.getText() + '\n';
 
                         DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
                         BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                         outToServer.writeBytes(send);
                         outToServer.flush();
-                        modifiedSentence = inFromServer.readLine();
-                        if (!modifiedSentence.equals("errorsignin") && !modifiedSentence.equals("error")) {
+                        /*OutputStreamWriter os=new OutputStreamWriter(clientSocket.getOutputStream());
+                        PrintWriter out=new PrintWriter(os);
+                        out.write(send);
+                        os.flush();
+
+                        BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                        */
+                        modifiedSentence=inFromServer.readLine();
+
+                        //incorrectUserOrPass.setText(modifiedSentence);
+                        //Intent intent = new Intent(getApplicationContext(), Start_menu.class);
+                        //startActivity(intent);
+                        //finish();
+                        if (modifiedSentence.equals("IncorrectPass")){
+
+                            //startActivity(intent);
+                            //finish();
+                            //incorrectUserOrPass.setVisibility(View.VISIBLE);
+                            //incorrectUserOrPass.setText(modifiedSentence);
+                            //TODO see if this works (is it setVisible(View.VISIBLE) to make the textView visibile?
+                        } else if (modifiedSentence.equals("NoPermission")) {
+
+                            //incorrectUserOrPass.setText(modifiedSentence);
+                            //incorrectUserOrPass.setVisibility(View.VISIBLE);
+                        } else if (modifiedSentence.equals("a") || modifiedSentence.equals("u")) {
                             Intent intent = new Intent(getApplicationContext(), Start_menu.class);
+
                             Global.permission = modifiedSentence.charAt(0);
                             Global.username = usernameEditText.getText().toString();
                             Global.password = passwordEditText.getText().toString();
-
                             startActivity(intent);
                             finish();
+                            //incorrectUserOrPass.setVisibility(View.GONE);
+                            //incorrectUserOrPass.setText(modifiedSentence);
                         }
                         clientSocket.close();
                     } catch (IOException e) {
@@ -124,13 +167,12 @@ public class SignIn extends AppCompatActivity {
                     }
                     return;
                 }
-            });
-            thr.start();
+            }).start();
 
-            thr.interrupt();
         }
 
     };
-
 }
+
+
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -14,6 +15,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -61,8 +63,20 @@ public class Start_menu extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
         displaySelectedScreen(R.id.my_address);
-    }
 
+
+        BottomNavigationView navigation=(BottomNavigationView) findViewById(R.id.navigation)
+        //ImageButton logoutButton=(ImageButton) tx.findViewById(R.id.logoutButton);
+        //logoutButton.setOnClickListener(LoggingOutListener);
+    }
+    View.OnClickListener LoggingOutListener=new View.OnClickListener() {
+
+        public void onClick(View view) {
+            Intent intent = new Intent(view.getContext(), UPorIn.class);
+            startActivity(intent);
+            finish();
+        }
+    };
     View.OnClickListener SlideMenuListener=new View.OnClickListener() {
 
         public void onClick(View view) {

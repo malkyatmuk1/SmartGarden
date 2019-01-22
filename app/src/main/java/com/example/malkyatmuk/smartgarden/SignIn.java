@@ -51,7 +51,7 @@ public class SignIn extends AppCompatActivity {
         passwordEditText = (EditText) findViewById(R.id.password);
         createNewAccountTextView = (TextView) findViewById(R.id.createNewAccount);
         signInButton = (Button) findViewById(R.id.SignInButton);
-        signInButton.setOnClickListener(SignInButtonListener);
+        signInButton.setOnClickListener(NextButtonListener);
         backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(BackButtonListener);
         createNewAccountTextView = (TextView) findViewById(R.id.createNewAccount);
@@ -74,7 +74,6 @@ public class SignIn extends AppCompatActivity {
             finish();
         }
     };
-    /*
     View.OnClickListener NextButtonListener=new View.OnClickListener() {
 
         public void onClick(View view) {
@@ -82,7 +81,7 @@ public class SignIn extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-    };*/
+    };
     View.OnClickListener SignInButtonListener = new View.OnClickListener() {
         public void onClick(final View v) {
 

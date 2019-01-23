@@ -65,7 +65,7 @@ public class Start_menu extends AppCompatActivity
         displaySelectedScreen(R.id.my_address);
 
 
-        BottomNavigationView navigation=(BottomNavigationView) findViewById(R.id.navigation)
+        BottomNavigationView navigation=(BottomNavigationView) findViewById(R.id.navigation);
         //ImageButton logoutButton=(ImageButton) tx.findViewById(R.id.logoutButton);
         //logoutButton.setOnClickListener(LoggingOutListener);
     }

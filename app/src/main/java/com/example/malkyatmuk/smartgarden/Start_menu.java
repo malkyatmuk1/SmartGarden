@@ -47,10 +47,13 @@ public class Start_menu extends AppCompatActivity
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        View txtusern=(View) navigationView.getHeaderView(0);
-        TableLayout tableLayout=(TableLayout) txtusern.findViewById(R.id.table);
+        View headerView=(View) navigationView.getHeaderView(0);
+        TableLayout tableLayout=(TableLayout) headerView.findViewById(R.id.table);
         TableRow row=(TableRow)  tableLayout.getChildAt(0);
-        TextView txtUsername= (TextView) txtusern.findViewById(R.id.usernameProfile);
+        TextView txtUsername= (TextView) headerView.findViewById(R.id.usernameProfile);
+
+        BottomNavigationView navigationViewBottom = (BottomNavigationView) findViewById(R.id.navigationbottom);
+        View footerView =(View) navigationViewBottom.
         //TextView txtAdress=(TextView) txtAdress.findViewById(R.id.adressProfile);
 
         txtUsername.setText(Global.username);

@@ -51,10 +51,11 @@ public class Start_menu extends AppCompatActivity
         TableLayout tableLayout=(TableLayout) txtusern.findViewById(R.id.table);
         TableRow row=(TableRow)  tableLayout.getChildAt(0);
         TextView txtUsername= (TextView) txtusern.findViewById(R.id.usernameProfile);
-        //TextView txtAdress=(TextView) txtAdress.findViewById(R.id.adressProfile);
+        TextView txtAdress=(TextView) txtusern.findViewById(R.id.adressProfile);
 
         txtUsername.setText(Global.username);
-
+        if(Global.permission=='a')txtAdress.setText("Administrator");
+        else txtAdress.setText("User");
 
         //txt.setText(Global.username.toString());
 
@@ -65,7 +66,7 @@ public class Start_menu extends AppCompatActivity
         displaySelectedScreen(R.id.my_address);
 
 
-        BottomNavigationView navigation=(BottomNavigationView) findViewById(R.id.navigation)
+        //BottomNavigationView navigation=(BottomNavigationView) findViewById(R.id.navigation)
         //ImageButton logoutButton=(ImageButton) tx.findViewById(R.id.logoutButton);
         //logoutButton.setOnClickListener(LoggingOutListener);
     }
@@ -95,7 +96,6 @@ public class Start_menu extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

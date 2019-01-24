@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.gms.common.SignInButton;
+
 import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
@@ -51,7 +53,7 @@ public class SignIn extends AppCompatActivity {
         passwordEditText = (EditText) findViewById(R.id.password);
         createNewAccountTextView = (TextView) findViewById(R.id.createNewAccount);
         signInButton = (Button) findViewById(R.id.SignInButton);
-        signInButton.setOnClickListener(NextButtonListener);
+        signInButton.setOnClickListener(SignInButtonListener);
         backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(BackButtonListener);
         createNewAccountTextView = (TextView) findViewById(R.id.createNewAccount);

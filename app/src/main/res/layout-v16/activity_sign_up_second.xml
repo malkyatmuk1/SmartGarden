@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -50,6 +55,20 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="15dp"
         android:src="@drawable/avatar" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/info"
+        android:layout_gravity="center"
+        android:textColor="@color/red"
+        android:textSize="10dp"
+        />
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/usernameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
     <EditText
         android:id="@+id/usernameEditText"
         android:layout_width="300dp"
@@ -60,28 +79,43 @@
         android:hint="Username"
         android:maxLines="1"
         android:paddingLeft="30dp"
+
         android:textColorHint="@color/blue"
         android:textSize="15dp" />
-    <android.support.design.widget.TextInputEditText
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/firstpassLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+    <EditText
         android:id="@+id/firstpassEditText"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
         android:background="@drawable/edittext"
         android:fontFamily="@font/titillium_weblight"
         android:hint="Password"
+
         android:inputType="textPassword"
         android:maxLines="1"
         android:paddingLeft="30dp"
         android:textColorHint="@color/blue"
         android:textSize="15dp" />
-    <android.support.design.widget.TextInputEditText
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/secondpassLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+    <EditText
         android:id="@+id/secondpassEditText"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
+
         android:background="@drawable/edittext"
         android:fontFamily="@font/titillium_weblight"
         android:hint="Confirm Password"
@@ -90,6 +124,7 @@
         android:paddingLeft="30dp"
         android:textColorHint="@color/blue"
         android:textSize="15dp" />
+    </android.support.design.widget.TextInputLayout>
     <LinearLayout
         android:layout_width="100dp"
         android:layout_height="18dp"
@@ -133,3 +168,4 @@
         android:textColor="@color/blue"
         android:textStyle="bold" />
 </LinearLayout>
+</ScrollView>

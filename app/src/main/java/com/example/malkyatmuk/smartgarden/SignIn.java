@@ -146,7 +146,6 @@ public class SignIn extends AppCompatActivity {
                             //finish();
                             //incorrectUserOrPass.setVisibility(View.VISIBLE);
                             //incorrectUserOrPass.setText(modifiedSentence);
-                            //TODO see if this works (is it setVisible(View.VISIBLE) to make the textView visibile?
                         } else if (modifiedSentence.equals("NoPermission")) {
 
                             //incorrectUserOrPass.setText(modifiedSentence);

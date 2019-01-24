@@ -141,7 +141,21 @@ public class SignIn extends AppCompatActivity {
                         //startActivity(intent);
                         //finish();
                         if (modifiedSentence.equals("IncorrectPass")){
-
+                            incorrectUserOrPass.post(new Runnable() {
+                                public void run() {
+                                    incorrectUserOrPass.setText("Incorrect username or password");
+                                }
+                            });
+                            usernameEditText.post(new Runnable() {
+                                public void run() {
+                                    usernameEditText.setText("");
+                                }
+                            });
+                            passwordEditText.post(new Runnable() {
+                                public void run() {
+                                    passwordEditText.setText("");
+                                }
+                            });
                             //startActivity(intent);
                             //finish();
                             //incorrectUserOrPass.setVisibility(View.VISIBLE);

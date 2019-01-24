@@ -70,8 +70,6 @@ public class Start_menu extends AppCompatActivity
 
         //txt.setText(Global.username.toString());
 
-
-
         //BottomNavigationView navigation=(BottomNavigationView) findViewById(R.id.navigation)
         //ImageButton logoutButton=(ImageButton) tx.findViewById(R.id.logoutButton);
         //logoutButton.setOnClickListener(LoggingOutListener);

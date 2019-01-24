@@ -47,7 +47,6 @@
         android:id="@+id/incorrectUserOrPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Incorrect username or password"
         android:textColor="#FF0000"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="5dp"

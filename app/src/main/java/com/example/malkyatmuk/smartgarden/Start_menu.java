@@ -51,25 +51,26 @@ public class Start_menu extends AppCompatActivity
         TableLayout tableLayout=(TableLayout) headerView.findViewById(R.id.table);
         TableRow row=(TableRow)  tableLayout.getChildAt(0);
         TextView txtUsername= (TextView) headerView.findViewById(R.id.usernameProfile);
-/*
-        BottomNavigationView navigationViewBottom = (BottomNavigationView) navigationView.findViewById(R.id.navigationbottom);
-        ImageButton logoutButton= (ImageButton) navigationViewBottom.findViewById(R.id.logoutButton);
-        logoutButton.setOnClickListener(LogoutClickListener);
-        */
         TextView txtAdress=(TextView) headerView.findViewById(R.id.adressProfile);
 
         txtUsername.setText(Global.username);
-        if(Global.permission=='a')txtAdress.setText("Administrator");
+        char c=Global.permission;
+        if(c=='a')txtAdress.setText("Administrator");
         else txtAdress.setText("User");
-
 
 
         ImageButton slideMenuButton=(ImageButton) row.findViewById(R.id.slideMenu);
         slideMenuButton.setOnClickListener(SlideMenuListener);
-
         navigationView.setNavigationItemSelectedListener(this);
         displaySelectedScreen(R.id.my_address);
+        //View footerView =(View) navigationViewBottom.findViewById(R.id.)
 
+
+        //txt.setText(Global.username.toString());
+
+        //BottomNavigationView navigation=(BottomNavigationView) findViewById(R.id.navigation)
+        //ImageButton logoutButton=(ImageButton) tx.findViewById(R.id.logoutButton);
+        //logoutButton.setOnClickListener(LoggingOutListener);
 
     }
     View.OnClickListener LogoutClickListener=new View.OnClickListener() {
@@ -113,7 +114,7 @@ public class Start_menu extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         displaySelectedScreen(item.getItemId());
         return true;
-    }
+    };
     private void displaySelectedScreen(int itemId) {
         //creating fragment object
         Fragment fragment = null;

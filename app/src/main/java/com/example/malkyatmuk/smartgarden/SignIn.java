@@ -141,12 +141,25 @@ public class SignIn extends AppCompatActivity {
                         //startActivity(intent);
                         //finish();
                         if (modifiedSentence.equals("IncorrectPass")){
-
+                            incorrectUserOrPass.post(new Runnable() {
+                                public void run() {
+                                    incorrectUserOrPass.setText("Incorrect username or password");
+                                }
+                            });
+                            usernameEditText.post(new Runnable() {
+                                public void run() {
+                                    usernameEditText.setText("");
+                                }
+                            });
+                            passwordEditText.post(new Runnable() {
+                                public void run() {
+                                    passwordEditText.setText("");
+                                }
+                            });
                             //startActivity(intent);
                             //finish();
                             //incorrectUserOrPass.setVisibility(View.VISIBLE);
                             //incorrectUserOrPass.setText(modifiedSentence);
-                            //TODO see if this works (is it setVisible(View.VISIBLE) to make the textView visibile?
                         } else if (modifiedSentence.equals("NoPermission")) {
 
                             //incorrectUserOrPass.setText(modifiedSentence);

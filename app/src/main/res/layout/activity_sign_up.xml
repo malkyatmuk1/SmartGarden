@@ -43,22 +43,25 @@
         android:layout_marginBottom="80dp"
         android:fontFamily="@font/titillium_weblight"
         android:textSize="20dp"/>
+
     <EditText
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/edittext"
-        android:text="Email"
-        android:textColor="@color/blue"
-        android:textSize="15dp"
+        android:fontFamily="@font/titillium_weblight"
+        android:hint="Email"
+        android:textColorHint="#000000"
         android:paddingLeft="30dp"
-        android:fontFamily="@font/titillium_weblight" />
+        android:textColor="@color/blue"
+        android:textSize="15dp" />
     <EditText
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/edittext"
-        android:text="Contact Number"
+        android:hint="Contact Number"
+        android:textColorHint="#000000"
         android:textColor="@color/blue"
         android:textSize="15dp"
         android:paddingLeft="30dp"

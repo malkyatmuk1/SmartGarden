@@ -51,16 +51,18 @@ public class Start_menu extends AppCompatActivity
         TableLayout tableLayout=(TableLayout) headerView.findViewById(R.id.table);
         TableRow row=(TableRow)  tableLayout.getChildAt(0);
         TextView txtUsername= (TextView) headerView.findViewById(R.id.usernameProfile);
-
-        BottomNavigationView navigationViewBottom = (BottomNavigationView) findViewById(R.id.navigationbottom);
-        View footerView =(View) navigationViewBottom.
-        //TextView txtAdress=(TextView) txtAdress.findViewById(R.id.adressProfile);
+/*
+        BottomNavigationView navigationViewBottom = (BottomNavigationView) navigationView.findViewById(R.id.navigationbottom);
+        ImageButton logoutButton= (ImageButton) navigationViewBottom.findViewById(R.id.logoutButton);
+        logoutButton.setOnClickListener(LogoutClickListener);
+        */
+        TextView txtAdress=(TextView) headerView.findViewById(R.id.adressProfile);
 
         txtUsername.setText(Global.username);
         if(Global.permission=='a')txtAdress.setText("Administrator");
         else txtAdress.setText("User");
 
-        //txt.setText(Global.username.toString());
+
 
         ImageButton slideMenuButton=(ImageButton) row.findViewById(R.id.slideMenu);
         slideMenuButton.setOnClickListener(SlideMenuListener);
@@ -68,14 +70,13 @@ public class Start_menu extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         displaySelectedScreen(R.id.my_address);
 
-        //BottomNavigationView navigation=(BottomNavigationView) findViewById(R.id.navigation)
-        //ImageButton logoutButton=(ImageButton) tx.findViewById(R.id.logoutButton);
-        //logoutButton.setOnClickListener(LoggingOutListener);
+
     }
-    View.OnClickListener LoggingOutListener=new View.OnClickListener() {
+    View.OnClickListener LogoutClickListener=new View.OnClickListener() {
 
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), UPorIn.class);
+            Intent intent = new Intent();
+            intent.setClassName("com.example.malkyatmuk.smartgarden","com.example.malkyatmuk.smartgarden.SignIn");
             startActivity(intent);
             finish();
         }
@@ -136,6 +137,13 @@ public class Start_menu extends AppCompatActivity
                 break;
             case R.id.about_us:
               fragment=new About_Us();
+                break;
+
+            case R.id.logoutButton:
+                Intent intent = new Intent();
+                intent.setClassName("com.example.malkyatmuk.smartgarden","com.example.malkyatmuk.smartgarden.SignIn");
+                startActivity(intent);
+                finish();
                 break;
         }
 

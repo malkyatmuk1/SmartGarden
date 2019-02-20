@@ -45,21 +45,24 @@ public class Start_menu extends AppCompatActivity
         toolbar.setTitleTextColor(Color.parseColor("#67f7d1"));
 
 
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        View headerView=(View) navigationView.getHeaderView(0);
-        TableLayout tableLayout=(TableLayout) headerView.findViewById(R.id.table);
-        TableRow row=(TableRow)  tableLayout.getChildAt(0);
-        TextView txtUsername= (TextView) headerView.findViewById(R.id.usernameProfile);
-        TextView txtAdress=(TextView) headerView.findViewById(R.id.adressProfile);
+        View headerView = (View) navigationView.getHeaderView(0);
+        TableLayout tableLayout = (TableLayout) headerView.findViewById(R.id.table);
+        TableRow row = (TableRow) tableLayout.getChildAt(0);
+        TableRow rowSettings = (TableRow) tableLayout.getChildAt(0);
+        TextView txtUsername = (TextView) headerView.findViewById(R.id.usernameProfile);
+        TextView txtAdress = (TextView) headerView.findViewById(R.id.adressProfile);
 
         txtUsername.setText(Global.username);
-        char c=Global.permission;
-        if(c=='a')txtAdress.setText("Administrator");
+        char c = Global.permission;
+        if (c == 'a') txtAdress.setText("Administrator");
         else txtAdress.setText("User");
 
 
-        ImageButton slideMenuButton=(ImageButton) row.findViewById(R.id.slideMenu);
+        ImageButton slideMenuButton = (ImageButton) row.findViewById(R.id.slideMenu);
+        ImageButton settingsButton = (ImageButton) rowSettings.findViewById(R.id.settingsButton);
+
+        settingsButton.setOnClickListener(NewNicknameOrPassword);
         slideMenuButton.setOnClickListener(SlideMenuListener);
         navigationView.setNavigationItemSelectedListener(this);
         displaySelectedScreen(R.id.my_address);
@@ -73,6 +76,14 @@ public class Start_menu extends AppCompatActivity
         //logoutButton.setOnClickListener(LoggingOutListener);
 
     }
+    View.OnClickListener NewNicknameOrPassword=new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(view.getContext(), Edit_Account.class);
+            startActivity(intent);
+            finish();
+        }
+    };
     View.OnClickListener LogoutClickListener=new View.OnClickListener() {
 
         public void onClick(View view) {

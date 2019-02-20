@@ -27,12 +27,16 @@ public class About_Us extends Fragment {
         View  myFragmentView = inflater.inflate(R.layout.fragment_about_us, container, false);
         return myFragmentView;
 
+
+
     }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTheme(R.style.MyActionBar);
-        getActivity().setTitle("My Address");
+        getActivity().setTitle("About us");
+
+
         }
 }

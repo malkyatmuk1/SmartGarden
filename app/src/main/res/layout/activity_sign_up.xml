@@ -51,9 +51,9 @@
         android:background="@drawable/edittext"
         android:fontFamily="@font/titillium_weblight"
         android:hint="Email"
-        android:textColorHint="#000000"
         android:paddingLeft="30dp"
         android:textColor="@color/blue"
+        android:textColorHint="#000000"
         android:textSize="15dp" />
     <EditText
         android:layout_width="300dp"

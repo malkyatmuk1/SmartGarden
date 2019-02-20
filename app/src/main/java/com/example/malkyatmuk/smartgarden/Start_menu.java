@@ -19,7 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -64,23 +63,21 @@ public class Start_menu extends AppCompatActivity
         slideMenuButton.setOnClickListener(SlideMenuListener);
         navigationView.setNavigationItemSelectedListener(this);
         displaySelectedScreen(R.id.my_address);
+        //View footerView =(View) navigationViewBottom.findViewById(R.id.)
 
-        BottomNavigationView navigationViewBottom = (BottomNavigationView) findViewById(R.id.navigationbottom);
-        ImageButton logoutButton=(ImageButton) navigationViewBottom.findViewById(R.id.logoutButton);
-        logoutButton.setOnClickListener(LogoutListener);
-        //View footerView =(View) navigationViewBottom.findViewById(R.id.footer);
-        //ImageButton logoutButton=(ImageButton) footerView.findViewById(R.id.logoutButton);
-        //logoutButton.setOnClickListener(LogoutListener);
+
         //txt.setText(Global.username.toString());
+
         //BottomNavigationView navigation=(BottomNavigationView) findViewById(R.id.navigation)
         //ImageButton logoutButton=(ImageButton) tx.findViewById(R.id.logoutButton);
         //logoutButton.setOnClickListener(LoggingOutListener);
 
     }
-    View.OnClickListener LogoutListener=new View.OnClickListener() {
+    View.OnClickListener LogoutClickListener=new View.OnClickListener() {
 
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), UPorIn.class);
+            Intent intent = new Intent();
+            intent.setClassName("com.example.malkyatmuk.smartgarden","com.example.malkyatmuk.smartgarden.SignIn");
             startActivity(intent);
             finish();
         }
@@ -124,7 +121,7 @@ public class Start_menu extends AppCompatActivity
         //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.my_address:
-               fragment = new MyAddress();
+                fragment = new MyAddress();
                 break;
             case R.id.garden_items:
 
@@ -133,14 +130,21 @@ public class Start_menu extends AppCompatActivity
                 break;
             case R.id.contact_us:
 
-                    fragment = new Contact_Us();
+                fragment = new Contact_Us();
 
                 break;
             case R.id.share:
 
                 break;
             case R.id.about_us:
-              fragment=new About_Us();
+                fragment=new About_Us();
+                break;
+
+            case R.id.logoutButton:
+                Intent intent = new Intent();
+                intent.setClassName("com.example.malkyatmuk.smartgarden","com.example.malkyatmuk.smartgarden.SignIn");
+                startActivity(intent);
+                finish();
                 break;
         }
 

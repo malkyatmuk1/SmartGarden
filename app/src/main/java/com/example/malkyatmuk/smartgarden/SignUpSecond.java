@@ -49,6 +49,8 @@ public class SignUpSecond extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_second);
         infoTextView= (TextView) findViewById(R.id.info);
+        signedUp=(TextView) findViewById(R.id.signedUp);
+        signedUp.setOnClickListener(AlreadySignedUp);
         usernameEditText=(EditText) findViewById(R.id.usernameEditText);
         firstpassEditText =(EditText) findViewById(R.id.firstpassEditText);
         secondpassEditText= (EditText) findViewById(R.id.secondpassEditText);

@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -65,16 +66,18 @@ public class Start_menu extends AppCompatActivity
         displaySelectedScreen(R.id.my_address);
 
         BottomNavigationView navigationViewBottom = (BottomNavigationView) findViewById(R.id.navigationbottom);
-        //View footerView =(View) navigationViewBottom.findViewById(R.id.)
-
-
+        ImageButton logoutButton=(ImageButton) navigationViewBottom.findViewById(R.id.logoutButton);
+        logoutButton.setOnClickListener(LogoutListener);
+        //View footerView =(View) navigationViewBottom.findViewById(R.id.footer);
+        //ImageButton logoutButton=(ImageButton) footerView.findViewById(R.id.logoutButton);
+        //logoutButton.setOnClickListener(LogoutListener);
         //txt.setText(Global.username.toString());
-
         //BottomNavigationView navigation=(BottomNavigationView) findViewById(R.id.navigation)
         //ImageButton logoutButton=(ImageButton) tx.findViewById(R.id.logoutButton);
         //logoutButton.setOnClickListener(LoggingOutListener);
+
     }
-    View.OnClickListener LoggingOutListener=new View.OnClickListener() {
+    View.OnClickListener LogoutListener=new View.OnClickListener() {
 
         public void onClick(View view) {
             Intent intent = new Intent(view.getContext(), UPorIn.class);

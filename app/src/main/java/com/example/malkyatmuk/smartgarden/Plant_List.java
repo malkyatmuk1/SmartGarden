@@ -1,5 +1,6 @@
 package com.example.malkyatmuk.smartgarden;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -33,6 +34,8 @@ public class Plant_List extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_list_of_plants, container, false);
         final GridView listView = (GridView) view.findViewById(R.id.card_listView);
+        FloatingActionButton fab=(FloatingActionButton)view.findViewById(R.id.fab);
+        fab.setOnClickListener(FabButtonListener);
         //progressBar=(ProgressBar) view.findViewById(R.id.progressBar);
         readPlants(view,true);
         Global.plants.add("tanq");
@@ -45,7 +48,12 @@ public class Plant_List extends Fragment {
         listView.setAdapter(adapter);
         return view;
     }
-
+    View.OnClickListener FabButtonListener=new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            startActivity(new Intent(view.getContext(),Add_Card.class));
+        }
+    };
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

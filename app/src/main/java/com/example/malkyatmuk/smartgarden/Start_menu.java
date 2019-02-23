@@ -1,10 +1,12 @@
 package com.example.malkyatmuk.smartgarden;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
+import android.support.annotation.MainThread;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -14,16 +16,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Slide;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-public class Start_menu extends AppCompatActivity
+public class Start_menu<LogoutClickListener> extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @SuppressLint("ResourceAsColor")
@@ -71,9 +76,11 @@ public class Start_menu extends AppCompatActivity
 
         //txt.setText(Global.username.toString());
 
-        //BottomNavigationView navigation=(BottomNavigationView) findViewById(R.id.navigation)
-        //ImageButton logoutButton=(ImageButton) tx.findViewById(R.id.logoutButton);
-        //logoutButton.setOnClickListener(LoggingOutListener);
+        BottomNavigationView navigation=(BottomNavigationView) findViewById(R.id.navigationBottom);
+
+        MenuItem logoutButton=(MenuItem) navigation.getMenu().findItem(R.id.itemLogout);
+
+        logoutButton.setOnMenuItemClickListener(LogoutClickListener);
 
     }
     View.OnClickListener NewNicknameOrPassword=new View.OnClickListener() {
@@ -84,15 +91,25 @@ public class Start_menu extends AppCompatActivity
             finish();
         }
     };
-    View.OnClickListener LogoutClickListener=new View.OnClickListener() {
+    void func()
+    {
+        Intent intent=new Intent(this,SignIn.class);
+        startActivity(intent);
+        finish();
+    }
+    MenuItem.OnMenuItemClickListener LogoutClickListener = new MenuItem.OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem) {
 
-        public void onClick(View view) {
-            Intent intent = new Intent();
-            intent.setClassName("com.example.malkyatmuk.smartgarden","com.example.malkyatmuk.smartgarden.SignIn");
-            startActivity(intent);
-            finish();
+            func();
+
+            //Intent intent = new Intent(,SignIn.class);
+            //startActivity(intent);
+            //finish();
+            return false;
         }
     };
+
     View.OnClickListener SlideMenuListener=new View.OnClickListener() {
 
         public void onClick(View view) {

@@ -104,28 +104,15 @@ public class Edit_Account extends Activity {
                         //Intent intent = new Intent(getApplicationContext(), Start_menu.class);
                         //startActivity(intent);
                         //finish();
+                        //TODO tova ne znam zashto si go napravil taka, no spored men ne stava taka da se pishe, ne e i imalo problem ... tezi post metodi sa izlishni!
                         if (modifiedSentence.equals("IncorrectPass")){
-                            noMatch.post(new Runnable() {
-                                public void run() {
                                     noMatch.setText("Incorrect old password");
-                                }
-                            });
-                            oldPass.post(new Runnable() {
-                                public void run() {
                                     oldPass.setText("");
-                                }
-                            });
-                            newPass.post(new Runnable() {
-                                public void run() {
                                     newPass.setText("");
-                                }
-                            });
-                            confPass.post(new Runnable() {
-                                public void run() {
                                     confPass.setText("");
                                 }
-                            });
-                        } else if (modifiedSentence.equals("a") || modifiedSentence.equals("u")) {
+
+                        else if (modifiedSentence.equals("a") || modifiedSentence.equals("u")) {
 
                             if(newPassw.equals(confPassw))
                             {

@@ -67,7 +67,8 @@
         android:id="@+id/usernameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center" >
+        android:gravity="center"
+        android:textColorHint="@color/blue" >
 
     <EditText
         android:id="@+id/usernameEditText"
@@ -79,15 +80,19 @@
         android:hint="Username"
         android:maxLines="1"
         android:paddingLeft="30dp"
-
         android:textColorHint="@color/blue"
-        android:textSize="15dp" />
+        android:textColor="@color/blue"
+        android:textSize="15dp"
+        android:singleLine="true"
+        android:nextFocusDown="@+id/firstpassEditText"
+        />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:id="@+id/firstpassLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center" >
+        android:gravity="center"
+        android:textColorHint="@color/blue" >
 
         <EditText
             android:id="@+id/firstpassEditText"
@@ -101,7 +106,8 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:paddingLeft="30dp"
-            android:textColorHint="#000000"
+            android:textColorHint="@color/blue"
+            android:textColor="@color/blue"
             android:textSize="15dp" />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
@@ -109,6 +115,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColorHint="@color/blue"
         >
     <EditText
         android:id="@+id/secondpassEditText"
@@ -123,6 +130,7 @@
         android:maxLines="1"
         android:paddingLeft="30dp"
         android:textColorHint="@color/blue"
+        android:textColor="@color/blue"
         android:textSize="15dp" />
     </android.support.design.widget.TextInputLayout>
     <LinearLayout

@@ -8,46 +8,23 @@
     android:orientation="vertical"
     android:gravity="center_vertical"
     android:id="@+id/fragment_address"
-    tools:context=".MyAddress">
-    <android.support.v7.widget.CardView
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        app:cardElevation="4dp"
-        app:cardBackgroundColor="@android:color/transparent"
-        android:layout_gravity="center"
-        app:cardCornerRadius="20dp"
-        android:layout_marginBottom="90dp"
-        >
-        <LinearLayout
+    tools:context=".MyAddress"
+    >
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Address"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:paddingLeft="20dp"
-                />
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="2dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/gradient_blue_green" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="IMPORTANT: CardView’s shadows will be clipped if it reaches to the parent view’s borders or padding area. To prevent it, either add padding and "
-                android:textColor="@color/greyText"
-                android:lines="5"
-                android:layout_margin="3dp"
-                android:paddingLeft="20dp"
-                />
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/edittext"
+        android:fontFamily="@font/titillium_weblight"
+        android:hint="IP"
+        android:paddingLeft="30dp"
+        android:textColor="@color/blue"
+        android:textColorHint="#000000"
+        android:textSize="15dp" />
+
     <Button
         android:layout_width="300dp"
         android:layout_height="50dp"
@@ -59,4 +36,8 @@
         android:textAllCaps="false"
         android:textSize="15dp"
         android:textStyle="bold"/>
+
+
+
+
 </LinearLayout>

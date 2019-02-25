@@ -7,7 +7,8 @@
     android:background="@color/white"
     tools:context=".Start"
     android:orientation="vertical"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    tools:ignore="MissingDefaultResource">
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="50dp"
@@ -86,6 +87,7 @@
         android:paddingLeft="30dp"
         android:fontFamily="@font/titillium_weblight"
         android:layout_marginTop="10dp" />
+
 
     <Button
         android:id="@+id/changePassButton"

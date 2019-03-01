@@ -10,16 +10,7 @@
     android:id="@+id/fragment_address"
     tools:context=".MyAddress"
     >
-    <TextView
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="@string/auto"
-        android:textColor="@color/greyText"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        android:paddingLeft="30dp"
-        android:layout_gravity="center_horizontal"
-        />
+
     <TextView
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -31,35 +22,38 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="10dp"
         />
-
-
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="IP settings"
+        android:textSize="30dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        />
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edittext_white"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:hint="IP"
+        android:inputType="numberDecimal"
+        android:digits="0123456789."
+        android:textColorHint="@color/white"
+        android:backgroundTint="@color/white"
+        />
     <Button
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:background="@drawable/button"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="20dp"
-
-        android:text="AUTO"
+        android:text="Apply"
         android:textAlignment="center"
         android:gravity="center"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/titillium_weblight"
         android:textAllCaps="false"
         android:textSize="15dp"
         android:textStyle="bold"/>
-    <Button
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:background="@drawable/button"
-        android:layout_gravity="center_horizontal"
-        android:text="MANUAL"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:fontFamily="@font/titillium_weblight"
-        android:textAllCaps="false"
-        android:textSize="15dp"
-        android:textStyle="bold"/>
-
-
 
 </LinearLayout>

@@ -21,6 +21,8 @@ using namespace std;
 #define DHTPIN 16
 
 #define user_start  78
+#define pass_start 88
+#define salt_start 108
 #define user_step  sizeof(person)
 #define passAP_start  68
 #define passAP_stop  77 
@@ -37,12 +39,12 @@ unsigned int TrigPin = 3;           // connect Pin 3(Arduino digital io) to Trig
 unsigned long Time_Echo_us = 0;
 unsigned long Len_mm  = 0;
 //user-info
-char ssid[64];
-char password[64];
+char ssid[32];
+char password[32];
 const char passAp[]="12345678";
 const char ssidAp[]="espd";
-const char passWiFi[]="IamSuperProgrammer";
-const char ssidWiFi[]="JohnAndWillow";
+
+
 vector<String> commands;
 person list[10];
 byte listofflags[10]; 
@@ -58,6 +60,7 @@ char* salt_random();
 void readPerson(uint index, person* p);
 void writePerson(int start, person* p);
 char isHavingPermission(char* usernamePerson,String passwordPerson);
+int indexOfUser(char* usernamePerson,String passwordPerson);
 void printlist();
 void printt(char* s,int n);
 void GetExternalIP(String* s);
@@ -76,12 +79,13 @@ uint32_t delayMS;
 
 
 void setup() {
-  
+    
   ESP.eraseConfig();
   WiFi.mode(WIFI_AP_STA);
   Serial.begin(115200);
   WiFi.softAP(ssidAp,passAp);
   EEPROM.begin(512);
+
   pinMode(pin, INPUT); 
   pinMode(EchoPin, INPUT);                    //Set EchoPin as input, to receive measure result from US-015
   pinMode(TrigPin, OUTPUT);        
@@ -102,9 +106,9 @@ void setup() {
   }
   printlist();
 
-  /*
+  
     String ssidpass;
- // ssidpass=readWifi();
+ ssidpass=readWifi();
   Serial.println(ssidpass);
  commands=splitString(ssidpass,' ');
  // //readWifi
@@ -115,16 +119,18 @@ void setup() {
  
 Serial.println(ssid);
 Serial.println(password);
-*/
+
 
   //connect to WiFi
   int br=0;
   Serial.println("here");
-  WiFi.begin(ssidWiFi,passWiFi);
-  while (WiFi.status() != WL_CONNECTED)
+  WiFi.begin(ssid,password);
+
+  while (WiFi.status() != WL_CONNECTED && br<15)
   {
     delay(500);
     Serial.print(".");
+    br++;
   }
   Serial.print("IP Address: "); Serial.println(WiFi.localIP());
   server.begin();
@@ -134,7 +140,7 @@ Serial.println(password);
 void loop()
 { 
   client=server.available();
-  if(ip.length()==0 || flagChangedWifi) {GetExternalIP(ip);flagChangedWifi=false;  Serial.println(ip);}
+  if(ip.length()==0 || flagChangedWifi) {GetExternalIP(ip);flagChangedWifi=false;  Serial.println("here "+ip);}
 
   if(client)
   {
@@ -206,7 +212,36 @@ void loop()
     }
     else if(commands[0]=="setWifi")
     {
-      //TODO
+      //setWifi TN tanqnaid tanq a
+      //setWifi JohnAndWillow IamSuperProgrammer tanq a
+        int flag;
+        char nameuser[10];
+        char* passworduser;
+        char perm1;
+        
+        commands[3].toCharArray(nameuser,10);
+        perm1=isHavingPermission(nameuser,commands[4]);
+        Serial.println(perm1);
+        commands[1].toCharArray(ssid,32);
+        commands[2].toCharArray(password,32);
+        Serial.println(ssid);
+        Serial.println(password);
+        if(perm1=='a') 
+        {
+          Serial.println();          
+          writeWifi(commands[1],commands[2]);
+        }
+        int br=0;
+        WiFi.begin(ssid,password);
+       while (WiFi.status() != WL_CONNECTED && br<15)
+        {
+         delay(500);
+         Serial.print(".");
+         br++;
+        }
+         Serial.print("IP Address: "); Serial.println(WiFi.localIP());
+        
+      
     }
     else if(commands[0]=="setPermission")
     {
@@ -236,7 +271,7 @@ void loop()
       if(!strncmp(passh,list[0].pass_hash,20)&&!strncmp(list[0].username,p.username,10)){flag=1;}
         else flag=0;
       for(int i=0;i<10;i++)
-      {
+      { 
         if(!strncmp(list[i].username,username1,10))
         {         
           if(flag==1)
@@ -251,6 +286,46 @@ void loop()
         }
       }
     }
+    else if(commands[0]=="setPassWord")
+    {
+      char nameuser[10];
+      String str;
+      bool flag=0;
+      person p;
+      char passh[20];
+      int index;
+        
+      commands[1].toCharArray(p.username,10);   
+      index=indexOfUser(p.username, commands[2]);
+      Serial.println("im here: "+index);
+  
+      if(index!=-1){
+        
+        char salt[13];
+        for(int i=0;i<12;i++){
+        salt[i]=char(random(33,126));
+        }
+        salt[12]=0;
+        commands[3]+=salt;
+        strncpy(p.salt,salt,12);
+        sha1(commands[3]).toCharArray(p.pass_hash,20);
+        
+        strncpy(list[index].pass_hash,p.pass_hash,20);
+        strncpy(list[index].salt,salt,12);
+        for(int i=0;i<20;i++)
+        {
+          
+          EEPROM.write(pass_start+index*user_step+i,p.pass_hash[i]);
+          EEPROM.commit();
+          
+        }
+        for(int i=0;i<12;i++){EEPROM.write(salt_start+index*user_step+i,p.salt[i]);EEPROM.commit();}
+        client.println("ready!");
+      
+     }
+     else client.println("Incorect Pass");
+    }
+    
     else if(commands[0]=="list")
     {
       char nameuser[10];
@@ -344,7 +419,7 @@ void loop()
       if(commands[1]=="true")client.println(getHumidityOrTemp(true));
       else if(commands[1]=="false")client.println(getHumidityOrTemp(false));
     }
-    
+    Serial.println("here");
   }
 /*
 
@@ -420,6 +495,7 @@ void writeWifi(String passWifi,String ssidWifi)
     Serial.print(char(EEPROM.read(i+32))); 
   }
     EEPROM.commit();
+    Serial.println("minah");
 }
 
 char* salt_random()
@@ -569,8 +645,46 @@ WiFiClient client;
     //Serial.println("connection failedpopop");
   }
 }
+int indexOfUser(char* usernamePerson,String passwordPerson)
+{
+  Serial.println(usernamePerson);
+  Serial.println(passwordPerson);
+  char passh[20];
+  char salt[12];
+  int index;
+  char perm1;
+  bool flag;
+  for(int i=0;i<usercount;i++)
+   {   
+    //Serial.println(list[i].username);
+    if(!strncmp(list[i].username,usernamePerson,10))
+      {
+        Serial.print(usernamePerson);
+        Serial.println(".");
+            strncpy(salt,list[i].salt,12);
+            perm1=list[i].salt[12];
+            salt[12]='\0';     
+            passwordPerson+=salt;
+            Serial.println(passwordPerson);
+            //we hash the password+salt
+            sha1(passwordPerson).toCharArray(passh,20);
+            Serial.println(passh);
+            Serial.println(list[i].pass_hash);
+            //check if the hashed pass form the client and the hashed password form the list are the same-> if is false the flag  become 0 
+           
+            index=i;
+            if(strncmp(passh,list[i].pass_hash,20)) {index=-1;}
+           Serial.println(flag);
+            break;
+          }
+        else index=-1;
+    }
+  return index;
+}
 void EEPROMNull()
 {
   for(int i=0;i<512;i++)EEPROM.write(i,0);
   EEPROM.commit();
 }
+//setPassWord test a b
+// setPermission test u tanq a

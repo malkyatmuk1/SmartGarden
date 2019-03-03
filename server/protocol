@@ -41,3 +41,11 @@ return:
 	humidity
 2) false:
 	temperature
+---------------------------
+setPassWord username lastpass newpass
+return:
+1)ready!
+2)Incorect Pass
+---------------------------
+setWifi ssid password adminusername adminpass
+return nothing

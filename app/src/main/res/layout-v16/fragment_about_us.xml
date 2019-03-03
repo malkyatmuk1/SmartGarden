@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into"
+        android:text="We are Tanya Naidenova and Daniel Velichkov and we study in Math High School in Plovdiv, Bulgaria. Our mission is to make the world a better place to live in. We hope that this application will be useful for many people."
         android:textAlignment="center"
         android:textSize="15dp"
         android:textColor="@color/greyText"
@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="tanya.naidenova@abv.bg
-        0898855763"
+        android:text="tanya.naidenova@abv.bg 0898855763
+dani.levski00@gmail.com 0988922448"
         android:textColor="@color/greyText"/>
 </LinearLayout>

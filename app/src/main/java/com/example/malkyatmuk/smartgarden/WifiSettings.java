@@ -44,7 +44,6 @@ public class WifiSettings extends Activity {
         applyButton.setOnClickListener(ApplyButtonListener);
         backButton=(ImageButton)findViewById(R.id.backButton);
         backButton.setOnClickListener(BackButtonListener);
-
     }
     View.OnClickListener BackButtonListener=new View.OnClickListener() {
 

@@ -27,8 +27,8 @@ public class Plant_List extends Fragment {
         final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
     }
 
-  @Nullable
-  @Override
+    @Nullable
+    @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
 
@@ -61,7 +61,7 @@ public class Plant_List extends Fragment {
 
         getActivity().setTitle("Plants List");
         view.setFocusable(false);
-       final SwipeRefreshLayout sr=(SwipeRefreshLayout) view.findViewById(R.id.mSwipeRefreshLayout);
+        final SwipeRefreshLayout sr=(SwipeRefreshLayout) view.findViewById(R.id.mSwipeRefreshLayout);
         sr.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

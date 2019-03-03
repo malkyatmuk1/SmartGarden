@@ -3,6 +3,7 @@ package com.example.malkyatmuk.smartgarden;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -43,7 +44,10 @@ public class Add_Card extends AppCompatActivity {
 
         int width=dm.widthPixels;
         int height=dm.heightPixels;
-        getWindow().setLayout((int)(width*.6),(int)(height*.8));
+        GradientDrawable drawable=new GradientDrawable();
+        drawable.setColor(1);
+        getWindow().setBackgroundDrawable(drawable);
+        getWindow().setLayout((int)(width*.4),(int)(height*.7));
     }
 }
 

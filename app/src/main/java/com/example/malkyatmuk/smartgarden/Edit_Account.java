@@ -95,7 +95,6 @@ public class Edit_Account extends Activity {
                         PrintWriter out=new PrintWriter(os);
                         out.write(send);
                         os.flush();
-
                         BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                         */
                         modifiedSentence=inFromServer.readLine();
@@ -106,11 +105,11 @@ public class Edit_Account extends Activity {
                         //finish();
                         //TODO tova ne znam zashto si go napravil taka, no spored men ne stava taka da se pishe, ne e i imalo problem ... tezi post metodi sa izlishni!
                         if (modifiedSentence.equals("IncorrectPass")){
-                                    noMatch.setText("Incorrect old password");
-                                    oldPass.setText("");
-                                    newPass.setText("");
-                                    confPass.setText("");
-                                }
+                            noMatch.setText("Incorrect old password");
+                            oldPass.setText("");
+                            newPass.setText("");
+                            confPass.setText("");
+                        }
 
                         else if (modifiedSentence.equals("a") || modifiedSentence.equals("u")) {
 

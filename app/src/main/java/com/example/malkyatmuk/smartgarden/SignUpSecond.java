@@ -34,7 +34,7 @@ import java.net.Socket;
 public class SignUpSecond extends Activity {
     ImageButton backButton;
     Button signUpButton;
-    public TextView signedUp,infoTextView;
+    public TextView signedUp,infoTextView,wifi;
     EditText usernameEditText, firstpassEditText,secondpassEditText;
 
     TextInputLayout firstpassLayout,secondpassLayout,usernameLayout;
@@ -59,13 +59,22 @@ public class SignUpSecond extends Activity {
         usernameLayout=(TextInputLayout) findViewById(R.id.usernameLayout);
         firstpassEditText.addTextChangedListener(textWatcherFirstPass);
         secondpassEditText.addTextChangedListener(textWatcherSecondPass);
-
+        wifi=(TextView)findViewById(R.id.wifiSettings);
+        wifi.setOnClickListener(WifiSettingsListener);
         backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(BackButtonListener);
         signUpButton= (Button) findViewById(R.id.signupButton);
         signUpButton.setOnClickListener(signupButtonListener);
 
     }
+    View.OnClickListener WifiSettingsListener=new View.OnClickListener() {
+
+        public void onClick(View view) {
+            Intent intent = new Intent(view.getContext(), WifiSettings.class);
+            startActivity(intent);
+            finish();
+        }
+    };
     View.OnClickListener AlreadySignedUp=new View.OnClickListener() {
 
         public void onClick(View view) {

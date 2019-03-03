@@ -21,7 +21,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Change Password"
+        android:text="Wifi settings"
         android:textAllCaps="true"
         android:textStyle="bold"
         android:fontFamily="@font/tt_corals_thin_demo"
@@ -46,27 +46,12 @@
         android:visibility="visible"
         android:textSize="15dp"/>
     <EditText
-        android:id="@+id/oldPassword"
+        android:id="@+id/wifiId"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/edittext"
-        android:hint="Old password"
-        android:textColorHint="@color/blue"
-        android:inputType="textPassword"
-        android:textColor="@color/blue"
-        android:textSize="15dp"
-        android:paddingLeft="30dp"
-        android:fontFamily="@font/titillium_weblight"
-        android:layout_marginTop="10dp"/>
-    <EditText
-        android:id="@+id/passwordOne"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/edittext"
-        android:hint="New password"
-        android:inputType="textPassword"
+        android:hint="Wifi-ssid"
         android:textColorHint="@color/blue"
         android:textColor="@color/blue"
         android:textSize="15dp"
@@ -74,12 +59,39 @@
         android:fontFamily="@font/titillium_weblight"
         android:layout_marginTop="10dp"/>
     <EditText
-        android:id="@+id/passwordTwo"
+        android:id="@+id/wifiPass"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/edittext"
-        android:hint="Confirm new password"
+        android:hint="Wifi-pass"
+        android:inputType="textPassword"
+        android:textColorHint="@color/blue"
+        android:textColor="@color/blue"
+        android:textSize="15dp"
+        android:paddingLeft="30dp"
+        android:fontFamily="@font/titillium_weblight"
+        android:layout_marginTop="10dp"/>
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/edittext"
+        android:hint="Username"
+        android:textColorHint="@color/blue"
+        android:textColor="@color/blue"
+        android:textSize="15dp"
+        android:paddingLeft="30dp"
+        android:fontFamily="@font/titillium_weblight"
+        android:layout_marginTop="10dp" />
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/edittext"
+        android:hint="Password"
         android:textColorHint="@color/blue"
         android:inputType="textPassword"
         android:textColor="@color/blue"
@@ -90,26 +102,17 @@
 
 
     <Button
-        android:id="@+id/changePassButton"
+        android:id="@+id/applyButton"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:background="@drawable/button"
-        android:drawableRight="@drawable/right_arrow_button"
         android:paddingRight="20dp"
-        android:text="Change Password"
+        android:text="Apply"
         android:textSize="15dp"
         android:textColor="@color/white"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:textAlignment="gravity"
         android:textAllCaps="false" />
-    <TextView
-        android:id="@+id/cancelLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Don't want to change it anymore? "
-        android:textColor="@color/blue"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp" />
+
 </LinearLayout>

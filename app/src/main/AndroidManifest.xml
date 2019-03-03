@@ -14,7 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
-
         >
         <activity android:name=".Start" android:windowSoftInputMode="adjustResize|stateHidden">
 
@@ -30,9 +29,8 @@
         <activity android:name=".SignUpSecond" android:theme="@style/generalnotitle" android:windowSoftInputMode="stateVisible|adjustResize"/>
         <activity android:name=".Start_menu" android:theme="@style/generalnotitle" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".SignIn" android:theme="@style/generalnotitle" android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name=".Edit_Account" android:theme="@style/generalnotitle" android:windowSoftInputMode="adjustNothing|stateHidden"/>
         <activity android:name=".Add_Card" android:theme="@style/Translucent" android:windowSoftInputMode="adjustNothing|stateHidden"/>
-
+        <activity android:name=".WifiSettings" android:theme="@style/generalnotitle" android:windowSoftInputMode="adjustNothing|stateHidden"/>
 
     </application>
 

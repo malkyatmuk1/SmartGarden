@@ -1,32 +1,24 @@
 package com.example.malkyatmuk.smartgarden;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.google.android.gms.common.SignInButton;
-
-import org.w3c.dom.Text;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.InetAddress;
 import java.net.Socket;
 
-public class Edit_Account extends Activity {
+public class Change_Password extends Fragment {
     EditText oldPass,newPass,confPass;
     Button changePass;
     TextView cancelChanging,noMatch;
@@ -39,32 +31,29 @@ public class Edit_Account extends Activity {
     private static String SERVER_IP;
     public String send;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_account);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
 
-        oldPass=(EditText) findViewById(R.id.oldPassword);
-        newPass=(EditText) findViewById(R.id.passwordOne);
-        confPass=(EditText) findViewById(R.id.passwordTwo);
-        changePass=(Button) findViewById(R.id.changePassButton);
-        cancelChanging=(TextView) findViewById(R.id.cancelLink);
-        noMatch=(TextView) findViewById(R.id.noMatching);
-        backButton=(ImageButton) findViewById(R.id.backButton);
+        View myFragmentView = inflater.inflate(R.layout.fragment_change_pass, container, false);
+        oldPass=(EditText) myFragmentView.findViewById(R.id.oldPassword);
+        newPass=(EditText) myFragmentView.findViewById(R.id.passwordOne);
+        confPass=(EditText) myFragmentView.findViewById(R.id.passwordTwo);
+        changePass=(Button) myFragmentView.findViewById(R.id.changePassButton);
+        noMatch=(TextView) myFragmentView.findViewById(R.id.noMatching);
 
         changePass.setOnClickListener(ChangePasswordListener);
-        backButton.setOnClickListener(BackButtonListener);
-        cancelChanging.setOnClickListener(BackButtonListener);
+        return myFragmentView;
 
     }
-    View.OnClickListener BackButtonListener=new View.OnClickListener() {
 
-        public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), Start_menu.class);
-            startActivity(intent);
-            finish();
-        }
-    };
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //you can set the title for your toolbar here for different fragments different titles
+        getActivity().setTitle("");
+    }
     View.OnClickListener ChangePasswordListener= new View.OnClickListener() {
         public void onClick(final View v) {
 
@@ -95,7 +84,6 @@ public class Edit_Account extends Activity {
                         PrintWriter out=new PrintWriter(os);
                         out.write(send);
                         os.flush();
-
                         BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                         */
                         modifiedSentence=inFromServer.readLine();
@@ -106,11 +94,11 @@ public class Edit_Account extends Activity {
                         //finish();
                         //TODO tova ne znam zashto si go napravil taka, no spored men ne stava taka da se pishe, ne e i imalo problem ... tezi post metodi sa izlishni!
                         if (modifiedSentence.equals("IncorrectPass")){
-                                    noMatch.setText("Incorrect old password");
-                                    oldPass.setText("");
-                                    newPass.setText("");
-                                    confPass.setText("");
-                                }
+                            noMatch.setText("Incorrect old password");
+                            oldPass.setText("");
+                            newPass.setText("");
+                            confPass.setText("");
+                        }
 
                         else if (modifiedSentence.equals("a") || modifiedSentence.equals("u")) {
 

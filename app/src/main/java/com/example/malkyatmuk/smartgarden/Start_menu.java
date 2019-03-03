@@ -161,7 +161,9 @@ public class Start_menu<LogoutClickListener> extends AppCompatActivity
                 fragment = new Contact_Us();
 
                 break;
-            case R.id.share:
+            case R.id.changePass:
+
+                fragment=new Change_Password();
 
                 break;
             case R.id.about_us:

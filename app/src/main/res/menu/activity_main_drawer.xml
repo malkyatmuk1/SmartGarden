@@ -23,7 +23,7 @@
         <item
             android:title="Share"
             android:icon="@drawable/share"
-            android:id="@+id/share"/>
+            android:id="@+id/changePass"/>
         <item
             android:id="@+id/about_us"
             android:icon="@drawable/aboutus"

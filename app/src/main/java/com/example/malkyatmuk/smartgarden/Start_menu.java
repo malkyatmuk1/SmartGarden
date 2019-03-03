@@ -86,9 +86,12 @@ public class Start_menu<LogoutClickListener> extends AppCompatActivity
     View.OnClickListener NewNicknameOrPassword=new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), Edit_Account.class);
-            startActivity(intent);
-            finish();
+            Fragment fragment=new Change_Password();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, fragment);
+            ft.commit();
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
         }
     };
     void func()
@@ -161,9 +164,7 @@ public class Start_menu<LogoutClickListener> extends AppCompatActivity
                 fragment = new Contact_Us();
 
                 break;
-            case R.id.changePass:
-
-                fragment=new Change_Password();
+            case R.id.share:
 
                 break;
             case R.id.about_us:

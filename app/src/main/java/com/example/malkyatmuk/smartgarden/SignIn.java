@@ -33,7 +33,7 @@ import java.net.Socket;
 public class SignIn extends AppCompatActivity {
 
     EditText usernameEditText, passwordEditText;
-    TextView createNewAccountTextView, incorrectUserOrPass;
+    TextView createNewAccountTextView, incorrectUserOrPass,wifi;
     Button signInButton;
     ImageButton backButton;
 
@@ -59,7 +59,17 @@ public class SignIn extends AppCompatActivity {
         createNewAccountTextView = (TextView) findViewById(R.id.createNewAccount);
         createNewAccountTextView.setOnClickListener(CreateNewAccountListener);
         incorrectUserOrPass=(TextView) findViewById(R.id.incorrectUserOrPass);
+        wifi=(TextView)findViewById(R.id.wifiSettings);
+        wifi.setOnClickListener(WifiSettingsListener);
     }
+    View.OnClickListener WifiSettingsListener=new View.OnClickListener() {
+
+        public void onClick(View view) {
+            Intent intent = new Intent(view.getContext(), WifiSettings.class);
+            startActivity(intent);
+            finish();
+        }
+    };
     View.OnClickListener CreateNewAccountListener=new View.OnClickListener() {
 
         public void onClick(View view) {

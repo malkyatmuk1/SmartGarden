@@ -167,11 +167,20 @@
         android:textColor="@color/white"
         android:textSize="15dp" />
     <TextView
+        android:id="@+id/wifiSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Wifi settings"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp" />
+    <TextView
         android:id="@+id/signedUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="2dp"
         android:text="Already have an account? Sign in"
         android:textColor="@color/blue"
         android:textStyle="bold" />

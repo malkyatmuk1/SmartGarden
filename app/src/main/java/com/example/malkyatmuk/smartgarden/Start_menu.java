@@ -61,7 +61,10 @@ public class Start_menu<LogoutClickListener> extends AppCompatActivity
         txtUsername.setText(Global.username);
         char c = Global.permission;
         if (c == 'a') txtAdress.setText("Administrator");
-        else txtAdress.setText("User");
+        else if(c == 'u')txtAdress.setText("User");
+        else txtAdress.setText("No user");
+
+        txtAdress.setText(Global.password);
 
 
         ImageButton slideMenuButton = (ImageButton) row.findViewById(R.id.slideMenu);

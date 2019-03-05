@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
 import com.google.android.gms.common.SignInButton;
 
@@ -34,11 +35,13 @@ import java.net.Socket;
 
 public class Add_Card extends AppCompatActivity {
     TextView name;
+    Button newCard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.card);
         TextView name=(TextView) findViewById(R.id.name);
+        Button newCard=(Button) findViewById(R.id.button_view);
         DisplayMetrics dm= new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -48,6 +51,7 @@ public class Add_Card extends AppCompatActivity {
         drawable.setColor(1);
         getWindow().setBackgroundDrawable(drawable);
         getWindow().setLayout((int)(width*.4),(int)(height*.7));
+
     }
 }
 

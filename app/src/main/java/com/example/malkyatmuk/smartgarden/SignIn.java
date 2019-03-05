@@ -171,6 +171,13 @@ public class SignIn extends AppCompatActivity {
                             //incorrectUserOrPass.setVisibility(View.VISIBLE);
                             //incorrectUserOrPass.setText(modifiedSentence);
                         } else if (modifiedSentence.equals("NoPermission")) {
+                            Intent intent = new Intent(getApplicationContext(), Start_menu.class);
+
+                            Global.permission = 'n';
+                            Global.username = usernameEditText.getText().toString();
+                            Global.password = passwordEditText.getText().toString();
+                            startActivity(intent);
+                            finish();
 
                             //incorrectUserOrPass.setText(modifiedSentence);
                             //incorrectUserOrPass.setVisibility(View.VISIBLE);

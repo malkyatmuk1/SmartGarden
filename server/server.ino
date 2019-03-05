@@ -79,13 +79,12 @@ uint32_t delayMS;
 
 
 void setup() {
-    
+   
   ESP.eraseConfig();
   WiFi.mode(WIFI_AP_STA);
   Serial.begin(115200);
   WiFi.softAP(ssidAp,passAp);
   EEPROM.begin(512);
-
   pinMode(pin, INPUT); 
   pinMode(EchoPin, INPUT);                    //Set EchoPin as input, to receive measure result from US-015
   pinMode(TrigPin, OUTPUT);        

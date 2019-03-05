@@ -31,6 +31,9 @@ public class WifiSettings extends Activity {
     EditText wifiPassEditText,wifiIdEditText,passwordEditText,usernameEditText;
     Button applyButton;
     ImageButton backButton;
+    Socket clientSocket;
+    public String send,modifiedSentence;
+    private static final int SERVERPORT = 3030;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +59,39 @@ public class WifiSettings extends Activity {
     View.OnClickListener ApplyButtonListener=new View.OnClickListener() {
 
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), SignIn.class);
-            startActivity(intent);
-            finish();
+            final String wifiName,wifiPass,pass,username;
+            wifiName=wifiIdEditText.getText().toString();
+            wifiPass=wifiPassEditText.getText().toString();
+            pass=passwordEditText.getText().toString();
+            username=usernameEditText.getText().toString();
+            new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    try {
+                        //Log.d("dani","tuk");
+                        //Thread.sleep(2000);
+                        clientSocket = new Socket(Global.ip, SERVERPORT);
+                        /*
+                                    send = "signin " + usernameEditText.getText() + " " + passwordEditText.getText() + '\n';
+                                    incorrectUserOrPass.setText(send);
+                                    incorrectUserOrPass.setVisibility(View.VISIBLE);
+                            this put here force the program to shut down after clicking on signin button
+                         */
+                        send = "setWifi " + wifiName + " " + wifiPass + " " + username + " " + pass + '\n';
+
+                        DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+                        BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                        outToServer.writeBytes(send);
+                        outToServer.flush();
+
+                        clientSocket.close();
+                    } catch (IOException e) {
+                        System.out.println("Exception " + e);
+                    }
+                    return;
+                }
+            }).start();
         }
     };
 }

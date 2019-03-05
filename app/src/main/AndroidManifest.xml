@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         >
-        <activity android:name=".Start" android:windowSoftInputMode="adjustResize|stateHidden">
+        <activity android:name=".Start_menu" android:windowSoftInputMode="adjustResize|stateHidden">
 
 
             <intent-filter>
@@ -27,7 +27,7 @@
         <activity android:name=".UPorIn" android:theme="@style/generalnotitle" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".SignUp" android:theme="@style/generalnotitle" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".SignUpSecond" android:theme="@style/generalnotitle" android:windowSoftInputMode="stateVisible|adjustResize"/>
-        <activity android:name=".Start_menu" android:theme="@style/generalnotitle" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".Start" android:theme="@style/generalnotitle" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".SignIn" android:theme="@style/generalnotitle" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".Add_Card" android:theme="@style/Translucent" android:windowSoftInputMode="adjustNothing|stateHidden"/>
         <activity android:name=".WifiSettings" android:theme="@style/generalnotitle" android:windowSoftInputMode="adjustNothing|stateHidden"/>

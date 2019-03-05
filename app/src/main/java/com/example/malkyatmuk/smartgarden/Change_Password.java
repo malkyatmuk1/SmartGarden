@@ -69,95 +69,95 @@ public class Change_Password extends Fragment {
             }
             else
             {
-            new Thread(new Runnable() {
+                new Thread(new Runnable() {
 
-                @Override
-                public void run() {
-                    try {
-                        //Log.d("dani","tuk");
-                        //Thread.sleep(2000);
-                        clientSocket = new Socket(Global.ip, SERVERPORT);
-                        /*
-                                    send = "signin " + usernameEditText.getText() + " " + passwordEditText.getText() + '\n';
-                                    incorrectUserOrPass.setText(send);
-                                    incorrectUserOrPass.setVisibility(View.VISIBLE);
-                            this put here force the program to shut down after clicking on signin button
-                         */
-                        send = "setPassWord " + Global.username + " " + oldPassw + " " + newPass + '\n';
+                    @Override
+                    public void run() {
+                        try {
+                            //Log.d("dani","tuk");
+                            //Thread.sleep(2000);
+                            clientSocket = new Socket(Global.ip, SERVERPORT);
+                            /*
+                                        send = "signin " + usernameEditText.getText() + " " + passwordEditText.getText() + '\n';
+                                        incorrectUserOrPass.setText(send);
+                                        incorrectUserOrPass.setVisibility(View.VISIBLE);
+                                this put here force the program to shut down after clicking on signin button
+                             */
+                            send = "setPassWord " + Global.username + " " + oldPassw + " " + newPass + '\n';
 
-                        DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-                        BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                        outToServer.writeBytes(send);
-                        outToServer.flush();
-                        /*OutputStreamWriter os=new OutputStreamWriter(clientSocket.getOutputStream());
-                        PrintWriter out=new PrintWriter(os);
-                        out.write(send);
-                        os.flush();
-                        BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                        */
-                        modifiedSentence=inFromServer.readLine();
+                            DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+                            BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                            outToServer.writeBytes(send);
+                            outToServer.flush();
+                            /*OutputStreamWriter os=new OutputStreamWriter(clientSocket.getOutputStream());
+                            PrintWriter out=new PrintWriter(os);
+                            out.write(send);
+                            os.flush();
+                            BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                            */
+                            modifiedSentence=inFromServer.readLine();
 
-                        //incorrectUserOrPass.setText(modifiedSentence);
-                        //Intent intent = new Intent(getApplicationContext(), Start_menu.class);
-                        if (modifiedSentence.equals("IncorectPass")){
-                            noMatch.post(new Runnable() {
-                                public void run() {
-                                    noMatch.setText("Incorrect password");
-                                }
-                            });
-                            newPass.post(new Runnable() {
-                                public void run() {
-                                    newPass.setText("");
-                                }
-                            });
-                            oldPass.post(new Runnable() {
-                                public void run() {
-                                    oldPass.setText("");
-                                }
-                            });
-                            confPass.post(new Runnable() {
-                                public void run() {
-                                    confPass.setText("");
-                                }
-                            });
-                            //startActivity(intent);
-                            //finish();
-                            //incorrectUserOrPass.setVisibility(View.VISIBLE);
                             //incorrectUserOrPass.setText(modifiedSentence);
+                            //Intent intent = new Intent(getApplicationContext(), Start_menu.class);
+                            if (modifiedSentence.equals("IncorectPass")){
+                                noMatch.post(new Runnable() {
+                                    public void run() {
+                                        noMatch.setText("Incorrect password");
+                                    }
+                                });
+                                newPass.post(new Runnable() {
+                                    public void run() {
+                                        newPass.setText("");
+                                    }
+                                });
+                                oldPass.post(new Runnable() {
+                                    public void run() {
+                                        oldPass.setText("");
+                                    }
+                                });
+                                confPass.post(new Runnable() {
+                                    public void run() {
+                                        confPass.setText("");
+                                    }
+                                });
+                                //startActivity(intent);
+                                //finish();
+                                //incorrectUserOrPass.setVisibility(View.VISIBLE);
+                                //incorrectUserOrPass.setText(modifiedSentence);
+                            }
+                            else if (modifiedSentence.equals("ready!")) {
+                                noMatch.post(new Runnable() {
+                                    public void run() {
+                                        noMatch.setText("Password changed successfully!");
+                                    }
+                                });
+                                newPass.post(new Runnable() {
+                                    public void run() {
+                                        newPass.setText("");
+                                    }
+                                });
+                                oldPass.post(new Runnable() {
+                                    public void run() {
+                                        oldPass.setText("");
+                                    }
+                                });
+                                confPass.post(new Runnable() {
+                                    public void run() {
+                                        confPass.setText("");
+                                    }
+                                });
+
+                            }
+
+                                //incorrectUserOrPass.setVisibility(View.GONE);
+
+                            clientSocket.close();
+                        } catch (IOException e) {
+                            System.out.println("Exception " + e);
                         }
-                        else if (modifiedSentence.equals("ready!")) {
-                            noMatch.post(new Runnable() {
-                                public void run() {
-                                    noMatch.setText("Password changed successfully!");
-                                }
-                            });
-                            newPass.post(new Runnable() {
-                                public void run() {
-                                    newPass.setText("");
-                                }
-                            });
-                            oldPass.post(new Runnable() {
-                                public void run() {
-                                    oldPass.setText("");
-                                }
-                            });
-                            confPass.post(new Runnable() {
-                                public void run() {
-                                    confPass.setText("");
-                                }
-                            });
-
-                        }
-
-                            //incorrectUserOrPass.setVisibility(View.GONE);
-
-                        clientSocket.close();
-                    } catch (IOException e) {
-                        System.out.println("Exception " + e);
+                        return;
                     }
-                    return;
-                }
-            }).start();
+                }).start();
 
         }}
 

@@ -232,6 +232,8 @@ void loop()
           writeWifi(commands[1],commands[2]);
         }
         int br=0;
+        client.stop();
+        while(client.available());
         WiFi.begin(ssid,password);
        while (WiFi.status() != WL_CONNECTED && br<15)
         {
@@ -240,6 +242,7 @@ void loop()
          br++;
         }
          Serial.print("IP Address: "); Serial.println(WiFi.localIP());
+         
         
       
     }

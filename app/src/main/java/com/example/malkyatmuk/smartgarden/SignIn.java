@@ -35,7 +35,7 @@ public class SignIn extends AppCompatActivity {
     EditText usernameEditText, passwordEditText;
     TextView createNewAccountTextView, incorrectUserOrPass,wifi;
     Button signInButton;
-    ImageButton backButton;
+    ImageButton backButton,ipButton;
 
     Thread thr;
     private Socket clientSocket;
@@ -56,11 +56,14 @@ public class SignIn extends AppCompatActivity {
         signInButton.setOnClickListener(SignInButtonListener);
         backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(BackButtonListener);
+        ipButton = (ImageButton) findViewById(R.id.ipButton);
+        ipButton.setOnClickListener(IPButtonListener);
         createNewAccountTextView = (TextView) findViewById(R.id.createNewAccount);
         createNewAccountTextView.setOnClickListener(CreateNewAccountListener);
         incorrectUserOrPass=(TextView) findViewById(R.id.incorrectUserOrPass);
         wifi=(TextView)findViewById(R.id.wifiSettings);
         wifi.setOnClickListener(WifiSettingsListener);
+
     }
     View.OnClickListener WifiSettingsListener=new View.OnClickListener() {
 
@@ -86,12 +89,11 @@ public class SignIn extends AppCompatActivity {
             finish();
         }
     };
-    View.OnClickListener NextButtonListener=new View.OnClickListener() {
+    View.OnClickListener IPButtonListener=new View.OnClickListener() {
 
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), Start_menu.class);
-            startActivity(intent);
-            finish();
+            WifiDialog wifidialog=new WifiDialog();
+            wifidialog.show(getFragmentManager(),"wifi");
         }
     };
     View.OnClickListener SignInButtonListener = new View.OnClickListener() {

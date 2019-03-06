@@ -22,7 +22,7 @@ public class Global extends Application {
     public static String wifiusername="";
     public static boolean flagforNotify=true;
     public static String wifiPassword="";
-    public static String ip="46.35.165.136";
+    public static String ip="";
     public static String directip="192.168.4.1";
     public static boolean ipsignin=false;
     public static boolean checksignin=false;

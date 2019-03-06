@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Start_menu<LogoutClickListener> extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -64,10 +65,7 @@ public class Start_menu<LogoutClickListener> extends AppCompatActivity
         else if(c == 'u')txtAdress.setText("User");
         else txtAdress.setText("No user");
 
-        txtAdress.setText(Global.password);
-
-
-        ImageButton slideMenuButton = (ImageButton) row.findViewById(R.id.slideMenu);
+         ImageButton slideMenuButton = (ImageButton) row.findViewById(R.id.slideMenu);
         ImageButton settingsButton = (ImageButton) rowSettings.findViewById(R.id.settingsButton);
 
         settingsButton.setOnClickListener(NewNicknameOrPassword);
@@ -155,7 +153,7 @@ public class Start_menu<LogoutClickListener> extends AppCompatActivity
         //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.users:
-                if(Global.permission=='a')
+
                 fragment = new Client_List();
 
                 break;

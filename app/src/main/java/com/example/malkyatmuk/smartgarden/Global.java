@@ -27,7 +27,7 @@ public class Global extends Application {
         public static double temperature;
         Plants()
         {
-            namePlant="-1";
+            namePlant="";
             pouring=0;
             humidity=0.0;
             temperature=0.0;

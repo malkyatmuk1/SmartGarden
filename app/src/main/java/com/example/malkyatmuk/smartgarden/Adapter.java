@@ -75,6 +75,7 @@ public class Adapter extends BaseAdapter {
 
             @Override
             public void onClick(View v) {
+
             }
 
         });

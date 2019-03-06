@@ -78,6 +78,7 @@ public class Add_Card extends AppCompatActivity {
                     pouring.setText("Need a whole number");
                 }
                 else {
+                    Global.plants.add(name.getText().toString());
                     Global.myPlants[Global.numberOfPlants].namePlant = name.getText().toString();
                     int newValue = Integer.parseInt(value);
                     Global.myPlants[Global.numberOfPlants].pouring = newValue;

@@ -60,6 +60,7 @@ public class SignUp extends Activity {
     View.OnClickListener WifiSettingsListener=new View.OnClickListener() {
 
         public void onClick(View view) {
+            Global.goback=false;
             Intent intent = new Intent(view.getContext(), WifiSettings.class);
             startActivity(intent);
             finish();

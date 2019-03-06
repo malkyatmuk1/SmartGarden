@@ -68,6 +68,7 @@ public class SignIn extends AppCompatActivity {
     View.OnClickListener WifiSettingsListener=new View.OnClickListener() {
 
         public void onClick(View view) {
+            Global.goback=true;
             Intent intent = new Intent(view.getContext(), WifiSettings.class);
             startActivity(intent);
             finish();

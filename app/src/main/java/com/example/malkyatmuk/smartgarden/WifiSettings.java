@@ -51,9 +51,16 @@ public class WifiSettings extends Activity {
     View.OnClickListener BackButtonListener=new View.OnClickListener() {
 
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), UPorIn.class);
-            startActivity(intent);
-            finish();
+            if(Global.goback==true) {
+                Intent intent = new Intent(view.getContext(), SignIn.class);
+                startActivity(intent);
+                finish();
+            }
+            else {
+                Intent intent = new Intent(view.getContext(), SignUp.class);
+                startActivity(intent);
+                finish();
+            }
         }
     };
     View.OnClickListener ApplyButtonListener=new View.OnClickListener() {

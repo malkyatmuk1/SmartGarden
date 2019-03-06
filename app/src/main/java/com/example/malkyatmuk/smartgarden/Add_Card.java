@@ -61,26 +61,34 @@ public class Add_Card extends AppCompatActivity {
         public void onClick(final View v) {
             if(Global.numberOfPlants<60)
             {
-                Global.plants.add(name.getText().toString());
                 Global.myPlants[Global.numberOfPlants].namePlant = name.getText().toString();
                 String value = pouring.getText().toString();
-                int newValue = Integer.parseInt(value);
-                Global.myPlants[Global.numberOfPlants].pouring = newValue;
-                Global.numberOfPlants++;
+                boolean flag=true;
+                for(int i=0;i<value.length();i++)
+                {
+                    if(value.charAt(i)-'0'>=0 && value.charAt(i)-'0'<=9) {
+                        continue;
+                    }
+                    else {
+                        flag=false;
+                        break;
+                    }
+                }
+                if(flag==false)
+                {
+                    pouring.setText("Need a whole number");
+                }
+                else {
+                    int newValue = Integer.parseInt(value);
+                    Global.myPlants[Global.numberOfPlants].pouring = newValue;
+                    Global.numberOfPlants++;
+                    finish();
+                }
             }
             else{
-                name.post(new Runnable() {
-                    public void run() {
-                        name.setText("Too many plants");
-                    }
-                });
-                pouring.post(new Runnable() {
-                    public void run() {
-                        pouring.setText("");
-                    }
-                });
+                name.setText("Too many plants");
+                pouring.setText("");
             }
-            finish();
         }
     };
 }

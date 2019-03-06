@@ -33,6 +33,7 @@
         <activity android:name=".Add_Card" android:theme="@style/Translucent" android:windowSoftInputMode="adjustNothing|stateHidden"/>
         <activity android:name=".WifiSettings" android:theme="@style/generalnotitle" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".IP" android:theme="@style/generalnotitle" android:windowSoftInputMode="adjustNothing|stateHidden"/>
+        <activity android:name=".View_Plant" android:theme="@style/generalnotitle" android:windowSoftInputMode="adjustResize|stateHidden"/>
 
     </application>
 

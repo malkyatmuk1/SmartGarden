@@ -1,6 +1,7 @@
 package com.example.malkyatmuk.smartgarden;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
@@ -74,7 +75,6 @@ public class Adapter extends BaseAdapter {
 
             @Override
             public void onClick(View v) {
-                //TODO
             }
 
         });

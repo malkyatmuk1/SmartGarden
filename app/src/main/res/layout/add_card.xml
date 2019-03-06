@@ -34,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="Name"
+                android:textSize="15dp"
                 android:textColor="@color/greyText"
                 android:layout_marginTop="10dp"
                 />
@@ -43,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="Pouring times"
+                android:textSize="15dp"
                 android:textColor="@color/greyText"
                 />
             <Button

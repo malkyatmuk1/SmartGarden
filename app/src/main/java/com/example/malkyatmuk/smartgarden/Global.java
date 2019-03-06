@@ -18,6 +18,7 @@ public class Global extends Application {
     public static String username="";
     public static String password="";
     public static char permission;
+    public static int indexOfPlant=0;
     public static int numberOfPlants;
     public static class Plants{
         public static String namePlant;

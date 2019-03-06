@@ -11,6 +11,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 
@@ -19,10 +20,14 @@ public class Plant_List extends Fragment {
     String[] gen=new String[]{"There are no other users!"};
     ProgressBar progressBar;
     FloatingActionButton fab;
-
+    Button viewPlant;
     public void readPlants(View view,boolean isProgressbar) {
 
 //        if (isProgressbar) progressBar.setVisibility(View.VISIBLE);
+        Global.plants.clear();
+        for(int i=0;i<Global.numberOfPlants;i++) {
+            Global.plants.add(Global.myPlants[i].namePlant);
+        }
         final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
     }
 

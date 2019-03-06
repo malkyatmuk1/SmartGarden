@@ -33,6 +33,17 @@
                 android:layout_marginBottom="20dp"
                 android:background="@color/white"
                 android:src="@drawable/left_arrow_aqua" />
+            <ImageButton
+                android:id="@+id/ipButton"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="40dp"
+                android:background="@color/white"
+                android:foregroundGravity="right|center_vertical"
+                android:src="@drawable/ip" />
         </RelativeLayout>
     </LinearLayout>
 

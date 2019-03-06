@@ -95,6 +95,7 @@ public class SignIn extends AppCompatActivity {
     View.OnClickListener IPButtonListener=new View.OnClickListener() {
 
         public void onClick(View view) {
+            Global.goback=true;
             WifiDialog wifidialog=new WifiDialog();
             wifidialog.show(getFragmentManager(),"wifi");
         }

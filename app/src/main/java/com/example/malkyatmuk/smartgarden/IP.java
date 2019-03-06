@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,11 +15,14 @@ public class IP extends AppCompatActivity {
     EditText ip;
     Button apply;
     TextView goback;
+    ImageButton backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ip);
 
+        backButton=(ImageButton)findViewById(R.id.backButton);
+        backButton.setOnClickListener(gobacklistener);
         ip=(EditText) findViewById(R.id.ip);
         goback=(TextView) findViewById(R.id.goback);
         goback.setOnClickListener(gobacklistener);
@@ -29,7 +33,7 @@ public class IP extends AppCompatActivity {
     View.OnClickListener gobacklistener=new View.OnClickListener() {
 
         public void onClick(View view) {
-            if(Global.ipsignin) {
+            if(Global.goback==true) {
                 Intent intent = new Intent(view.getContext(), SignIn.class);
                 startActivity(intent);
                 finish();

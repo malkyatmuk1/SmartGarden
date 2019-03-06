@@ -23,7 +23,7 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class SignUp extends Activity {
-    ImageButton backButton;
+    ImageButton backButton,ipButton;
     Button signUpButton;
     public TextView signedUp,infoTextView,wifi;
     EditText usernameEditText, firstpassEditText,secondpassEditText;
@@ -38,6 +38,8 @@ public class SignUp extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        ipButton=(ImageButton)findViewById(R.id.ipButton);
+        ipButton.setOnClickListener(IpButtonListener);
         infoTextView= (TextView) findViewById(R.id.info);
         signedUp=(TextView) findViewById(R.id.signedUp);
         signedUp.setOnClickListener(AlreadySignedUp);
@@ -57,6 +59,15 @@ public class SignUp extends Activity {
         signUpButton.setOnClickListener(signupButtonListener);
 
     }
+    View.OnClickListener IpButtonListener=new View.OnClickListener() {
+
+        public void onClick(View view) {
+            Global.goback=false;
+            WifiDialog wifidialog=new WifiDialog();
+            wifidialog.show(getFragmentManager(),"wifi");
+
+        }
+    };
     View.OnClickListener WifiSettingsListener=new View.OnClickListener() {
 
         public void onClick(View view) {

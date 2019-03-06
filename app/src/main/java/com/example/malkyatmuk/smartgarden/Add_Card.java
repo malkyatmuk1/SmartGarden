@@ -61,7 +61,6 @@ public class Add_Card extends AppCompatActivity {
         public void onClick(final View v) {
             if(Global.numberOfPlants<60)
             {
-                Global.myPlants[Global.numberOfPlants].namePlant = name.getText().toString();
                 String value = pouring.getText().toString();
                 boolean flag=true;
                 for(int i=0;i<value.length();i++)
@@ -79,6 +78,7 @@ public class Add_Card extends AppCompatActivity {
                     pouring.setText("Need a whole number");
                 }
                 else {
+                    Global.myPlants[Global.numberOfPlants].namePlant = name.getText().toString();
                     int newValue = Integer.parseInt(value);
                     Global.myPlants[Global.numberOfPlants].pouring = newValue;
                     Global.numberOfPlants++;

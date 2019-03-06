@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
@@ -100,10 +102,13 @@ public class WifiDialog extends DialogFragment {
                             wifiManager.enableNetwork(0, true);
                             wifiManager.reconnect();
                         }
+
                         Log.e("tukotPass","prediLong");
                         LongOperation lg=new  LongOperation(context,wifiManager);
                         Log.e("tukotPass","SledLog1");
-                        lg.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                        lg.execute("");
+
+
 //                        progressBar.setVisibility(View.VISIBLE);
                     }
                 })
@@ -174,7 +179,7 @@ public class WifiDialog extends DialogFragment {
 class LongOperation extends AsyncTask<String, Void, Void> {
     private static final int SERVERPORT = 3030;
     private String SERVER_IP;
-    private Socket clientSocket;
+
     public Context mContext;
     public View mView;
     public ProgressBar progressBar;
@@ -189,47 +194,55 @@ class LongOperation extends AsyncTask<String, Void, Void> {
         this.wifi=wifiManager;
     }
     protected Void doInBackground(String ...Params) {
-        String modifiedSentence;
 
+        ConnectivityManager connManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        String msg;
+        if(mWifi.isConnected()) msg="yes";
+        else msg="no";
+        Log.e("tukotPass", msg);
+        while(!mWifi.isConnected()){if(mWifi.isConnected()) msg="yes";
+        else {msg="no"; mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);}
+            Log.e("tukotPass", msg);};
         try {
 
-                int SERVERPORT = 3030;
-                InetAddress ip = InetAddress.getByName(Global.directip);
-                Log.e("p", "tuk");
-                Thread.sleep(5000);
-                clientSocket = new Socket(ip, SERVERPORT);
-                Log.e("phg", "tuk");
-                String send = "ip\n";
+            int SERVERPORT = 3030;
+            InetAddress ip = InetAddress.getByName(Global.directip);
+            Log.e("p", "tuk");
+            Thread.sleep(2000);
+            Socket clientSocket = new Socket("192.168.4.1", SERVERPORT);
+            Log.e("phg", "tuk");
+            String send = "ip\n";
 
-                DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-                BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                outToServer.writeBytes(send);
+            DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+            BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            outToServer.writeBytes(send);
 
-                outToServer.flush();
-
-
-                modifiedSentence = inFromServer.readLine();
-                Global.ip = modifiedSentence;
-                Global.setIP(modifiedSentence, mContext);
-
-                clientSocket.close();
+            outToServer.flush();
 
 
+            String modifiedSentence = inFromServer.readLine();
+            Global.ip = modifiedSentence;
+            //  Global.setIP(modifiedSentence, mContext);
 
+            clientSocket.close();
             wifi.disconnect();
-        }
-        catch (IOException e) {
+
+        } catch (IOException e) {
             System.out.println("Exception " + e);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+
         return null;
     }
+
     protected void onPostExecute(Void result) { }
     @Override
     protected void onPreExecute() { }
 
     @Override
     protected void onProgressUpdate(Void... values) { }
+
 }

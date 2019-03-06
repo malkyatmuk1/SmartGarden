@@ -1,8 +1,11 @@
 package com.example.malkyatmuk.smartgarden;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -63,7 +66,6 @@ public class SignIn extends AppCompatActivity {
         incorrectUserOrPass=(TextView) findViewById(R.id.incorrectUserOrPass);
         wifi=(TextView)findViewById(R.id.wifiSettings);
         wifi.setOnClickListener(WifiSettingsListener);
-
     }
     View.OnClickListener WifiSettingsListener=new View.OnClickListener() {
 

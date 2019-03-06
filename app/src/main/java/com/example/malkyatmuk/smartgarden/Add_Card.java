@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
 import com.google.android.gms.common.SignInButton;
 
@@ -33,22 +34,34 @@ import java.net.Socket;
 
 
 public class Add_Card extends AppCompatActivity {
-    TextView name;
+    EditText name;
+    Button newCard;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.card);
-        TextView name=(TextView) findViewById(R.id.name);
-        DisplayMetrics dm= new DisplayMetrics();
+        name = (EditText) findViewById(R.id.name);
+        newCard = (Button) findViewById(R.id.button_view);
+        newCard.setOnClickListener(NewCardListener);
+        DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-        int width=dm.widthPixels;
-        int height=dm.heightPixels;
-        GradientDrawable drawable=new GradientDrawable();
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+        GradientDrawable drawable = new GradientDrawable();
         drawable.setColor(1);
         getWindow().setBackgroundDrawable(drawable);
-        getWindow().setLayout((int)(width*.4),(int)(height*.7));
+        getWindow().setLayout((int) (width * .4), (int) (height * .7));
+
     }
+
+    View.OnClickListener NewCardListener = new View.OnClickListener() {
+        public void onClick(final View v) {
+            String namePlant=name.getText().toString();
+            Global.plants.add(namePlant);
+        }
+    };
 }
 
 

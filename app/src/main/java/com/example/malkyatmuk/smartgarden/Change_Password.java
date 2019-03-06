@@ -99,7 +99,7 @@ public class Change_Password extends Fragment {
 
                             //incorrectUserOrPass.setText(modifiedSentence);
                             //Intent intent = new Intent(getApplicationContext(), Start_menu.class);
-                            if (modifiedSentence.equals("IncorectPass")){
+                            if (modifiedSentence.equals("Incorect Pass")){
                                 noMatch.post(new Runnable() {
                                     public void run() {
                                         noMatch.setText("Incorrect password");
@@ -126,6 +126,7 @@ public class Change_Password extends Fragment {
                                 //incorrectUserOrPass.setText(modifiedSentence);
                             }
                             else if (modifiedSentence.equals("ready!")) {
+                                Global.password=newPassw;
                                 noMatch.post(new Runnable() {
                                     public void run() {
                                         noMatch.setText("Password changed successfully!");

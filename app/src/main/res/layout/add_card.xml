@@ -2,14 +2,14 @@
 <android.support.v7.widget.CardView
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="150dp"
-    android:layout_height="200dp"
+    android:layout_width="180dp"
+    android:layout_height="280dp"
     app:cardElevation="4dp"
     app:layout_anchorGravity="center_vertical"
     app:cardBackgroundColor="@color/white"
     android:layout_gravity="center"
     app:cardCornerRadius="20dp"
-    android:layout_marginBottom="90dp"
+    android:layout_marginBottom="80dp"
 
     android:foregroundGravity="center_vertical"
     >
@@ -28,8 +28,8 @@
                 android:src="@drawable/plant"
                 android:layout_gravity="center_horizontal"
                 />
-            <TextView
-                android:id="@+id/name"
+            <EditText
+                android:id="@+id/namePlant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -37,13 +37,21 @@
                 android:textColor="@color/greyText"
                 android:layout_marginTop="10dp"
                 />
+            <EditText
+                android:id="@+id/pouringTimes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Pouring times"
+                android:textColor="@color/greyText"
+                />
             <Button
-                android:id="@+id/button_view"
+                android:id="@+id/addButton"
                 android:layout_width="70dp"
                 android:layout_height="30dp"
-                android:text="View"
+                android:text="Add"
                 android:background="@drawable/button"
-                android:textSize="10dp"
+                android:textSize="15dp"
                 android:layout_marginTop="10dp"
                 />
 

@@ -23,7 +23,6 @@ public class Plant_List extends Fragment {
     public void readPlants(View view,boolean isProgressbar) {
 
 //        if (isProgressbar) progressBar.setVisibility(View.VISIBLE);
-        Global.plants.clear();
         final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
     }
 
@@ -38,12 +37,6 @@ public class Plant_List extends Fragment {
         fab.setOnClickListener(FabButtonListener);
         //progressBar=(ProgressBar) view.findViewById(R.id.progressBar);
         readPlants(view,true);
-        Global.plants.add("tanq");
-        Global.plants.add("ivan");
-        Global.plants.add("iva");
-        Global.plants.add ("kuku");
-        Global.plants.add ("kuku1");
-
         Adapter adapter = new Adapter(getContext(),Global.plants);
         listView.setAdapter(adapter);
         return view;

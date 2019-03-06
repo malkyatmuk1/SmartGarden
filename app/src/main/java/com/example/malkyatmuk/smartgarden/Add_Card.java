@@ -34,15 +34,16 @@ import java.net.Socket;
 
 
 public class Add_Card extends AppCompatActivity {
-    EditText name;
+    EditText name,pouring;
     Button newCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.card);
-        name = (EditText) findViewById(R.id.name);
-        newCard = (Button) findViewById(R.id.button_view);
+        setContentView(R.layout.add_card);
+        name = (EditText) findViewById(R.id.namePlant);
+        pouring = (EditText) findViewById(R.id.pouringTimes);
+        newCard = (Button) findViewById(R.id.addButton);
         newCard.setOnClickListener(NewCardListener);
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -58,8 +59,28 @@ public class Add_Card extends AppCompatActivity {
 
     View.OnClickListener NewCardListener = new View.OnClickListener() {
         public void onClick(final View v) {
-            String namePlant=name.getText().toString();
-            Global.plants.add(namePlant);
+            if(Global.numberOfPlants<60)
+            {
+                Global.plants.add(name.getText().toString());
+                Global.myPlants[Global.numberOfPlants].namePlant = name.getText().toString();
+                String value = pouring.getText().toString();
+                int newValue = Integer.parseInt(value);
+                Global.myPlants[Global.numberOfPlants].pouring = newValue;
+                Global.numberOfPlants++;
+            }
+            else{
+                name.post(new Runnable() {
+                    public void run() {
+                        name.setText("Too many plants");
+                    }
+                });
+                pouring.post(new Runnable() {
+                    public void run() {
+                        pouring.setText("");
+                    }
+                });
+            }
+            finish();
         }
     };
 }

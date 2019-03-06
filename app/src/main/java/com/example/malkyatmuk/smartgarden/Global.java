@@ -4,7 +4,10 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by malkyatmuk on 10/22/17.
@@ -15,6 +18,21 @@ public class Global extends Application {
     public static String username="";
     public static String password="";
     public static char permission;
+    public static int numberOfPlants;
+    public static class Plants{
+        public static String namePlant;
+        public static int pouring;
+        public static double humidity;
+        public static double temperature;
+        Plants()
+        {
+            namePlant="-1";
+            pouring=0;
+            humidity=0.0;
+            temperature=0.0;
+        }
+    }
+    public static Plants[] myPlants=new Plants[128];
     public static ArrayList<String> plants=new ArrayList<String>();
     public static double longetudeHome=0;
     public static double latitudeHome=0;

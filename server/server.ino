@@ -122,7 +122,7 @@ Serial.println(password);
 
   //connect to WiFi
   int br=0;
-  Serial.println("here");
+
   WiFi.begin(ssid,password);
 
   while (WiFi.status() != WL_CONNECTED && br<15)
@@ -139,7 +139,7 @@ Serial.println(password);
 void loop()
 { 
   client=server.available();
-  if(ip.length()==0 || flagChangedWifi) {GetExternalIP(ip);flagChangedWifi=false;  Serial.println("here "+ip);}
+  if(ip.length()==0 || flagChangedWifi) {GetExternalIP(ip);flagChangedWifi=false;  Serial.println(ip);}
 
   if(client)
   {
@@ -295,11 +295,15 @@ void loop()
       bool flag=0;
       person p;
       char passh[20];
-      int index;
+      int index=-9
+      ;
         
       commands[1].toCharArray(p.username,10);   
+      Serial.println("im here: ");
+      Serial.println(index);
       index=indexOfUser(p.username, commands[2]);
       Serial.println("im here: "+index);
+      
   
       if(index!=-1){
         
@@ -318,10 +322,12 @@ void loop()
         {
           
           EEPROM.write(pass_start+index*user_step+i,p.pass_hash[i]);
+          Serial.print(p.pass_hash[i]);
           EEPROM.commit();
           
         }
-        for(int i=0;i<12;i++){EEPROM.write(salt_start+index*user_step+i,p.salt[i]);EEPROM.commit();}
+        for(int i=0;i<12;i++){EEPROM.write(salt_start+index*user_step+i,p.salt[i]); Serial.print(p.salt[i]);EEPROM.commit();}
+        
         client.println("ready!");
       
      }
@@ -421,7 +427,6 @@ void loop()
       if(commands[1]=="true")client.println(getHumidityOrTemp(true));
       else if(commands[1]=="false")client.println(getHumidityOrTemp(false));
     }
-    Serial.println("here");
   }
 /*
 
@@ -656,8 +661,9 @@ int indexOfUser(char* usernamePerson,String passwordPerson)
   int index;
   char perm1;
   bool flag;
-  for(int i=0;i<usercount;i++)
+  for(int i=0;i<10;i++)
    {   
+    Serial.println(i);
     //Serial.println(list[i].username);
     if(!strncmp(list[i].username,usernamePerson,10))
       {
@@ -666,17 +672,18 @@ int indexOfUser(char* usernamePerson,String passwordPerson)
             strncpy(salt,list[i].salt,12);
             perm1=list[i].salt[12];
             salt[12]='\0';     
+            Serial.println(passwordPerson);
             passwordPerson+=salt;
             Serial.println(passwordPerson);
             //we hash the password+salt
             sha1(passwordPerson).toCharArray(passh,20);
-            Serial.println(passh);
+            Serial.println(passh); 
+            
             Serial.println(list[i].pass_hash);
             //check if the hashed pass form the client and the hashed password form the list are the same-> if is false the flag  become 0 
            
             index=i;
             if(strncmp(passh,list[i].pass_hash,20)) {index=-1;}
-           Serial.println(flag);
             break;
           }
         else index=-1;
@@ -688,5 +695,5 @@ void EEPROMNull()
   for(int i=0;i<512;i++)EEPROM.write(i,0);
   EEPROM.commit();
 }
-//setPassWord test a b
-// setPermission test u tanq a
+//setPassWord test5 a b
+// setPermission test5 a tanq a

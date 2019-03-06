@@ -83,7 +83,7 @@ public class Change_Password extends Fragment {
                                         incorrectUserOrPass.setVisibility(View.VISIBLE);
                                 this put here force the program to shut down after clicking on signin button
                              */
-                            send = "setPassWord " + Global.username + " " + oldPassw + " " + newPass + '\n';
+                            send = "setPassWord " + Global.username + " " + oldPassw + " " + newPassw + '\n';
 
                             DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
                             BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));

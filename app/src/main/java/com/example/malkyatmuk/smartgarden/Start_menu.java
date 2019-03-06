@@ -70,7 +70,7 @@ public class Start_menu<LogoutClickListener> extends AppCompatActivity
         settingsButton.setOnClickListener(NewNicknameOrPassword);
         slideMenuButton.setOnClickListener(SlideMenuListener);
         navigationView.setNavigationItemSelectedListener(this);
-        displaySelectedScreen(R.id.my_address);
+        displaySelectedScreen(R.id.users);
         //View footerView =(View) navigationViewBottom.findViewById(R.id.)
 
 
@@ -151,8 +151,10 @@ public class Start_menu<LogoutClickListener> extends AppCompatActivity
         Fragment fragment = null;
         //initializing the fragment object which is selected
         switch (itemId) {
-            case R.id.my_address:
-                fragment = new MyAddress();
+            case R.id.users:
+                if(Global.permission=='a')
+                fragment = new Client_List();
+
                 break;
             case R.id.garden_items:
 
@@ -162,9 +164,6 @@ public class Start_menu<LogoutClickListener> extends AppCompatActivity
             case R.id.contact_us:
 
                 fragment = new Contact_Us();
-
-                break;
-            case R.id.share:
 
                 break;
             case R.id.about_us:

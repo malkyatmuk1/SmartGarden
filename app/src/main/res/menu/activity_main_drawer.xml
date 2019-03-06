@@ -5,9 +5,9 @@
     <group android:checkableBehavior="single" android:id="@+id/first">
 
         <item
-            android:id="@+id/my_address"
-            android:icon="@drawable/location"
-            android:title="My Address"/>
+            android:id="@+id/users"
+            android:icon="@drawable/users"
+            android:title="User list"/>
         <item
             android:id="@+id/garden_items"
             android:icon="@drawable/agriculture"
@@ -20,10 +20,6 @@
             android:id="@+id/contact_us"
             android:icon="@drawable/contact"
             android:title="Contact Us"/>
-        <item
-            android:title="Share"
-            android:icon="@drawable/share"
-            android:id="@+id/share"/>
         <item
             android:id="@+id/about_us"
             android:icon="@drawable/aboutus"

@@ -32,6 +32,7 @@ public class WifiSettings extends Activity {
     Button applyButton;
     ImageButton backButton;
     Socket clientSocket;
+    TextView messageTextView;
     public String send,modifiedSentence;
     private static final int SERVERPORT = 3030;
 
@@ -47,6 +48,8 @@ public class WifiSettings extends Activity {
         applyButton.setOnClickListener(ApplyButtonListener);
         backButton=(ImageButton)findViewById(R.id.backButton);
         backButton.setOnClickListener(BackButtonListener);
+        messageTextView=(TextView)findViewById(R.id.noMatching);
+
     }
     View.OnClickListener BackButtonListener=new View.OnClickListener() {
 
@@ -91,6 +94,11 @@ public class WifiSettings extends Activity {
                         BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                         outToServer.writeBytes(send);
                         outToServer.flush();
+                        messageTextView.post(new Runnable() {
+                            public void run() {
+                                messageTextView.setText("Done");
+                            }
+                        });
 
                         clientSocket.close();
                     } catch (IOException e) {

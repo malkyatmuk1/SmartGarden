@@ -77,7 +77,10 @@
             android:textSize="15dp"
             android:paddingLeft="30dp"
             android:fontFamily="@font/titillium_weblight"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:singleLine="true"
+            android:nextFocusDown="@+id/wifiPass"
+            />
         <EditText
             android:id="@+id/wifiPass"
             android:layout_width="300dp"
@@ -91,7 +94,10 @@
             android:textSize="15dp"
             android:paddingLeft="30dp"
             android:fontFamily="@font/titillium_weblight"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:singleLine="true"
+            android:nextFocusDown="@+id/username"
+            />
         <EditText
             android:id="@+id/username"
             android:layout_width="300dp"
@@ -104,7 +110,10 @@
             android:textSize="15dp"
             android:paddingLeft="30dp"
             android:fontFamily="@font/titillium_weblight"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:singleLine="true"
+            android:nextFocusDown="@+id/password"
+            />
         <EditText
             android:id="@+id/password"
             android:layout_width="300dp"

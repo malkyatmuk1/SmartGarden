@@ -28,6 +28,9 @@ public class Plant_List extends Fragment {
     ProgressBar progressBar;
     FloatingActionButton fab;
     Button viewPlant;
+    View view;
+    GridView listView;
+
     public void readPlants(View view,boolean isProgressbar) {
 
 //        if (isProgressbar) progressBar.setVisibility(View.VISIBLE);
@@ -38,21 +41,29 @@ public class Plant_List extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
+        if(Global.permission=='u' || Global.permission=='a'){
+           view  = inflater.inflate(R.layout.fragment_list_of_plants, container, false);
+            listView = (GridView) view.findViewById(R.id.card_listView);
+            fab=(FloatingActionButton) view.findViewById(R.id.fab);
+            fab.setOnClickListener(FabButtonListener);
+            //progressBar=(ProgressBar) view.findViewById(R.id.progressBar);
+            readPlants(view,false);
+            Global.fromView=false;
 
-        View view = inflater.inflate(R.layout.fragment_list_of_plants, container, false);
-        final GridView listView = (GridView) view.findViewById(R.id.card_listView);
-        FloatingActionButton fab=(FloatingActionButton)view.findViewById(R.id.fab);
-        fab.setOnClickListener(FabButtonListener);
-        //progressBar=(ProgressBar) view.findViewById(R.id.progressBar);
-        readPlants(view,false);
-        Global.fromView=false;
+
+            Adapter adapter = new Adapter(getContext(),Global.myPlants);
+            listView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+            new LongOperation().execute("");
+            return view;
+                       }
+        else
+        {
+             view = inflater.inflate(R.layout.fragment_users_nopermission, container, false);
+            return view;
+        }
 
 
-        Adapter adapter = new Adapter(getContext(),Global.myPlants);
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        new LongOperation().execute("");
-        return view;
     }
     View.OnClickListener FabButtonListener=new View.OnClickListener() {
         @Override
@@ -67,14 +78,17 @@ public class Plant_List extends Fragment {
 
         getActivity().setTitle("Plants List");
         view.setFocusable(false);
-        final SwipeRefreshLayout sr=(SwipeRefreshLayout) view.findViewById(R.id.mSwipeRefreshLayout);
-        sr.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                readPlants(view,false);
-                sr.setRefreshing(false);
-            }
-        });
+        if (Global.permission == 'u' || Global.permission == 'a') {
+            final SwipeRefreshLayout sr = (SwipeRefreshLayout) view.findViewById(R.id.mSwipeRefreshLayout);
+            sr.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    readPlants(view, false);
+                    sr.setRefreshing(false);
+                }
+            });
+
+        }
     }
     class LongOperation extends AsyncTask<String, Void, Void> {
         private static final int SERVERPORT = 3030;

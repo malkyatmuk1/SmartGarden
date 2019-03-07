@@ -12,9 +12,6 @@ return:
 - a , for admin
 - u , for user
 ----------------------------
-setWifi
-//TODO
-----------------------------
 setPermission user permission adminUsername adminPassword
 return:
 1)permission

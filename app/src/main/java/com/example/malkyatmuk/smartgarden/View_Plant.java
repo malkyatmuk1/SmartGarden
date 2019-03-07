@@ -35,7 +35,8 @@ import java.net.Socket;
 
 
 public class View_Plant extends Activity {
-    EditText namePlantEditText,pouringTimesEditText,humidityEditText,temperatureEditText;
+    EditText namePlantEditText,pouringTimesEditText;
+    TextView humidityTextView,temperatureTextView;
     Button saveInfoButton;
     ImageButton backButton;
     @Override
@@ -44,8 +45,8 @@ public class View_Plant extends Activity {
         setContentView(R.layout.activity_view_plant);
         namePlantEditText = (EditText) findViewById(R.id.plantName);
         pouringTimesEditText = (EditText) findViewById(R.id.plantPouringTimes);
-        temperatureEditText = (EditText) findViewById(R.id.plantTemperature);
-        humidityEditText = (EditText) findViewById(R.id.plantHumidity);
+        temperatureTextView = (TextView) findViewById(R.id.plantTemperature);
+        humidityTextView = (TextView) findViewById(R.id.plantHumidity);
         saveInfoButton=(Button) findViewById(R.id.saveInfo);
         backButton=(ImageButton)findViewById(R.id.backButton);
         backButton.setOnClickListener(BackButtonListener);
@@ -55,8 +56,7 @@ public class View_Plant extends Activity {
         String hum=String.valueOf(Global.myPlants.get(Global.indexOfPlant).humidity);
         namePlantEditText.setText(Global.myPlants.get(Global.indexOfPlant).namePlant);
         pouringTimesEditText.setText(pour);
-        temperatureEditText.setText(temp);
-        humidityEditText.setText(hum);
+
     }
     View.OnClickListener BackButtonListener=new View.OnClickListener() {
 
@@ -72,8 +72,8 @@ public class View_Plant extends Activity {
         public void onClick(View view) {
             Global.myPlants.get(Global.indexOfPlant).namePlant=namePlantEditText.getText().toString();
             Global.myPlants.get(Global.indexOfPlant).pouring= Integer.parseInt(pouringTimesEditText.getText().toString());
-            Global.myPlants.get(Global.indexOfPlant).temperature=Double.parseDouble(temperatureEditText.getText().toString());
-            Global.myPlants.get(Global.indexOfPlant).humidity=Double.parseDouble(humidityEditText.getText().toString());
+            Global.myPlants.get(Global.indexOfPlant).temperature=Double.parseDouble(temperatureTextView.getText().toString());
+            Global.myPlants.get(Global.indexOfPlant).humidity=Double.parseDouble(humidityTextView.getText().toString());
             Intent intent = new Intent(view.getContext(), View_Plant.class);
             startActivity(intent);
             finish();

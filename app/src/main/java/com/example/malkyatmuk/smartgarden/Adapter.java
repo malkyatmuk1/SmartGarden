@@ -71,6 +71,7 @@ public class Adapter extends BaseAdapter {
         holder.PlantImage = (ImageView) convertView.findViewById(R.id.image);
         holder.plantName = (TextView) convertView.findViewById(R.id.name);
         holder.ViewButton = (Button) convertView.findViewById(R.id.button_view);
+        holder.DellButton = (Button) convertView.findViewById(R.id.button_dell);
 
         Plants pl = (Plants) this.getItem(position);
 
@@ -80,9 +81,21 @@ public class Adapter extends BaseAdapter {
 
             @Override
             public void onClick(View v) {
+
                 Global.indexOfPlant=position;
                 Intent intent = new Intent(mContext, View_Plant.class);
                 mContext.startActivity(intent);
+
+            }
+
+        });
+        holder.DellButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                notifyDataSetChanged();
+                mList.remove(position);
 
             }
 
@@ -94,6 +107,7 @@ public class Adapter extends BaseAdapter {
         class ViewHolder {
             TextView plantName;
             Button ViewButton;
+            Button DellButton;
             ImageView PlantImage;
         }
 

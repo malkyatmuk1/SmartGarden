@@ -8,18 +8,62 @@
     android:orientation="vertical"
     android:gravity="fill_vertical"
     android:id="@+id/activity_view_plant"
+    tools:context=".View_Plant"
     >
 
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_gravity="left"
-        android:layout_marginLeft="10dp"
-        android:background="@color/white"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="top"
+        android:layout_marginTop="10dp">
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="40dp"
+                android:background="@color/white"
 
-        android:src="@drawable/left_arrow_aqua" />
+                android:src="@drawable/left_arrow_aqua" />
+
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/tt_corals_thin_demo"
+            android:layout_marginBottom="10dp"
+            android:text="Plant Information"
+            android:textAllCaps="true"
+            android:textColor="@color/aqua"
+            android:textSize="40dp"
+            android:textStyle="bold"
+        />
+        <View
+            android:layout_width="100dp"
+            android:layout_height="2dp"
+            android:background="@drawable/gradient_blue_green"
+            android:layout_gravity="center_horizontal"
+
+            android:layout_marginBottom="20dp"
+            />
 
     <ImageView
             android:id="@+id/image"
@@ -27,7 +71,14 @@
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/plant"
-            android:layout_marginTop="100dp"/>
+          />
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/secondpassLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColorHint="@color/blue"
+        >
     <EditText
         android:id="@+id/plantName"
         android:layout_width="300dp"
@@ -37,8 +88,20 @@
         android:background="@drawable/edittext"
         android:paddingLeft="30dp"
         android:textColor="@color/blue"
-        android:textSize="20dp" />
-
+        android:textSize="20dp"
+        android:hint="Name"
+        android:textColorHint="@color/blue"
+        android:singleLine="true"
+        android:nextFocusDown="@id/plantPouringTimes"
+        />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/pouringLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColorHint="@color/blue"
+        >
     <EditText
         android:id="@+id/plantPouringTimes"
         android:layout_width="300dp"
@@ -48,49 +111,117 @@
         android:background="@drawable/edittext"
         android:paddingLeft="30dp"
         android:textColor="@color/blue"
-        android:textSize="17dp" />
+        android:textSize="17dp"
+        android:hint="Pouring times"
+        android:textColorHint="@color/blue"
+        android:singleLine="true"
+        />
+    </android.support.design.widget.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
 
+            >
+
+            <TextView
+                android:id="@+id/tittleTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+
+                android:layout_marginRight="35dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/white"
+                android:textColor="@color/blue"
+                android:textSize="17dp"
+                android:hint="Temperature"
+                android:textColorHint="@color/blue"
+                android:gravity="center"
+
+                />
+
+
+            <TextView
+                android:id="@+id/tittleHumidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+
+                android:layout_marginLeft="35dp"
+                android:background="@color/white"
+
+                android:textColor="@color/blue"
+                android:textSize="17dp"
+                android:hint="Humidity"
+                android:textColorHint="@color/blue"
+                />
+
+        </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="80dp">
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+
+        >
 
         <TextView
             android:id="@+id/plantTemperature"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_gravity="left"
             android:layout_marginLeft="5dp"
+
             android:layout_marginTop="5dp"
             android:background="@drawable/edittext"
-            android:paddingLeft="30dp"
             android:textColor="@color/blue"
-            android:textSize="17dp" />
+            android:textSize="17dp"
+            android:hint="Temperature"
+            android:textColorHint="@color/blue"
+            android:gravity="center"
+            />
+
 
         <TextView
             android:id="@+id/plantHumidity"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_gravity="right"
+            android:layout_gravity="left"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="150dp"
+            android:gravity="center"
+
+            android:layout_marginRight="5dp"
             android:background="@drawable/edittext"
-            android:paddingLeft="30dp"
+
             android:textColor="@color/blue"
-            android:textSize="17dp" />
+            android:textSize="17dp"
+            android:hint="Humidity"
+            android:textColorHint="@color/blue"
+            />
+
     </LinearLayout>
     <Button
         android:id="@+id/saveInfo"
-        android:layout_width="150dp"
+        android:layout_width="300dp"
         android:layout_height="50dp"
         android:background="@drawable/button"
         android:paddingRight="20dp"
-        android:text="    Save Info"
+        android:paddingLeft="10dp"
+        android:text="Save Info"
         android:textSize="15dp"
         android:textColor="@color/white"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
+        android:drawableRight="@drawable/right_arrow_button"
 
          />
+    </LinearLayout>
 </LinearLayout>

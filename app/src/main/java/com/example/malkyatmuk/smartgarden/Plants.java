@@ -9,8 +9,8 @@ public  class Plants{
     {
         namePlant="";
         pouring=0;
-        humidity=0.0;
-        temperature=0.0;
+        humidity=Global.humidity;
+        temperature=Global.temperature;
     }
     public String getName() {
         return namePlant;

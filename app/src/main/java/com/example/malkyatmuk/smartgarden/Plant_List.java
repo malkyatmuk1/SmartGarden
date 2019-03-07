@@ -2,6 +2,7 @@ package com.example.malkyatmuk.smartgarden;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -14,6 +15,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ProgressBar;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
 
 public class Plant_List extends Fragment {
 
@@ -44,6 +51,7 @@ public class Plant_List extends Fragment {
         Adapter adapter = new Adapter(getContext(),Global.myPlants);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        new LongOperation().execute("");
         return view;
     }
     View.OnClickListener FabButtonListener=new View.OnClickListener() {
@@ -67,5 +75,44 @@ public class Plant_List extends Fragment {
                 sr.setRefreshing(false);
             }
         });
+    }
+    class LongOperation extends AsyncTask<String, Void, Void> {
+        private static final int SERVERPORT = 3030;
+        private String SERVER_IP;
+        private Socket clientSocket;
+
+        protected Void doInBackground(String... Param) {
+
+            try {
+
+                Socket clientSocket;
+                clientSocket = new Socket(Global.ip, SERVERPORT);
+                BufferedReader inFromServer;
+                String line;
+                DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+                inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                outToServer.writeBytes("Humidity true" + '\n');
+                outToServer.flush();
+
+                line = inFromServer.readLine();
+                Global.humidity=Double.parseDouble(line);
+                clientSocket.close();
+
+                clientSocket = new Socket(Global.ip, SERVERPORT);
+                outToServer = new DataOutputStream(clientSocket.getOutputStream());
+                inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                outToServer.writeBytes("Humidity false" + '\n');
+                outToServer.flush();
+
+                line = inFromServer.readLine();
+                Global.temperature=Double.parseDouble(line);
+                clientSocket.close();
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 }

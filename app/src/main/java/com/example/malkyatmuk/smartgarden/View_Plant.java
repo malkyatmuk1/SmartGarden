@@ -52,10 +52,12 @@ public class View_Plant extends Activity {
         backButton.setOnClickListener(BackButtonListener);
         saveInfoButton.setOnClickListener(SaveInfoListener);
         String pour=String.valueOf(Global.myPlants.get(Global.indexOfPlant).pouring);
-        String temp=String.valueOf(Global.myPlants.get(Global.indexOfPlant).temperature);
-        String hum=String.valueOf(Global.myPlants.get(Global.indexOfPlant).humidity);
+        String temp=String.valueOf(Global.temperature);
+        String hum=String.valueOf(Global.humidity);
         namePlantEditText.setText(Global.myPlants.get(Global.indexOfPlant).namePlant);
         pouringTimesEditText.setText(pour);
+        temperatureTextView.setText(temp+" °C");
+        humidityTextView.setText(hum+" HD");
 
     }
     View.OnClickListener BackButtonListener=new View.OnClickListener() {
@@ -72,9 +74,8 @@ public class View_Plant extends Activity {
         public void onClick(View view) {
             Global.myPlants.get(Global.indexOfPlant).namePlant=namePlantEditText.getText().toString();
             Global.myPlants.get(Global.indexOfPlant).pouring= Integer.parseInt(pouringTimesEditText.getText().toString());
-            Global.myPlants.get(Global.indexOfPlant).temperature=Double.parseDouble(temperatureTextView.getText().toString());
-            Global.myPlants.get(Global.indexOfPlant).humidity=Double.parseDouble(humidityTextView.getText().toString());
-            Intent intent = new Intent(view.getContext(), View_Plant.class);
+            Global.fromView=true;
+            Intent intent = new Intent(view.getContext(), Start_menu.class);
             startActivity(intent);
             finish();
         }

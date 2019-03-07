@@ -22,6 +22,7 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by malkyatmuk on 10/24/17.
@@ -30,13 +31,13 @@ import java.util.ArrayList;
 
 public class Adapter extends BaseAdapter {
     private Context mContext;
-    private ArrayList<String> mList;
+    private  ArrayList<Plants> mList;
     private String[] spliter;
     private String modif;
 
-    public Adapter(Context context,ArrayList<String> list){
+    public Adapter(Context context, ArrayList<Plants> list){
         mContext=context;
-        mList=list;
+        mList= list;
     }
 
     @Override
@@ -55,22 +56,26 @@ public class Adapter extends BaseAdapter {
     }
 
     @Override
+
     public View getView(final int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
         //use convertView recycle
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.card, parent, false);
-            holder.PlantImage = (ImageView) convertView.findViewById(R.id.image);
-            holder.plantName = (TextView) convertView.findViewById(R.id.name);
-            holder.plantName.setText(mList.get(position));
-            holder.ViewButton = (Button) convertView.findViewById(R.id.button_view);
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        holder.PlantImage = (ImageView) convertView.findViewById(R.id.image);
+        holder.plantName = (TextView) convertView.findViewById(R.id.name);
+        holder.ViewButton = (Button) convertView.findViewById(R.id.button_view);
 
+        Plants pl = (Plants) this.getItem(position);
 
+        holder.plantName.setText(pl.getName());
+        holder.PlantImage.setBackgroundResource(R.drawable.plant);
         holder.ViewButton.setOnClickListener(new View.OnClickListener() {
 
             @Override

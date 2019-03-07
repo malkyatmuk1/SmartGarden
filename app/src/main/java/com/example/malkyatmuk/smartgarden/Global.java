@@ -20,20 +20,8 @@ public class Global extends Application {
     public static char permission;
     public static int indexOfPlant=0;
     public static int numberOfPlants;
-    public static class Plants{
-        public static String namePlant;
-        public static int pouring;
-        public static double humidity;
-        public static double temperature;
-        Plants()
-        {
-            namePlant="";
-            pouring=0;
-            humidity=0.0;
-            temperature=0.0;
-        }
-    }
-    public static Plants[] myPlants=new Plants[128];
+
+    public static ArrayList <Plants> myPlants=new ArrayList<Plants>();
     public static ArrayList<String> plants=new ArrayList<String>();
     public static double longetudeHome=0;
     public static double latitudeHome=0;

@@ -40,8 +40,9 @@ public class Plant_List extends Fragment {
         readPlants(view,false);
 
 
-        Adapter adapter = new Adapter(getContext(),Global.plants);
+        Adapter adapter = new Adapter(getContext(),Global.myPlants);
         listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
         return view;
     }
     View.OnClickListener FabButtonListener=new View.OnClickListener() {

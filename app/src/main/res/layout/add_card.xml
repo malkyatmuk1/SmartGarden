@@ -28,30 +28,56 @@
                 android:src="@drawable/plant"
                 android:layout_gravity="center_horizontal"
                 />
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/nameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColorHint="@color/blue" >
             <EditText
                 android:id="@+id/namePlant"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center_horizontal"
-                android:text="Name"
+                android:hint="Name"
                 android:textSize="15dp"
+                android:paddingLeft="10dp"
+                android:textColorHint="@color/greyText"
                 android:textColor="@color/greyText"
                 android:layout_marginTop="10dp"
+                android:singleLine="true"
+                android:nextFocusDown="@+id/pouringTimes"
+
+                android:background="@drawable/edittext"
                 />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/pouringLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColorHint="@color/blue" >
             <EditText
                 android:id="@+id/pouringTimes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center_horizontal"
-                android:text="Pouring times"
+                android:hint="Pouring times"
                 android:textSize="15dp"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edittext"
+                android:textColorHint="@color/greyText"
                 android:textColor="@color/greyText"
+                android:singleLine="true"
                 />
+            </android.support.design.widget.TextInputLayout>
             <Button
                 android:id="@+id/addButton"
-                android:layout_width="70dp"
+                android:layout_width="150dp"
                 android:layout_height="30dp"
                 android:text="Add"
+                android:textAllCaps="false"
+                android:drawableRight="@drawable/right_arrow_button"
                 android:background="@drawable/button"
                 android:textSize="15dp"
                 android:layout_marginTop="10dp"

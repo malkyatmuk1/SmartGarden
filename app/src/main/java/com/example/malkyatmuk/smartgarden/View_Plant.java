@@ -50,10 +50,10 @@ public class View_Plant extends Activity {
         backButton=(ImageButton)findViewById(R.id.backButton);
         backButton.setOnClickListener(BackButtonListener);
         saveInfoButton.setOnClickListener(SaveInfoListener);
-        String pour=String.valueOf(Global.myPlants[Global.indexOfPlant].pouring);
-        String temp=String.valueOf(Global.myPlants[Global.indexOfPlant].temperature);
-        String hum=String.valueOf(Global.myPlants[Global.indexOfPlant].humidity);
-        namePlantEditText.setText(Global.myPlants[Global.indexOfPlant].namePlant);
+        String pour=String.valueOf(Global.myPlants.get(Global.indexOfPlant).pouring);
+        String temp=String.valueOf(Global.myPlants.get(Global.indexOfPlant).temperature);
+        String hum=String.valueOf(Global.myPlants.get(Global.indexOfPlant).humidity);
+        namePlantEditText.setText(Global.myPlants.get(Global.indexOfPlant).namePlant);
         pouringTimesEditText.setText(pour);
         temperatureEditText.setText(temp);
         humidityEditText.setText(hum);
@@ -69,10 +69,10 @@ public class View_Plant extends Activity {
     View.OnClickListener SaveInfoListener=new View.OnClickListener() {
 
         public void onClick(View view) {
-            Global.myPlants[Global.indexOfPlant].namePlant=namePlantEditText.getText().toString();
-            Global.myPlants[Global.indexOfPlant].pouring= Integer.parseInt(pouringTimesEditText.getText().toString());
-            Global.myPlants[Global.indexOfPlant].temperature=Double.parseDouble(temperatureEditText.getText().toString());
-            Global.myPlants[Global.indexOfPlant].humidity=Double.parseDouble(humidityEditText.getText().toString());
+            Global.myPlants.get(Global.indexOfPlant).namePlant=namePlantEditText.getText().toString();
+            Global.myPlants.get(Global.indexOfPlant).pouring= Integer.parseInt(pouringTimesEditText.getText().toString());
+            Global.myPlants.get(Global.indexOfPlant).temperature=Double.parseDouble(temperatureEditText.getText().toString());
+            Global.myPlants.get(Global.indexOfPlant).humidity=Double.parseDouble(humidityEditText.getText().toString());
             Intent intent = new Intent(view.getContext(), View_Plant.class);
             startActivity(intent);
             finish();

@@ -3,11 +3,14 @@ package com.example.malkyatmuk.smartgarden;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,6 +44,7 @@ public class Add_Card extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_card);
+
         name = (EditText) findViewById(R.id.namePlant);
         pouring = (EditText) findViewById(R.id.pouringTimes);
         newCard = (Button) findViewById(R.id.addButton);
@@ -51,15 +55,17 @@ public class Add_Card extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
         GradientDrawable drawable = new GradientDrawable();
-        drawable.setColor(1);
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setColor(Color.TRANSPARENT);
+        drawable.setCornerRadius(20);
+        drawable.setSize(180,280);
         getWindow().setBackgroundDrawable(drawable);
-        getWindow().setLayout((int) (width * .4), (int) (height * .7));
-
+        getWindow().setLayout((int) (width), (int) (height));
     }
 
     View.OnClickListener NewCardListener = new View.OnClickListener() {
         public void onClick(final View v) {
-            if(Global.numberOfPlants<60)
+            if(Global.myPlants.size()<60)
             {
                 String value = pouring.getText().toString();
                 boolean flag=true;
@@ -78,11 +84,10 @@ public class Add_Card extends AppCompatActivity {
                     pouring.setText("Need a whole number");
                 }
                 else {
-                    Global.plants.add(name.getText().toString());
-                    Global.myPlants[Global.numberOfPlants].namePlant = name.getText().toString();
-                    int newValue = Integer.parseInt(value);
-                    Global.myPlants[Global.numberOfPlants].pouring = newValue;
-                    Global.numberOfPlants++;
+                    Plants pl=new Plants();
+                    pl.namePlant=name.getText().toString();
+                    pl.pouring=Integer.parseInt(pouring.getText().toString());
+                    Global.myPlants.add(pl);
                     finish();
                 }
             }
@@ -90,6 +95,7 @@ public class Add_Card extends AppCompatActivity {
                 name.setText("Too many plants");
                 pouring.setText("");
             }
+            finish();
         }
     };
 }

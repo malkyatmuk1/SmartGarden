@@ -65,35 +65,27 @@ public class Add_Card extends AppCompatActivity {
 
     View.OnClickListener NewCardListener = new View.OnClickListener() {
         public void onClick(final View v) {
-            if(Global.myPlants.size()<60)
-            {
-                String value = pouring.getText().toString();
-                boolean flag=true;
-                for(int i=0;i<value.length();i++)
-                {
-                    if(value.charAt(i)-'0'>=0 && value.charAt(i)-'0'<=9) {
+            String value = pouring.getText().toString();
+            String nameOfPlant=name.getText().toString();
+            if(nameOfPlant.length()!=0 && value.length()!=0) {
+                boolean flag = true;
+                for (int i = 0; i < value.length(); i++) {
+                    if (value.charAt(i) - '0' >= 0 && value.charAt(i) - '0' <= 9) {
                         continue;
-                    }
-                    else {
-                        flag=false;
+                    } else {
+                        flag = false;
                         break;
                     }
                 }
-                if(flag==false)
-                {
+                if (flag == false) {
                     pouring.setText("Need a whole number");
-                }
-                else {
-                    Plants pl=new Plants();
-                    pl.namePlant=name.getText().toString();
-                    pl.pouring=Integer.parseInt(pouring.getText().toString());
+                } else {
+                    Plants pl = new Plants();
+                    pl.namePlant = nameOfPlant;
+                    pl.pouring = Integer.parseInt(pouring.getText().toString());
                     Global.myPlants.add(pl);
                     finish();
                 }
-            }
-            else{
-                name.setText("Too many plants");
-                pouring.setText("");
             }
             finish();
         }

@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -45,7 +50,7 @@
 
         >
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/tt_corals_thin_demo"
@@ -53,8 +58,9 @@
             android:text="Plant Information"
             android:textAllCaps="true"
             android:textColor="@color/aqua"
-            android:textSize="40dp"
+            android:textSize="30dp"
             android:textStyle="bold"
+            android:gravity="center_horizontal"
         />
         <View
             android:layout_width="100dp"
@@ -225,3 +231,4 @@
          />
     </LinearLayout>
 </LinearLayout>
+</ScrollView>

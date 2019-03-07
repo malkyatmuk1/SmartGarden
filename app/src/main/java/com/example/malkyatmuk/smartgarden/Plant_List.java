@@ -38,6 +38,7 @@ public class Plant_List extends Fragment {
         fab.setOnClickListener(FabButtonListener);
         //progressBar=(ProgressBar) view.findViewById(R.id.progressBar);
         readPlants(view,false);
+        Global.fromView=false;
 
 
         Adapter adapter = new Adapter(getContext(),Global.myPlants);

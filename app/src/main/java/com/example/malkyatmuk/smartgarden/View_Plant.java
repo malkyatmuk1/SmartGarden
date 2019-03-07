@@ -62,6 +62,7 @@ public class View_Plant extends Activity {
 
         public void onClick(View view) {
             Intent intent = new Intent(view.getContext(), Start_menu.class);
+            Global.fromView=true;
             startActivity(intent);
             finish();
         }

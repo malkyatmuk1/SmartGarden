@@ -71,7 +71,8 @@ public class Start_menu<LogoutClickListener> extends AppCompatActivity
         settingsButton.setOnClickListener(NewNicknameOrPassword);
         slideMenuButton.setOnClickListener(SlideMenuListener);
         navigationView.setNavigationItemSelectedListener(this);
-        displaySelectedScreen(R.id.users);
+        if(Global.fromView)  displaySelectedScreen(R.id.garden_items);
+        else displaySelectedScreen(R.id.users);
         //View footerView =(View) navigationViewBottom.findViewById(R.id.)
 
 

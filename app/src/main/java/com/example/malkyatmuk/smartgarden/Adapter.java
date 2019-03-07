@@ -80,11 +80,15 @@ public class Adapter extends BaseAdapter {
 
             @Override
             public void onClick(View v) {
+                Global.indexOfPlant=position;
+                Intent intent = new Intent(mContext, View_Plant.class);
+                mContext.startActivity(intent);
 
             }
 
         });
         return convertView;
+
     }
 
         class ViewHolder {

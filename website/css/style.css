@@ -135,7 +135,7 @@ video::cue{
 :root {
     --main-bg-color-blue: #c7c7c7;
     --main-bg-color-dark-blue: #185a9d;
-    --main-bg-color-pink: #67f7d1;
+    --main-bg-color-pink: #185A9D;
     --main-bg-color-grey: #EFF5F6;
     --main-bg-color-white: #EFF5F6;
     --main-bg-color-black: #020E17;
@@ -178,7 +178,7 @@ section {
     font-size: 40px;
     color: var(--main-bg-color-white);
     font-weight: bold;
-    line-height: 0.748;
+    line-height: 1.2;
 }
 
 .second-heading {
@@ -193,7 +193,7 @@ section {
 #header {
     height: 40px;
     width: 100%;
-    margin: 50px auto;
+    margin: 70px auto 0 auto;
 }
 
 #header ul {
@@ -255,14 +255,14 @@ section {
 #header ul li a.logo {
     background: url(../images/doorLockLogo.png);
     background-repeat: no-repeat;
-    background-size: 60%;
-    width: 100%;
-    height: 120px;
+    background-size: 100%;
+    /* width: 115%; */
+    height: 130px;
     max-width: 100px;
     margin: 0 auto;
     position: relative;
-    top: -49px;
-    left: 20px;
+    top: -80px;
+    left: 0px;
     right: 0;
     z-index: 9999;
 }
@@ -350,7 +350,7 @@ section {
 /*------------------------------------*/
 
 .team-section {
-    background: var(--main-bg-color-blue);
+    background: #2F98BD;
 }
 
 .team-headding {
@@ -430,7 +430,7 @@ section {
 /*------------------------*/
 
 .skills {
-    background: var(--main-bg-color-pink);
+    background: #9C27B0;
 }
 
 .section-title {
@@ -652,6 +652,12 @@ section {
 .no-touch .cdTop:hover {
     background-color: #e86256;
     opacity: 1;
+}
+
+.programmer {
+    padding: 10px 0;
+    font-weight: bold;
+    font-variant-caps: all-petite-caps;
 }
 
 @media only screen and (min-width: 768px) {

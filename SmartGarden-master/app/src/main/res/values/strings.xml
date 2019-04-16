@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SmartGarden</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="auto"><b>\u2022 AUTO- </b>If you click on the AUTO button, you will have to choose the Access Point of the server and connect to it.</string>
+    <string name="hand"><b>\u2022 MANUAL- </b>If you click on the MANUAL button, you will have to write the IP manually.</string>
+    <string name="AutoButton">AUTO</string>
+    <string name="HandButton">MANUAL</string>
+    <string name="connectButton">CONNECT</string>
+    <string name="wifi">Choose a WIFI</string>
+</resources>

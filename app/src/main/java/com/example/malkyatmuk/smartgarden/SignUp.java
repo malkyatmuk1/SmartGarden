@@ -195,6 +195,7 @@ public class SignUp extends Activity {
                         Log.d("tanq",modifiedSentence);
                         if (modifiedSentence.equals("truesignup") && !modifiedSentence.equals("error")) {
                             Intent intent = new Intent(getApplicationContext(), Start_menu.class);
+                            Global.signedIn=true;
                             Global.permission = modifiedSentence.charAt(0);
                             Global.username = usernameEditText.getText().toString();
                             Global.password = firstpassEditText.getText().toString();

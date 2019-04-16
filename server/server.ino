@@ -51,6 +51,7 @@ byte listofflags[10];
 String str;
 bool flagChangedWifi= true;
 String ip="";
+int pompa=5;
 
 //all methods
 vector<String> splitString(String line, char c);
@@ -87,7 +88,8 @@ void setup() {
   EEPROM.begin(512);
   pinMode(pin, INPUT); 
   pinMode(EchoPin, INPUT);                    //Set EchoPin as input, to receive measure result from US-015
-  pinMode(TrigPin, OUTPUT);        
+  pinMode(TrigPin, OUTPUT);
+  pinMode(pompa, OUTPUT);         
 
      
  
@@ -426,6 +428,13 @@ void loop()
     {
       if(commands[1]=="true")client.println(getHumidityOrTemp(true));
       else if(commands[1]=="false")client.println(getHumidityOrTemp(false));
+    }
+    else if(commands[0]=="water")
+    {
+      if(commands[1]=="1")
+     digitalWrite(pompa, HIGH); // sets the digital pin 13 on
+     else           // waits for a second
+     digitalWrite(pompa, LOW);
     }
   }
 /*

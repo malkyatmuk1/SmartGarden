@@ -107,7 +107,7 @@ public class Plant_List extends Fragment {
                 inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 outToServer.writeBytes("Humidity true" + '\n');
                 outToServer.flush();
-                
+
                 line = inFromServer.readLine();
                 Global.humidity=Double.parseDouble(line);
                 clientSocket.close();

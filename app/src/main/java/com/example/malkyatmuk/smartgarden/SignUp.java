@@ -1,7 +1,9 @@
 package com.example.malkyatmuk.smartgarden;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -196,9 +198,21 @@ public class SignUp extends Activity {
                         if (modifiedSentence.equals("truesignup") && !modifiedSentence.equals("error")) {
                             Intent intent = new Intent(getApplicationContext(), Start_menu.class);
                             Global.signedIn=true;
+                            SharedPreferences sp;
+                            sp= getSharedPreferences("login", Context.MODE_PRIVATE);
+
                             Global.permission = modifiedSentence.charAt(0);
                             Global.username = usernameEditText.getText().toString();
                             Global.password = firstpassEditText.getText().toString();
+                            sp.edit().putBoolean("logged",true).apply();
+                            sp.edit().putString("username",Global.username).apply();
+                            sp.edit().putString("password",Global.password).apply();
+                            if(Global.permission=='a')sp.edit().putString("permission","a").apply();
+                            else
+                            if(Global.permission=='u')sp.edit().putString("permission","u").apply();
+                            else
+                            if(Global.permission=='n')sp.edit().putString("permission","n").apply();
+
                             startActivity(intent);
                             finish();
                         }

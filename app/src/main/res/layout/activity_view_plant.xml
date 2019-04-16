@@ -101,7 +101,13 @@
         android:nextFocusDown="@id/plantType"
         />
 </android.support.design.widget.TextInputLayout>
-
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/typeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColorHint="@color/blue"
+            >
         <AutoCompleteTextView
             android:id="@+id/plantType"
             android:layout_width="300dp"
@@ -119,7 +125,9 @@
             android:ems="10">
             <requestFocus />
         </AutoCompleteTextView>
-        <android.support.design.widget.TextInputLayout
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/pouringLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

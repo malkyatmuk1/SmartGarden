@@ -12,6 +12,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -39,6 +41,8 @@ import java.net.Socket;
 public class Add_Card extends AppCompatActivity {
     EditText name,pouring;
     Button newCard;
+    AutoCompleteTextView typePlant;
+    String[] language ={"C","C++","Java",".NET","iPhone","Android","ASP.NET","PHP"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +50,17 @@ public class Add_Card extends AppCompatActivity {
         setContentView(R.layout.add_card);
 
         name = (EditText) findViewById(R.id.namePlant);
-        pouring = (EditText) findViewById(R.id.pouringTimes);
+        //pouring = (EditText) findViewById(R.id.pouringTimes);
         newCard = (Button) findViewById(R.id.addButton);
         newCard.setOnClickListener(NewCardListener);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (this,android.R.layout.select_dialog_item,language);
+        //Getting the instance of AutoCompleteTextView
+        typePlant= (AutoCompleteTextView)findViewById(R.id.plantType);
+        typePlant.setThreshold(1);//will start working from first character
+        typePlant.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
+        typePlant.setTextColor(Color.BLUE);
+
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -65,9 +77,10 @@ public class Add_Card extends AppCompatActivity {
 
     View.OnClickListener NewCardListener = new View.OnClickListener() {
         public void onClick(final View v) {
-            String value = pouring.getText().toString();
+            //String value = pouring.getText().toString();
             String nameOfPlant=name.getText().toString();
-            if(nameOfPlant.length()!=0 && value.length()!=0) {
+            String typeOfPlant=typePlant.getText().toString();
+            /*if(nameOfPlant.length()!=0 && value.length()!=0) {
                 boolean flag = true;
                 for (int i = 0; i < value.length(); i++) {
                     if (value.charAt(i) - '0' >= 0 && value.charAt(i) - '0' <= 9) {
@@ -86,7 +99,11 @@ public class Add_Card extends AppCompatActivity {
                     Global.myPlants.add(pl);
                     finish();
                 }
-            }
+            }*/
+            Plants pl = new Plants();
+            pl.namePlant = nameOfPlant;
+            pl.type=typeOfPlant;
+            Global.myPlants.add(pl);
             finish();
         }
     };

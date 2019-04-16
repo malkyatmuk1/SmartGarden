@@ -72,7 +72,6 @@
                     android:textColorHint="@color/blue"
                     android:singleLine="true"
                     android:ems="10">
-                    <requestFocus />
                 </AutoCompleteTextView>
             </android.support.design.widget.TextInputLayout>
             <Button

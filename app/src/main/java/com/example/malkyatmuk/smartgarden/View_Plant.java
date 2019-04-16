@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -39,10 +41,20 @@ public class View_Plant extends Activity {
     TextView humidityTextView,temperatureTextView;
     Button saveInfoButton;
     ImageButton backButton;
+    AutoCompleteTextView actv;
+
+    String[] language ={"C","C++","Java",".NET","iPhone","Android","ASP.NET","PHP"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_plant);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (this,android.R.layout.select_dialog_item,language);
+        //Getting the instance of AutoCompleteTextView
+        actv= (AutoCompleteTextView)findViewById(R.id.plantType);
+        actv.setThreshold(1);//will start working from first character
+        actv.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
+        actv.setTextColor(Color.BLUE);
         namePlantEditText = (EditText) findViewById(R.id.plantName);
         pouringTimesEditText = (EditText) findViewById(R.id.plantPouringTimes);
         temperatureTextView = (TextView) findViewById(R.id.plantTemperature);
@@ -55,6 +67,7 @@ public class View_Plant extends Activity {
         String temp=String.valueOf(Global.temperature);
         String hum=String.valueOf(Global.humidity);
         namePlantEditText.setText(Global.myPlants.get(Global.indexOfPlant).namePlant);
+        actv.setText(Global.myPlants.get(Global.indexOfPlant).type);
         pouringTimesEditText.setText(pour);
         temperatureTextView.setText(temp+" °C");
         humidityTextView.setText(hum+" HD");
@@ -74,6 +87,7 @@ public class View_Plant extends Activity {
         public void onClick(View view) {
             Global.myPlants.get(Global.indexOfPlant).namePlant=namePlantEditText.getText().toString();
             Global.myPlants.get(Global.indexOfPlant).pouring= Integer.parseInt(pouringTimesEditText.getText().toString());
+            Global.myPlants.get(Global.indexOfPlant).type=actv.getText().toString();
             Global.fromView=true;
             Intent intent = new Intent(view.getContext(), Start_menu.class);
             startActivity(intent);

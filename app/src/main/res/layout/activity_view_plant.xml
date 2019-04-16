@@ -49,19 +49,19 @@
         android:gravity="center_vertical"
 
         >
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:fontFamily="@font/tt_corals_thin_demo"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/tt_corals_thin_demo"
+            android:gravity="center_horizontal"
             android:text="Plant Information"
             android:textAllCaps="true"
             android:textColor="@color/aqua"
             android:textSize="30dp"
-            android:textStyle="bold"
-            android:gravity="center_horizontal"
-        />
+            android:textStyle="bold" />
         <View
             android:layout_width="100dp"
             android:layout_height="2dp"
@@ -98,10 +98,28 @@
         android:hint="Name"
         android:textColorHint="@color/blue"
         android:singleLine="true"
-        android:nextFocusDown="@id/plantPouringTimes"
+        android:nextFocusDown="@id/plantType"
         />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
+</android.support.design.widget.TextInputLayout>
+
+        <AutoCompleteTextView
+            android:id="@+id/plantType"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/edittext"
+            android:paddingLeft="30dp"
+            android:textColor="@color/blue"
+            android:textSize="20dp"
+            android:hint="Type"
+            android:textColorHint="@color/blue"
+            android:singleLine="true"
+            android:nextFocusDown="@id/pouringLayout"
+            android:ems="10">
+            <requestFocus />
+        </AutoCompleteTextView>
+        <android.support.design.widget.TextInputLayout
         android:id="@+id/pouringLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

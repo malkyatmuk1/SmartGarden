@@ -109,7 +109,7 @@
                 android:layout_gravity="center_horizontal"
                 android:gravity="center">
                 <TextView
-                    android:id="@+id/titleUsedWater"
+                    android:id="@+id/titleNextPouring"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
@@ -118,9 +118,23 @@
                     android:background="@color/white"
                     android:textColor="@color/blue"
                     android:textSize="17dp"
+                    android:hint="Next Pouring"
+                    android:textColorHint="@color/blue"
+                    android:gravity="center" />
+                <TextView
+                    android:id="@+id/titleUsedWater"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="35dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white"
+                    android:textColor="@color/blue"
+                    android:textSize="17dp"
                     android:hint="Used Water"
                     android:textColorHint="@color/blue"
                     android:gravity="center" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -130,6 +144,19 @@
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center">
+                <TextView
+                    android:id="@+id/nextPouring"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/edittext"
+                    android:textColor="@color/blue"
+                    android:textSize="17dp"
+                    android:hint="Next Pouring"
+                    android:textColorHint="@color/blue"
+                    android:gravity="center" />
                 <TextView
                     android:id="@+id/plantUsedWater"
                     android:layout_width="150dp"

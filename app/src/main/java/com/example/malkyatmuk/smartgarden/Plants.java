@@ -1,14 +1,17 @@
 package com.example.malkyatmuk.smartgarden;
 
+import java.util.Date;
+
 public  class Plants{
     public  String namePlant;
+    public  String type;
+    public  String ipPlant;
+    public  String lastPoured;
     public  int pouring;
     public  double humidity;
     public  double temperature;
-    public  String type;
-    public  boolean inside;
-    public  String ipPlant;
     public  double usedWater;
+    public  boolean inside;
     Plants()
     {
         namePlant="";
@@ -18,6 +21,7 @@ public  class Plants{
         temperature=Global.temperature;
         inside=true;
         ipPlant="";
+        lastPoured="00:00:00";
         usedWater=0.0;
 
     }

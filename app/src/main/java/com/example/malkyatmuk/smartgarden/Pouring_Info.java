@@ -30,30 +30,87 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
-
+import java.security.SecureRandom;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class Pouring_Info extends Activity {
 
     ImageButton backButton;
     EditText pouringTimes;
-    TextView usedWater;
+    TextView usedWater,nextPouring;
     Button saveInfoButton;
+    String currentTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pouring_info);
-        backButton=(ImageButton) findViewById(R.id.backButtonPouringInfo);
-        pouringTimes=(EditText)findViewById(R.id.plantPouringTimes);
-        usedWater=(TextView)findViewById(R.id.plantUsedWater);
-        saveInfoButton=(Button)findViewById(R.id.saveInfoPlantInfo);
+        backButton = (ImageButton) findViewById(R.id.backButtonPouringInfo);
+        pouringTimes = (EditText) findViewById(R.id.plantPouringTimes);
+        usedWater = (TextView) findViewById(R.id.plantUsedWater);
+        saveInfoButton = (Button) findViewById(R.id.saveInfoPlantInfo);
+        nextPouring= (TextView) findViewById(R.id.nextPouring);
+        String usedWaterValue = String.valueOf(Global.usedWater);
+        String pour=String.valueOf(Global.myPlants.get(Global.indexOfPlant).pouring);
+        String lastPouring=String.valueOf(Global.myPlants.get(Global.indexOfPlant).lastPoured);
+        usedWater.setText(usedWaterValue + " l");
+        pouringTimes.setText(pour);
 
-        String usedWaterValue=String.valueOf(Global.usedWater);
-        usedWater.setText(usedWaterValue+" l");
+
+        /*Date time;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            time = dateFormat.parse(lastPouring);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
+        currentTime = mdformat.format(calendar.getTime());
+        String lP=Global.myPlants.get(Global.indexOfPlant).lastPoured;
+
+        String c=""+lP.charAt(0);
+        int secondsLastPoured=Integer.parseInt(c)*36000;
+        c=""+lP.charAt(1);
+        secondsLastPoured+=Integer.parseInt(c)*3600;
+        c=""+lP.charAt(3);
+        secondsLastPoured+=Integer.parseInt(c)*600;
+        c=""+lP.charAt(4);
+        secondsLastPoured+=Integer.parseInt(c)*60;
+        c=""+lP.charAt(6);
+        secondsLastPoured+=Integer.parseInt(c)*10;
+        c=""+lP.charAt(7);
+        secondsLastPoured+=Integer.parseInt(c);
+
+        c=""+lP.charAt(0);
+        lP=currentTime;
+        int secondsCurrentTime=Integer.parseInt(c)*36000;
+        c=""+lP.charAt(1);
+        secondsCurrentTime+=Integer.parseInt(c)*3600;
+        c=""+lP.charAt(3);
+        secondsCurrentTime+=Integer.parseInt(c)*600;
+        c=""+lP.charAt(4);
+        secondsCurrentTime+=Integer.parseInt(c)*60;
+        c=""+lP.charAt(6);
+        secondsCurrentTime+=Integer.parseInt(c)*10;
+        c=""+lP.charAt(7);
+        secondsCurrentTime+=Integer.parseInt(c);
+
+        if(secondsCurrentTime<secondsLastPoured)secondsCurrentTime+=24*3600;
+        double pouringPeriod=((double)(24.0/(Integer.parseInt(pour))))*3600;
+        if(secondsCurrentTime-secondsLastPoured>=pouringPeriod) {
+            if(secondsCurrentTime>=24*3600)secondsCurrentTime-=24*3600;
+            int next=(int)pouringPeriod+secondsCurrentTime;
+            String nextPouringTime=String.valueOf(next/36000)+String.valueOf(next/3600%10)+":"+String.valueOf(next/600%10)+String.valueOf(next/60%10)+":"+String.valueOf(next/10%10)+String.valueOf(next%10);
+            nextPouring.setText(nextPouringTime);
+            Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
+        }
         backButton.setOnClickListener(BackButtonListener);
         saveInfoButton.setOnClickListener(SaveInfoListener);
     }
-
     View.OnClickListener BackButtonListener=new View.OnClickListener() {
 
         public void onClick(View view) {

@@ -2,6 +2,7 @@
 <android.support.v7.widget.CardView
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="180dp"
     android:layout_height="280dp"
     app:cardElevation="4dp"
@@ -66,14 +67,63 @@
                     android:layout_marginTop="15dp"
                     android:background="@drawable/edittext"
                     android:paddingLeft="15dp"
-                    android:textColor="@color/blue"
-                    android:textSize="20dp"
+                    android:textColor="@color/aqua"
+                    android:textSize="15dp"
                     android:hint="Type"
-                    android:textColorHint="@color/blue"
+                    android:textColorHint="@color/aqua"
                     android:singleLine="true"
                     android:ems="10">
                 </AutoCompleteTextView>
             </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/ipLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColorHint="@color/blue"
+                >
+                <EditText
+                    android:id="@+id/ipPlant"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:hint="IP"
+                    android:textSize="15dp"
+                    android:paddingLeft="10dp"
+                    android:textColorHint="@color/greyText"
+                    android:textColor="@color/greyText"
+                    android:layout_marginTop="10dp"
+                    android:singleLine="true"
+                    android:nextFocusDown="@+id/pouringTimes"
+
+                    android:background="@drawable/edittext"
+                    />
+            </android.support.design.widget.TextInputLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                >
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Plant's IP matches yours?"
+                android:fontFamily="@font/tt_corals_thin_demo"
+                android:textColor="@color/blue"
+                android:textSize="10dp"
+                />
+
+                <CheckBox
+                    android:id="@+id/ipMatch"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:buttonTint="@color/aqua"
+                    android:text="Plant's IP matches yours?"
+                    />
+            </LinearLayout>
+
             <Button
                 android:id="@+id/addButton"
                 android:layout_width="150dp"

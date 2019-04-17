@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -39,9 +40,11 @@ import java.net.Socket;
 
 
 public class Add_Card extends AppCompatActivity {
-    EditText name,pouring;
+    EditText name,ipPlant;
     Button newCard;
     AutoCompleteTextView typePlant;
+    CheckBox ipMatch;
+
     String[] language ={"C","C++","Java",".NET","iPhone","Android","ASP.NET","PHP"};
 
     @Override
@@ -53,6 +56,9 @@ public class Add_Card extends AppCompatActivity {
         //pouring = (EditText) findViewById(R.id.pouringTimes);
         newCard = (Button) findViewById(R.id.addButton);
         newCard.setOnClickListener(NewCardListener);
+        ipPlant= (EditText) findViewById(R.id.ipPlant);
+        ipMatch=(CheckBox) findViewById(R.id.ipMatch);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this,android.R.layout.select_dialog_item,language);
         //Getting the instance of AutoCompleteTextView
@@ -100,11 +106,22 @@ public class Add_Card extends AppCompatActivity {
                     finish();
                 }
             }*/
-            Plants pl = new Plants();
-            pl.namePlant = nameOfPlant;
-            pl.type=typeOfPlant;
-            Global.myPlants.add(pl);
-            finish();
+            if(ipMatch.isChecked()) {
+                Plants pl = new Plants();
+                pl.namePlant = nameOfPlant;
+                pl.type=typeOfPlant;
+                pl.ipPlant=Global.ip;
+                Global.myPlants.add(pl);
+                finish();
+            }
+            else {
+                Plants pl = new Plants();
+                pl.namePlant = nameOfPlant;
+                pl.type=typeOfPlant;
+                pl.ipPlant=ipPlant.getText().toString();
+                Global.myPlants.add(pl);
+                finish();
+            }
         }
     };
 }

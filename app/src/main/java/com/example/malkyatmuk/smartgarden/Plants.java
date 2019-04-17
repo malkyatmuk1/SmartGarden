@@ -7,6 +7,7 @@ public  class Plants{
     public  double temperature;
     public  String type;
     public  boolean inside;
+    public  String ipPlant;
     Plants()
     {
         namePlant="";
@@ -15,6 +16,7 @@ public  class Plants{
         humidity=Global.humidity;
         temperature=Global.temperature;
         inside=true;
+        ipPlant="";
     }
     public String getName() {
         return namePlant;

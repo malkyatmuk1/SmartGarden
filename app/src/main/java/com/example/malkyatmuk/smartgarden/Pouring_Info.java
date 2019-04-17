@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -40,25 +41,29 @@ import java.util.Date;
 public class Pouring_Info extends Activity {
 
     ImageButton backButton;
-    EditText pouringTimes;
-    TextView usedWater,nextPouring;
+    TextView usedWater,nextPouring,pouringTimes;
     Button saveInfoButton;
     String currentTime;
+    CheckBox autoPouring;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pouring_info);
         backButton = (ImageButton) findViewById(R.id.backButtonPouringInfo);
-        pouringTimes = (EditText) findViewById(R.id.plantPouringTimes);
+        pouringTimes = (TextView) findViewById(R.id.plantPouringTimes);
         usedWater = (TextView) findViewById(R.id.plantUsedWater);
         saveInfoButton = (Button) findViewById(R.id.saveInfoPlantInfo);
         nextPouring= (TextView) findViewById(R.id.nextPouring);
+        autoPouring=(CheckBox)findViewById(R.id.autoPouring);
+        if(autoPouring.isChecked()) {
+            //TODO
+        }
         String usedWaterValue = String.valueOf(Global.usedWater);
         String pour=String.valueOf(Global.myPlants.get(Global.indexOfPlant).pouring);
         String lastPouring=String.valueOf(Global.myPlants.get(Global.indexOfPlant).lastPoured);
         usedWater.setText(usedWaterValue + " l");
-        pouringTimes.setText(pour);
-
+        pouringTimes.setText(pour+" pouring times");
+        nextPouring.setText(Global.myPlants.get(Global.indexOfPlant).nextPouring);
 
         /*Date time;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -85,8 +90,9 @@ public class Pouring_Info extends Activity {
         c=""+lP.charAt(7);
         secondsLastPoured+=Integer.parseInt(c);
 
-        c=""+lP.charAt(0);
+
         lP=currentTime;
+        c=""+lP.charAt(0);
         int secondsCurrentTime=Integer.parseInt(c)*36000;
         c=""+lP.charAt(1);
         secondsCurrentTime+=Integer.parseInt(c)*3600;
@@ -104,8 +110,20 @@ public class Pouring_Info extends Activity {
         if(secondsCurrentTime-secondsLastPoured>=pouringPeriod) {
             if(secondsCurrentTime>=24*3600)secondsCurrentTime-=24*3600;
             int next=(int)pouringPeriod+secondsCurrentTime;
-            String nextPouringTime=String.valueOf(next/36000)+String.valueOf(next/3600%10)+":"+String.valueOf(next/600%10)+String.valueOf(next/60%10)+":"+String.valueOf(next/10%10)+String.valueOf(next%10);
+            if(next>=24*3600)next-=24*3600;
+            String nextPouringTime=String.valueOf(next/36000);
+            next-=(next/36000)*36000;
+            nextPouringTime+=String.valueOf(next/3600)+":";
+            next-=(next/3600)*3600;
+            nextPouringTime+=String.valueOf(next/600);
+            next-=(next/600)*600;
+            nextPouringTime+=String.valueOf(next/60)+":";
+            next-=(next/60)*60;
+            nextPouringTime+=String.valueOf(next/10);
+            next-=(next/10)*10;
+            nextPouringTime+=String.valueOf(next%10);
             nextPouring.setText(nextPouringTime);
+            Global.myPlants.get(Global.indexOfPlant).nextPouring=nextPouringTime;
             Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
         }
         backButton.setOnClickListener(BackButtonListener);
@@ -122,9 +140,8 @@ public class Pouring_Info extends Activity {
     View.OnClickListener SaveInfoListener=new View.OnClickListener() {
 
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), Start_menu.class);
-            startActivity(intent);
-            finish();
+
+            //TODO polivane
         }
     };
 }

@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColorHint="@color/blue">
-                <EditText
+                <TextView
                     android:id="@+id/plantPouringTimes"
                     android:layout_width="300dp"
                     android:layout_height="50dp"
@@ -126,7 +126,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:layout_marginRight="35dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="30dp"
                     android:layout_marginTop="5dp"
                     android:background="@color/white"
                     android:textColor="@color/blue"
@@ -154,7 +155,7 @@
                     android:background="@drawable/edittext"
                     android:textColor="@color/blue"
                     android:textSize="17dp"
-                    android:hint="Next Pouring"
+                    android:hint="Unknown"
                     android:textColorHint="@color/blue"
                     android:gravity="center" />
                 <TextView
@@ -171,6 +172,30 @@
                     android:textColorHint="@color/blue"
                     android:gravity="center" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="80dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Automatical pouring"
+                    android:fontFamily="@font/tt_corals_thin_demo"
+                    android:textColor="@color/blue"
+                    android:textSize="20dp"
+                    />
+
+                <CheckBox
+                    android:id="@+id/autoPouring"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:buttonTint="@color/aqua"
+                    />
+            </LinearLayout>
             <Button
                 android:id="@+id/saveInfoPlantInfo"
                 android:layout_width="300dp"
@@ -178,7 +203,7 @@
                 android:background="@drawable/button"
                 android:paddingRight="20dp"
                 android:paddingLeft="10dp"
-                android:text="Save Info"
+                android:text="       Pour the plant"
                 android:textSize="15dp"
                 android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"

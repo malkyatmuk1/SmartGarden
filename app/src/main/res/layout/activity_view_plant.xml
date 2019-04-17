@@ -39,7 +39,16 @@
 
                 android:src="@drawable/left_arrow_aqua" />
 
+            <ImageButton
+                android:id="@+id/pouringInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="330dp"
+                android:background="@color/aqua"
+                android:paddingRight="10dp"
+                android:src="@drawable/settings" />
         </RelativeLayout>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

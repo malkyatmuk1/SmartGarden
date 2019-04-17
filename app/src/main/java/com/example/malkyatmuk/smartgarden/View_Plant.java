@@ -40,7 +40,7 @@ public class View_Plant extends Activity {
     EditText namePlantEditText,pouringTimesEditText;
     TextView humidityTextView,temperatureTextView;
     Button saveInfoButton;
-    ImageButton backButton;
+    ImageButton backButton,pouringButton;
     AutoCompleteTextView actv;
 
     String[] language ={"C","C++","Java",".NET","iPhone","Android","ASP.NET","PHP"};
@@ -61,7 +61,8 @@ public class View_Plant extends Activity {
         humidityTextView = (TextView) findViewById(R.id.plantHumidity);
         saveInfoButton=(Button) findViewById(R.id.saveInfo);
         backButton=(ImageButton)findViewById(R.id.backButton);
-        backButton.setOnClickListener(BackButtonListener);
+        pouringButton=(ImageButton)findViewById(R.id.pouringInfo);
+        pouringButton.setOnClickListener(PouringInfoListener);
         saveInfoButton.setOnClickListener(SaveInfoListener);
         String pour=String.valueOf(Global.myPlants.get(Global.indexOfPlant).pouring);
         String temp=String.valueOf(Global.temperature);
@@ -73,6 +74,16 @@ public class View_Plant extends Activity {
         humidityTextView.setText(hum+" HD");
 
     }
+
+    View.OnClickListener PouringInfoListener=new View.OnClickListener() {
+
+        public void onClick(View view) {
+            Intent intent = new Intent(view.getContext(), Start_menu.class);
+            Global.fromView=true;
+            startActivity(intent);
+            finish();
+        }
+    };
     View.OnClickListener BackButtonListener=new View.OnClickListener() {
 
         public void onClick(View view) {

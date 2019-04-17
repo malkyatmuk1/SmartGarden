@@ -8,6 +8,7 @@ public  class Plants{
     public  String type;
     public  boolean inside;
     public  String ipPlant;
+    public  double usedWater;
     Plants()
     {
         namePlant="";
@@ -17,6 +18,8 @@ public  class Plants{
         temperature=Global.temperature;
         inside=true;
         ipPlant="";
+        usedWater=0.0;
+
     }
     public String getName() {
         return namePlant;

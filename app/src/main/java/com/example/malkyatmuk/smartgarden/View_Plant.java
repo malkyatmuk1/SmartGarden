@@ -48,6 +48,7 @@ public class View_Plant extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_plant);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this,android.R.layout.select_dialog_item,language);
         //Getting the instance of AutoCompleteTextView
@@ -55,15 +56,18 @@ public class View_Plant extends Activity {
         actv.setThreshold(1);//will start working from first character
         actv.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
         actv.setTextColor(Color.BLUE);
+
         namePlantEditText = (EditText) findViewById(R.id.plantName);
         pouringTimesEditText = (EditText) findViewById(R.id.plantPouringTimes);
         temperatureTextView = (TextView) findViewById(R.id.plantTemperature);
         humidityTextView = (TextView) findViewById(R.id.plantHumidity);
         saveInfoButton=(Button) findViewById(R.id.saveInfo);
         backButton=(ImageButton)findViewById(R.id.backButton);
-        pouringButton=(ImageButton)findViewById(R.id.pouringInfo);
+        backButton.setOnClickListener(BackButtonListener);
+        pouringButton=(ImageButton)findViewById(R.id.pouringInfoButton);
         pouringButton.setOnClickListener(PouringInfoListener);
         saveInfoButton.setOnClickListener(SaveInfoListener);
+
         String pour=String.valueOf(Global.myPlants.get(Global.indexOfPlant).pouring);
         String temp=String.valueOf(Global.temperature);
         String hum=String.valueOf(Global.humidity);
@@ -72,13 +76,11 @@ public class View_Plant extends Activity {
         pouringTimesEditText.setText(pour);
         temperatureTextView.setText(temp+" °C");
         humidityTextView.setText(hum+" HD");
-
     }
-
     View.OnClickListener PouringInfoListener=new View.OnClickListener() {
 
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), Start_menu.class);
+            Intent intent = new Intent(view.getContext(), Pouring_Info.class);
             Global.fromView=true;
             startActivity(intent);
             finish();

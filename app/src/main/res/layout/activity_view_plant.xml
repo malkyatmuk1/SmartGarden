@@ -40,7 +40,7 @@
                 android:src="@drawable/left_arrow_aqua" />
 
             <ImageButton
-                android:id="@+id/pouringInfo"
+                android:id="@+id/pouringInfoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="330dp"

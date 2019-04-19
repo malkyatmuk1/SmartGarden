@@ -86,6 +86,7 @@ public class Add_Card extends AppCompatActivity {
             //String value = pouring.getText().toString();
             String nameOfPlant=name.getText().toString();
             String typeOfPlant=typePlant.getText().toString();
+
             /*if(nameOfPlant.length()!=0 && value.length()!=0) {
                 boolean flag = true;
                 for (int i = 0; i < value.length(); i++) {
@@ -115,12 +116,18 @@ public class Add_Card extends AppCompatActivity {
                 finish();
             }
             else {
-                Plants pl = new Plants();
-                pl.namePlant = nameOfPlant;
-                pl.type=typeOfPlant;
-                pl.ipPlant=ipPlant.getText().toString();
-                Global.myPlants.add(pl);
-                finish();
+
+                if (ipPlant.getText().toString().length() != 0) {
+                    Plants pl = new Plants();
+                    pl.namePlant = nameOfPlant;
+                    pl.type = typeOfPlant;
+                    pl.ipPlant = ipPlant.getText().toString();
+                    Global.myPlants.add(pl);
+                    finish();
+                }
+                else ipPlant.setHint(
+                        "     must be entered"
+                );
             }
         }
     };

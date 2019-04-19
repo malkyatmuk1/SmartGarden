@@ -99,7 +99,19 @@ public class View_Plant extends Activity {
 
         public void onClick(View view) {
             Global.myPlants.get(Global.indexOfPlant).namePlant=namePlantEditText.getText().toString();
-            Global.myPlants.get(Global.indexOfPlant).pouring= Integer.parseInt(pouringTimesEditText.getText().toString());
+            String s=pouringTimesEditText.getText().toString();
+            boolean flag=true;
+            for(int i=0;i<s.length();i++)
+            {
+                if(s.charAt(i)-'0'>=0 && s.charAt(i)-'0'<=9) {
+                    continue;
+                }
+                else {
+                    flag=false;
+                    break;
+                }
+            }
+            if(flag==true) Global.myPlants.get(Global.indexOfPlant).pouring= Integer.parseInt(pouringTimesEditText.getText().toString());
             Global.myPlants.get(Global.indexOfPlant).type=actv.getText().toString();
             Global.fromView=true;
             Intent intent = new Intent(view.getContext(), Start_menu.class);

@@ -80,27 +80,27 @@
                 />
 
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/pouringLayout"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColorHint="@color/blue">
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center">
                 <TextView
                     android:id="@+id/plantPouringTimes"
                     android:layout_width="300dp"
                     android:layout_height="50dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/edittext"
-                    android:paddingLeft="30dp"
                     android:textColor="@color/blue"
                     android:textSize="17dp"
-                    android:hint="Pouring times"
                     android:textColorHint="@color/blue"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
-
+                    android:gravity="center" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -175,7 +175,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="0dp"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
                 android:layout_marginLeft="80dp"
@@ -191,7 +191,7 @@
 
                 <CheckBox
                     android:id="@+id/autoPouring"
-                    android:layout_width="20dp"
+                    android:layout_width="30dp"
                     android:layout_height="20dp"
                     android:buttonTint="@color/aqua"
                     />

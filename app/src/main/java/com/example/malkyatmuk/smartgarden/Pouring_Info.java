@@ -109,7 +109,7 @@ public class Pouring_Info extends Activity {
         //preminato 24 chasa
         if(secondsCurrentTime<secondsLastPoured)secondsCurrentTime+=24*3600;
 
-        
+
         double pouringPeriod=((double)(24.0/(Integer.parseInt(pour))))*3600;
 
         if(secondsCurrentTime-secondsLastPoured>=pouringPeriod) {

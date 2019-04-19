@@ -43,40 +43,41 @@ public class Pouring_Info extends Activity {
     ImageButton backButton;
     TextView usedWater,nextPouring,pouringTimes;
     Button saveInfoButton;
-    String currentTime;
+    String currentTime,pour;
     CheckBox autoPouring;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pouring_info);
+    public void init()
+    {
         backButton = (ImageButton) findViewById(R.id.backButtonPouringInfo);
         pouringTimes = (TextView) findViewById(R.id.plantPouringTimes);
         usedWater = (TextView) findViewById(R.id.plantUsedWater);
         saveInfoButton = (Button) findViewById(R.id.saveInfoPlantInfo);
         nextPouring= (TextView) findViewById(R.id.nextPouring);
         autoPouring=(CheckBox)findViewById(R.id.autoPouring);
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pouring_info);
+
+        init();
+
         if(autoPouring.isChecked()) {
             //TODO
         }
+
         String usedWaterValue = String.valueOf(Global.usedWater);
-        String pour=String.valueOf(Global.myPlants.get(Global.indexOfPlant).pouring);
+        pour=String.valueOf(Global.myPlants.get(Global.indexOfPlant).pouring);
         String lastPouring=String.valueOf(Global.myPlants.get(Global.indexOfPlant).lastPoured);
         usedWater.setText(usedWaterValue + " l");
         pouringTimes.setText(pour+" pouring times");
         nextPouring.setText(Global.myPlants.get(Global.indexOfPlant).nextPouring);
 
-        /*Date time;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            time = dateFormat.parse(lastPouring);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
         currentTime = mdformat.format(calendar.getTime());
-        String lP=Global.myPlants.get(Global.indexOfPlant).lastPoured;
 
+        // last poured->to seconds;
+        String lP=Global.myPlants.get(Global.indexOfPlant).lastPoured;
         String c=""+lP.charAt(0);
         int secondsLastPoured=Integer.parseInt(c)*36000;
         c=""+lP.charAt(1);
@@ -90,7 +91,7 @@ public class Pouring_Info extends Activity {
         c=""+lP.charAt(7);
         secondsLastPoured+=Integer.parseInt(c);
 
-
+        //currentTime-> to seconds;
         lP=currentTime;
         c=""+lP.charAt(0);
         int secondsCurrentTime=Integer.parseInt(c)*36000;
@@ -105,8 +106,12 @@ public class Pouring_Info extends Activity {
         c=""+lP.charAt(7);
         secondsCurrentTime+=Integer.parseInt(c);
 
+        //preminato 24 chasa
         if(secondsCurrentTime<secondsLastPoured)secondsCurrentTime+=24*3600;
+
+        
         double pouringPeriod=((double)(24.0/(Integer.parseInt(pour))))*3600;
+
         if(secondsCurrentTime-secondsLastPoured>=pouringPeriod) {
             if(secondsCurrentTime>=24*3600)secondsCurrentTime-=24*3600;
             int next=(int)pouringPeriod+secondsCurrentTime;
@@ -137,10 +142,51 @@ public class Pouring_Info extends Activity {
             finish();
         }
     };
+    public void Pouring()
+    {
+        //TODO ako e bilo polivano tvurde skoro -> ne
+        //TODO pouring
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
+        currentTime = mdformat.format(calendar.getTime());
+        String lP=currentTime;
+        String c="";
+        c=""+lP.charAt(0);
+        int secondsCurrentTime=Integer.parseInt(c)*36000;
+        c=""+lP.charAt(1);
+        secondsCurrentTime+=Integer.parseInt(c)*3600;
+        c=""+lP.charAt(3);
+        secondsCurrentTime+=Integer.parseInt(c)*600;
+        c=""+lP.charAt(4);
+        secondsCurrentTime+=Integer.parseInt(c)*60;
+        c=""+lP.charAt(6);
+        secondsCurrentTime+=Integer.parseInt(c)*10;
+        c=""+lP.charAt(7);
+        secondsCurrentTime+=Integer.parseInt(c);
+
+        double pouringPeriod=((double)(24.0/(Integer.parseInt(pour))))*3600;
+
+        int next=(int)pouringPeriod+secondsCurrentTime;
+        if(next>=24*3600)next-=24*3600;
+        String nextPouringTime=String.valueOf(next/36000);
+        next-=(next/36000)*36000;
+        nextPouringTime+=String.valueOf(next/3600)+":";
+        next-=(next/3600)*3600;
+        nextPouringTime+=String.valueOf(next/600);
+        next-=(next/600)*600;
+        nextPouringTime+=String.valueOf(next/60)+":";
+        next-=(next/60)*60;
+        nextPouringTime+=String.valueOf(next/10);
+        next-=(next/10)*10;
+        nextPouringTime+=String.valueOf(next%10);
+        nextPouring.setText(nextPouringTime);
+        Global.myPlants.get(Global.indexOfPlant).nextPouring=nextPouringTime;
+        Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
+    }
     View.OnClickListener SaveInfoListener=new View.OnClickListener() {
 
         public void onClick(View view) {
-
+            Pouring();
             //TODO polivane
         }
     };

@@ -17,7 +17,7 @@ public  class Plants{
     {
         namePlant="";
         type="";
-        pouring=0;
+        pouring=1;
         humidity=Global.humidity;
         temperature=Global.temperature;
         inside=true;

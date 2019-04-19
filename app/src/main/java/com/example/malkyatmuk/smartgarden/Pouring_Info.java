@@ -43,7 +43,7 @@ public class Pouring_Info extends Activity {
     ImageButton backButton;
     TextView usedWater,nextPouring,pouringTimes;
     Button saveInfoButton;
-    String currentTime,pour;
+    String currentTime,pour,pourType;
     CheckBox autoPouring;
     public void init()
     {
@@ -67,9 +67,10 @@ public class Pouring_Info extends Activity {
 
         String usedWaterValue = String.valueOf(Global.usedWater);
         pour=String.valueOf(Global.myPlants.get(Global.indexOfPlant).pouring);
+        pourType=Global.myPlants.get(Global.indexOfPlant).pouringType;
         String lastPouring=String.valueOf(Global.myPlants.get(Global.indexOfPlant).lastPoured);
         usedWater.setText(usedWaterValue + " l");
-        pouringTimes.setText(pour+" pouring times");
+        pouringTimes.setText(pour+" pouring times "+pourType);
         nextPouring.setText(Global.myPlants.get(Global.indexOfPlant).nextPouring);
 
         Calendar calendar = Calendar.getInstance();

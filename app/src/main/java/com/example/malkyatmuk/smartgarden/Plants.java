@@ -8,6 +8,7 @@ public  class Plants{
     public  String ipPlant;
     public  String lastPoured;
     public  String nextPouring;
+    public  String pouringType;
     public  int pouring;
     public  double humidity;
     public  double temperature;
@@ -25,6 +26,7 @@ public  class Plants{
         lastPoured="00:00:00";
         usedWater=0.0;
         nextPouring="00:00:00";
+        pouringType="daily";
 
     }
     public String getName() {

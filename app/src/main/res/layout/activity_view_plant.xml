@@ -136,28 +136,50 @@
                 android:textSize="20dp"></AutoCompleteTextView>
     </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <LinearLayout
         android:id="@+id/pouringLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
         android:gravity="center"
+        android:layout_marginTop="10dp"
         android:textColorHint="@color/blue"
         >
-    <EditText
-        android:id="@+id/plantPouringTimes"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/edittext"
-        android:paddingLeft="30dp"
-        android:textColor="@color/blue"
-        android:textSize="17dp"
-        android:hint="Pouring times"
-        android:textColorHint="@color/blue"
-        android:singleLine="true"
-        />
-    </android.support.design.widget.TextInputLayout>
+
+        <EditText
+            android:id="@+id/plantPouringTimes"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="left"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edittext"
+            android:paddingLeft="30dp"
+            android:textColor="@color/blue"
+            android:textSize="17dp"
+            android:hint="Pouring times"
+            android:textColorHint="@color/blue"
+            android:singleLine="true"
+            />
+        <AutoCompleteTextView
+            android:id="@+id/pouringType"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/edittext"
+            android:ems="3"
+            android:colorAccent="@color/blue"
+            android:hint="Pouring type"
+            android:nextFocusDown="@id/pouringLayout"
+            android:paddingLeft="30dp"
+            android:singleLine="true"
+            android:textColor="@color/aqua"
+            android:textColorHint="@color/blue"
+            android:textSize="20dp"
+            />
+
+    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -165,7 +187,6 @@
             android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-
             >
 
             <TextView

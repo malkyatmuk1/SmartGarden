@@ -432,9 +432,14 @@ void loop()
     else if(commands[0]=="water")
     {
       if(commands[1]=="1")
-     digitalWrite(pompa, HIGH); // sets the digital pin 13 on
-     else           // waits for a second
-     digitalWrite(pompa, LOW);
+      {
+        //TODO automagtic pouring
+        digitalWrite(pompa, HIGH); // sets the digital pin 13 on
+      }
+      else           // waits for a second
+      {
+        digitalWrite(pompa, LOW);
+      }
     }
   }
 /*

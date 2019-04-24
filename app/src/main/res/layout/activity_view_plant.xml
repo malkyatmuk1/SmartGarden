@@ -125,7 +125,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/edittext"
-                android:ems="10"
+                android:ems="35"
                 android:colorAccent="@color/blue"
                 android:hint="Type"
                 android:nextFocusDown="@id/pouringLayout"

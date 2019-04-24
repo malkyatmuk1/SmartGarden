@@ -119,7 +119,7 @@ public class View_Plant extends Activity {
             "Solanum Capsicastrum"
     };
     String[] pouringTypes={"daily","weekly","monthly"};
-    String colorString="blue";
+    String colorString="#424CA6";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,7 +131,7 @@ public class View_Plant extends Activity {
         actv= (AutoCompleteTextView)findViewById(R.id.plantType);
         actv.setThreshold(1);//will start working from first character
         actv.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
-        actv.setTextColor(Color.BLUE);
+        actv.setTextColor(Color.parseColor(colorString));
 
 
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>

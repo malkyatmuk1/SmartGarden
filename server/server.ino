@@ -1,3 +1,5 @@
+#include <Ticker.h>
+
 #include <DHTesp.h>
 
 
@@ -51,7 +53,12 @@ byte listofflags[10];
 String str;
 bool flagChangedWifi= true;
 String ip="";
-int pompa=5;
+int pompa=12;
+int flow = 13; 
+volatile unsigned int interruptCounter = 0; 
+int numberOfInterrupts = 0;
+const int pulses_per_litre = 5880;
+unsigned long duration;
 
 //all methods
 vector<String> splitString(String line, char c);
@@ -89,7 +96,11 @@ void setup() {
   pinMode(pin, INPUT); 
   pinMode(EchoPin, INPUT);                    //Set EchoPin as input, to receive measure result from US-015
   pinMode(TrigPin, OUTPUT);
-  pinMode(pompa, OUTPUT);         
+
+  pinMode(pompa, OUTPUT); 
+  pinMode(flow, INPUT); 
+  attachInterrupt(digitalPinToInterrupt(flow), count_pulse, RISING);  
+ 
 
      
  
@@ -140,6 +151,7 @@ Serial.println(password);
 
 void loop()
 { 
+ 
   client=server.available();
   if(ip.length()==0 || flagChangedWifi) {GetExternalIP(ip);flagChangedWifi=false;  Serial.println(ip);}
 
@@ -431,11 +443,24 @@ void loop()
     }
     else if(commands[0]=="water")
     {
-      if(commands[1]=="1")
-     digitalWrite(pompa, HIGH); // sets the digital pin 13 on
-     else           // waits for a second
-     digitalWrite(pompa, LOW);
-    }
+      if(commands[1]=="off")
+      {
+        digitalWrite(pompa, LOW);
+        Serial.println(interruptCounter);
+        double dev= (double)interruptCounter/(double)5880;
+        client.println(dev);
+      }
+      else
+      
+      {
+       
+        digitalWrite(pompa, HIGH);
+        
+        
+                                             
+      }
+     }
+
   }
 /*
 
@@ -453,9 +478,14 @@ void loop()
       Serial.println("mm");                 //output result to Serial monitor
     }
     delay(100);   
-    */                         
+    */  
+   
+        
 }
-
+void count_pulse() 
+{ 
+interruptCounter++; 
+} 
 
 double getHumidityOrTemp(boolean isHumidity)
 {

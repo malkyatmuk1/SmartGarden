@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<item android:title="My information"/>
+    <group android:checkableBehavior="single" android:id="@+id/first">
+
+        <item
+            android:id="@+id/users"
+            android:icon="@drawable/users"
+            android:title="User list"/>
+        <item
+            android:id="@+id/garden_items"
+            android:icon="@drawable/agriculture"
+            android:title="My Garden Items" />
+    </group>
+
+   <item android:title="Other" />
+   <group android:checkableBehavior="single" android:id="@+id/second">
+        <item
+            android:id="@+id/contact_us"
+            android:icon="@drawable/contact"
+            android:title="Contact Us"/>
+        <item
+            android:id="@+id/about_us"
+            android:icon="@drawable/aboutus"
+            android:title="About Us" />
+    </group>
+</menu>

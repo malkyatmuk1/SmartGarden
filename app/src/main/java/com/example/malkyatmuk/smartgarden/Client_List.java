@@ -42,7 +42,6 @@ public class Client_List extends Fragment {
 
                 try
                 {
-
                     Socket clientSocket;
                     clientSocket = new Socket(Global.ip, SERVERPORT);
                     BufferedReader inFromServer ;

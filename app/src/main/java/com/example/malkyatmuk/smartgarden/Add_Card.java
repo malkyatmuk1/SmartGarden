@@ -12,7 +12,10 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -37,18 +40,44 @@ import java.net.Socket;
 
 
 public class Add_Card extends AppCompatActivity {
-    EditText name,pouring;
+    EditText name,ipPlant;
     Button newCard;
-
+    AutoCompleteTextView typePlant;
+    CheckBox ipMatch;
+    String colorString="#424CA6";
+    String[] language ={"C","C++","Java",".NET","iPhone","Android","ASP.NET","PHP"};
+    String[] plantCommonNameEn ={"Amaryllis", "African Violet", "Angel Wing Begonia", "Barberton Daisy", "Beach Spider Lily", "Belladonna Lily", "Bird of Paradise",
+            "Blushing Bromeliad", "Busy Lizzie", "Calla Lily", "Coral Berry", "Corsage Orchid", "Cyclamen Persicum", "Eternal Flame",
+            "False Shamrock", "Flamingo Flower Plant", "Flaming Sword", "Flowering Maple Plant", "Kaffir Lily Plant",
+            "Lollipop Plant", "Lycaste Orchid", "Madagascar Jasmine", "Medusa's Head Plant", "Moth Orchid", "Ornamental Pepper Plant",
+            "Peace Lily", "Poinsettia", "Poison Primrose", "Queens Tears", "Rose of China", "Scarlet Star", "Slipper Orchid", "The One Colored Paphiopedilum Concolor", "Urn Plant", "Winter Cherry"
+    };
+    String[] plantScientificNameEn={"Hippeastrum", "Saintpaulia", "Begonia Coccinea", "Gerbera Jamesonii", "Hymenocallis Littoralis", "Amaryllis Bellandonna", "Strelitzia Reginae",
+            "Neoregelia Carolinae", "Impatiens Walleriana", "Zantedeschia Aethiopica", "Ardisia Crenata", "Cattleya", "Cyclamen Persicum", "Calathea Crocata", "Oxalis Triangularis", "Anthurium scherzerianum",
+            "Vriesea Splendens", "Abutilon Hybridum", "Clivia Miniata", "Pachystachys Lutea", "Lycaste", "Stephanotis Floribunda", "Tillandsia Caput Medusae", "Phalaenopsis", "Capsicum Annuum",
+            "Spathiphyllum Wallisii", "Euphorbia Pulcherrima", "Primula Obconica", "Billbergia Nutans", "Hibiscus Rosa-Sinensis", "Guzmania Lingulata", "Paphiopedilum", "Paphiopedilum Concolor",
+            "Aechmea Fansciata", "Solanum Capsicastrum"
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_card);
 
         name = (EditText) findViewById(R.id.namePlant);
-        pouring = (EditText) findViewById(R.id.pouringTimes);
+        //pouring = (EditText) findViewById(R.id.pouringTimes);
         newCard = (Button) findViewById(R.id.addButton);
         newCard.setOnClickListener(NewCardListener);
+        ipPlant= (EditText) findViewById(R.id.ipPlant);
+        ipMatch=(CheckBox) findViewById(R.id.ipMatch);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (this,android.R.layout.select_dialog_item,plantCommonNameEn);
+        //Getting the instance of AutoCompleteTextView
+        typePlant= (AutoCompleteTextView)findViewById(R.id.plantType);
+        typePlant.setThreshold(1);//will start working from first character
+        typePlant.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
+        typePlant.setTextColor(Color.parseColor(colorString));
+
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -65,9 +94,11 @@ public class Add_Card extends AppCompatActivity {
 
     View.OnClickListener NewCardListener = new View.OnClickListener() {
         public void onClick(final View v) {
-            String value = pouring.getText().toString();
+            //String value = pouring.getText().toString();
             String nameOfPlant=name.getText().toString();
-            if(nameOfPlant.length()!=0 && value.length()!=0) {
+            String typeOfPlant=typePlant.getText().toString();
+
+            /*if(nameOfPlant.length()!=0 && value.length()!=0) {
                 boolean flag = true;
                 for (int i = 0; i < value.length(); i++) {
                     if (value.charAt(i) - '0' >= 0 && value.charAt(i) - '0' <= 9) {
@@ -86,8 +117,29 @@ public class Add_Card extends AppCompatActivity {
                     Global.myPlants.add(pl);
                     finish();
                 }
+            }*/
+            if(ipMatch.isChecked()) {
+                Plants pl = new Plants();
+                pl.namePlant = nameOfPlant;
+                pl.type=typeOfPlant;
+                pl.ipPlant=Global.ip;
+                Global.myPlants.add(pl);
+                finish();
             }
-            finish();
+            else {
+
+                if (ipPlant.getText().toString().length() != 0) {
+                    Plants pl = new Plants();
+                    pl.namePlant = nameOfPlant;
+                    pl.type = typeOfPlant;
+                    pl.ipPlant = ipPlant.getText().toString();
+                    Global.myPlants.add(pl);
+                    finish();
+                }
+                else ipPlant.setHint(
+                        "     must be entered"
+                );
+            }
         }
     };
 }

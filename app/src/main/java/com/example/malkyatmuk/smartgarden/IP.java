@@ -1,6 +1,8 @@
 package com.example.malkyatmuk.smartgarden;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -28,7 +30,6 @@ public class IP extends AppCompatActivity {
         goback.setOnClickListener(gobacklistener);
         apply= (Button) findViewById(R.id.applyIpButton);
         apply.setOnClickListener(apllylistener);
-
     }
     View.OnClickListener gobacklistener=new View.OnClickListener() {
 
@@ -50,6 +51,9 @@ public class IP extends AppCompatActivity {
 
         public void onClick(View view) {
             Global.ip=ip.getText().toString();
+            SharedPreferences sp;
+            sp= getSharedPreferences("login", Context.MODE_PRIVATE);
+            sp.edit().putString("ip",Global.ip).apply();
             Global.setIP(Global.ip,getApplicationContext());
             Toast toast=Toast.makeText(getApplicationContext(),"The IP was set",Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.TOP|Gravity.CENTER, 0, 0);

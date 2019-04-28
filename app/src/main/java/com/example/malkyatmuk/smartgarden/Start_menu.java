@@ -2,7 +2,9 @@ package com.example.malkyatmuk.smartgarden;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
@@ -96,8 +98,12 @@ public class Start_menu<LogoutClickListener> extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         }
     };
+    SharedPreferences sp;
     void func()
     {
+        Global.signedIn=false;
+        sp= getSharedPreferences("login", Context.MODE_PRIVATE);
+        sp.edit().putBoolean("logged",false).apply();
         Intent intent=new Intent(this,SignIn.class);
         startActivity(intent);
         finish();
@@ -107,7 +113,6 @@ public class Start_menu<LogoutClickListener> extends AppCompatActivity
         public boolean onMenuItemClick(MenuItem menuItem) {
 
             func();
-
             //Intent intent = new Intent(,SignIn.class);
             //startActivity(intent);
             //finish();

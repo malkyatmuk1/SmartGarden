@@ -443,6 +443,7 @@ void loop()
     }
     else if(commands[0]=="water")
     {
+
       if(commands[1]=="off")
       {
         digitalWrite(pompa, LOW);
@@ -455,13 +456,11 @@ void loop()
       {
        
         digitalWrite(pompa, HIGH);
-        
-        
-                                             
+                                     
       }
-     }
+     }      
+    }
 
-  }
 /*
 
   

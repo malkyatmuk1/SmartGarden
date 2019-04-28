@@ -22,7 +22,7 @@ public class Global extends Application {
     public static int numberOfPlants;
     public static double humidity=0.0;
     public static double temperature=0.0;
-
+    public static double usedWater=0.0;
 
     public static ArrayList <Plants> myPlants=new ArrayList<Plants>();
     public static ArrayList<String> plants=new ArrayList<String>();
@@ -35,6 +35,7 @@ public class Global extends Application {
     public static String ip="";
     public static String directip="192.168.4.1";
     public static boolean ipsignin=false;
+    public static boolean signedIn=false;
     public static boolean checksignin=false;
     public static boolean checkProgress=false;
     public  static boolean fromView=false;

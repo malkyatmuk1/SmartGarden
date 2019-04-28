@@ -39,7 +39,16 @@
 
                 android:src="@drawable/left_arrow_aqua" />
 
+            <ImageButton
+                android:id="@+id/pouringInfoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="330dp"
+                android:background="@color/aqua"
+                android:paddingRight="10dp"
+                android:src="@drawable/settings" />
         </RelativeLayout>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,19 +58,19 @@
         android:gravity="center_vertical"
 
         >
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:fontFamily="@font/tt_corals_thin_demo"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/tt_corals_thin_demo"
+            android:gravity="center_horizontal"
             android:text="Plant Information"
             android:textAllCaps="true"
             android:textColor="@color/aqua"
             android:textSize="30dp"
-            android:textStyle="bold"
-            android:gravity="center_horizontal"
-        />
+            android:textStyle="bold" />
         <View
             android:layout_width="100dp"
             android:layout_height="2dp"
@@ -98,31 +107,79 @@
         android:hint="Name"
         android:textColorHint="@color/blue"
         android:singleLine="true"
-        android:nextFocusDown="@id/plantPouringTimes"
+        android:nextFocusDown="@id/plantType"
         />
+</android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/typeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColorHint="@color/blue"
+            >
+
+            <AutoCompleteTextView
+                android:id="@+id/plantType"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/edittext"
+                android:ems="35"
+                android:colorAccent="@color/blue"
+                android:hint="Type"
+                android:nextFocusDown="@id/pouringLayout"
+                android:paddingLeft="30dp"
+                android:singleLine="true"
+                android:textColor="@color/aqua"
+                android:textColorHint="@color/aqua"
+                android:textSize="20dp"></AutoCompleteTextView>
     </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
+
+    <LinearLayout
         android:id="@+id/pouringLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
         android:gravity="center"
+        android:layout_marginTop="10dp"
         android:textColorHint="@color/blue"
         >
-    <EditText
-        android:id="@+id/plantPouringTimes"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/edittext"
-        android:paddingLeft="30dp"
-        android:textColor="@color/blue"
-        android:textSize="17dp"
-        android:hint="Pouring times"
-        android:textColorHint="@color/blue"
-        android:singleLine="true"
-        />
-    </android.support.design.widget.TextInputLayout>
+
+        <EditText
+            android:id="@+id/plantPouringTimes"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="left"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edittext"
+            android:paddingLeft="30dp"
+            android:textColor="@color/blue"
+            android:textSize="17dp"
+            android:hint="Pouring times"
+            android:textColorHint="@color/blue"
+            android:singleLine="true"
+            />
+        <AutoCompleteTextView
+            android:id="@+id/pouringType"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/edittext"
+            android:ems="3"
+            android:colorAccent="@color/blue"
+            android:hint="Pouring type"
+            android:nextFocusDown="@id/pouringLayout"
+            android:paddingLeft="30dp"
+            android:singleLine="true"
+            android:textColor="@color/aqua"
+            android:textColorHint="@color/blue"
+            android:textSize="20dp"
+            />
+
+    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -130,7 +187,6 @@
             android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-
             >
 
             <TextView

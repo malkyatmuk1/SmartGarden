@@ -18,8 +18,11 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
@@ -70,8 +73,21 @@ public class Add_Card extends AppCompatActivity {
         newCard = (Button) findViewById(R.id.addButton);
         newCard.setOnClickListener(NewCardListener);
         ipPlant= (EditText) findViewById(R.id.ipPlant);
+        ipPlant.setHint("IP");
         ipMatch=(CheckBox) findViewById(R.id.ipMatch);
-
+        ipMatch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                if(isChecked==true) {
+                    ipPlant.setHint(" ");
+                    ipPlant.setVisibility(View.GONE);
+                }
+                else {
+                    ipPlant.setVisibility(View.VISIBLE);
+                    ipPlant.setHint("IP");
+                }
+            }
+        });
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this,android.R.layout.select_dialog_item,plantCommonNameEn);
         //Getting the instance of AutoCompleteTextView
@@ -93,7 +109,6 @@ public class Add_Card extends AppCompatActivity {
         getWindow().setBackgroundDrawable(drawable);
         getWindow().setLayout((int) (width), (int) (height));
     }
-
     View.OnClickListener NewCardListener = new View.OnClickListener() {
         public void onClick(final View v) {
             //String value = pouring.getText().toString();

@@ -1,5 +1,6 @@
 package com.example.malkyatmuk.smartgarden;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -10,12 +11,14 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -44,6 +47,7 @@ public class View_Plant extends Activity {
     ImageButton backButton,pouringButton;
     AutoCompleteTextView actv,pouringTypeActv;
     Spinner spinner;
+    LinearLayout pour;
     String[] language ={"C","C++","Java",".NET","iPhone","Android","ASP.NET","PHP"};
     String[] plantCommonNameEn ={"Amaryllis", "African Violet", "Angel Wing Begonia", "Barberton Daisy", "Beach Spider Lily", "Belladonna Lily", "Bird of Paradise",
             "Blushing Bromeliad", "Busy Lizzie", "Calla Lily", "Coral Berry", "Corsage Orchid", "Cyclamen Persicum", "Eternal Flame",
@@ -72,13 +76,10 @@ public class View_Plant extends Activity {
         actv.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
         actv.setTextColor(Color.parseColor(colorString));
 
-
-        spinner = (Spinner)findViewById(R.id.spinner);
-        ArrayAdapter<String>adapter2 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item,pouringTypes);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter2);
+        spinner = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> langAdapter = new ArrayAdapter<CharSequence>(this, R.layout.spinner_text, pouringTypes );
+        langAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+        spinner.setAdapter(langAdapter);
         namePlantEditText = (EditText) findViewById(R.id.plantName);
         pouringTimesEditText = (EditText) findViewById(R.id.plantPouringTimes);
         temperatureTextView = (TextView) findViewById(R.id.plantTemperature);

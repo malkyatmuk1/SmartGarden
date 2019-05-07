@@ -133,7 +133,9 @@
                 android:singleLine="true"
                 android:textColor="@color/aqua"
                 android:textColorHint="@color/aqua"
-                android:textSize="20dp"></AutoCompleteTextView>
+                android:textSize="20dp">
+
+            </AutoCompleteTextView>
     </android.support.design.widget.TextInputLayout>
 
     <LinearLayout
@@ -161,19 +163,33 @@
             android:textColorHint="@color/blue"
             android:singleLine="true"
             />
+        <RelativeLayout
 
-        <Spinner
-            android:id="@+id/spinner"
+            android:background="@drawable/edittext"
             android:layout_width="150dp"
             android:layout_height="50dp"
+            android:id="@+id/relativespinner"
+            >
+        <Spinner
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:id="@+id/spinner"
+            android:theme="@style/ThemeOverlay.AppCompat.Light"
             android:hint="Pouring type"
             android:nextFocusDown="@id/pouringLayout"
             android:paddingLeft="30dp"
             android:textColor="@color/aqua"
             android:textColorHint="@color/blue"
+            android:popupTheme="@style/Animation.AppCompat.DropDownUp"
             android:textSize="20dp"
-            android:background="@drawable/edittext"
-            android:spinnerMode="dropdown"/>
+            android:spinnerMode="dropdown"
+            android:overlapAnchor="false"
+            />
+
+    </RelativeLayout>
+
+
+
     </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

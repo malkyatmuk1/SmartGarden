@@ -8,12 +8,15 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AbsoluteLayout;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -49,6 +52,8 @@ public class Add_Card extends AppCompatActivity {
     Button newCard;
     AutoCompleteTextView typePlant;
     CheckBox ipMatch;
+    CardView card;
+    TextInputLayout ip;
     String colorString="#424CA6";
     String[] language ={"C","C++","Java",".NET","iPhone","Android","ASP.NET","PHP"};
     String[] plantCommonNameEn ={"Amaryllis", "African Violet", "Angel Wing Begonia", "Barberton Daisy", "Beach Spider Lily", "Belladonna Lily", "Bird of Paradise",
@@ -68,23 +73,24 @@ public class Add_Card extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_card);
 
+
+        card= (CardView) findViewById(R.id.addCard);
+        ip= (TextInputLayout) findViewById(R.id.ipLayout);
         name = (EditText) findViewById(R.id.namePlant);
         //pouring = (EditText) findViewById(R.id.pouringTimes);
         newCard = (Button) findViewById(R.id.addButton);
         newCard.setOnClickListener(NewCardListener);
         ipPlant= (EditText) findViewById(R.id.ipPlant);
-        ipPlant.setHint("IP");
+
         ipMatch=(CheckBox) findViewById(R.id.ipMatch);
         ipMatch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                 if(isChecked==true) {
-                    ipPlant.setHint(" ");
-                    ipPlant.setVisibility(View.GONE);
+                    ip.setVisibility(View.GONE);
                 }
                 else {
-                    ipPlant.setVisibility(View.VISIBLE);
-                    ipPlant.setHint("IP");
+                    ip.setVisibility(View.VISIBLE);
                 }
             }
         });

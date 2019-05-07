@@ -93,7 +93,7 @@ void setup() {
   Serial.begin(115200);
   WiFi.softAP(ssidAp,passAp);
   EEPROM.begin(512);
-  pinMode(pin, INPUT); 
+  pinMode (A0, INPUT); 
   pinMode(EchoPin, INPUT);                    //Set EchoPin as input, to receive measure result from US-015
   pinMode(TrigPin, OUTPUT);
 
@@ -499,15 +499,15 @@ double getHumidityOrTemp(boolean isHumidity)
 
 double getTemp()
 {
-  double tmp;
+  int tmp;
   double r,temperature,ut, Ri=4530.0, E=1.00;
   
+#define  R0  ((float)10000)
+#define B ((float)3435)
   tmp = analogRead (A0);
-  ut=double(tmp/1024);
-  //Serial.println(tmp);
-  r = (double)(ut*Ri)/(E-ut);
-  //Serial.print("r= ");
- // Serial.println(r);
+ 
+  Serial.println(tmp);
+  r = ((1023.0*R0)/(float)tmp)-R0;
   temperature = B/log(r/0.09919) - 273.15;
   return temperature;
 }

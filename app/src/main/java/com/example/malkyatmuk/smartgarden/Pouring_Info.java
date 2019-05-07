@@ -1,42 +1,24 @@
 package com.example.malkyatmuk.smartgarden;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import com.google.android.gms.common.SignInButton;
-
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.security.SecureRandom;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 
 public class Pouring_Info extends Activity {
@@ -66,6 +48,7 @@ public class Pouring_Info extends Activity {
         setContentView(R.layout.activity_pouring_info);
 
         init();
+
 
         if(autoPouring.isChecked()) {
             new Thread(new Runnable() {
@@ -337,13 +320,17 @@ public class Pouring_Info extends Activity {
                 public void run() {
                     try {
                         clientSocket = new Socket(Global.ip, SERVERPORT);
-
+                        BufferedReader inFromServer;
+                        String line;
                         send="water on";
                         //+pouringTimes.getText().toString()+" 1";//TODO its for daily only
                         DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-                        BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                        inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                       inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                         outToServer.writeBytes(send);
                         outToServer.flush();
+                        line = inFromServer.readLine();
+                        usedWater.setText(line);
                         clientSocket.close();
                         //izprastame na servera: <water> <1(1 za automatic - 0 za ednokratno)> <pouring times> <daily/weekly/monthly(1,2,3)>
                     } catch (IOException e) {
@@ -355,6 +342,7 @@ public class Pouring_Info extends Activity {
         }
     };
 }
+
 
 
 

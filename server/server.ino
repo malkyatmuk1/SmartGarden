@@ -459,6 +459,10 @@ void loop()
                                      
       }
      }      
+    else if(commands[0]=="flowMeter")
+    {
+      client.println((double)interruptCounter/(double)5880);
+    }
     }
 
 /*

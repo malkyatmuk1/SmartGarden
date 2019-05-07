@@ -45,6 +45,7 @@ public class Pouring_Info extends Activity {
     TextView usedWater,nextPouring,pouringTimes;
     Button saveInfoButton;
     String currentTime,pour,pourType;
+    int pourTypeInt;
     private Socket clientSocket;
     String send;
     CheckBox autoPouring;
@@ -95,7 +96,10 @@ public class Pouring_Info extends Activity {
 
             String usedWaterValue = String.valueOf(Global.usedWater);
             pour = String.valueOf(Global.myPlants.get(Global.indexOfPlant).pouring);
-            pourType = Global.myPlants.get(Global.indexOfPlant).pouringType;
+            pourTypeInt = Global.myPlants.get(Global.indexOfPlant).pouringType;
+            if(pourTypeInt==0)pourType="daily";
+            else if(pourTypeInt==1)pourType="weekly";
+            else if(pourTypeInt==2)pourType="monthly";
             String lastPouring = String.valueOf(Global.myPlants.get(Global.indexOfPlant).lastPoured);
             usedWater.setText(usedWaterValue + " l");
             pouringTimes.setText(pour + " pouring times " + pourType);

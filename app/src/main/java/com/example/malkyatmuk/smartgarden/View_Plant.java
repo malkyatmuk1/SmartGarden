@@ -16,6 +16,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.gms.common.SignInButton;
@@ -42,7 +43,7 @@ public class View_Plant extends Activity {
     Button saveInfoButton;
     ImageButton backButton,pouringButton;
     AutoCompleteTextView actv,pouringTypeActv;
-
+    Spinner spinner;
     String[] language ={"C","C++","Java",".NET","iPhone","Android","ASP.NET","PHP"};
     String[] plantCommonNameEn ={
             "Amaryllis",
@@ -134,15 +135,12 @@ public class View_Plant extends Activity {
         actv.setTextColor(Color.parseColor(colorString));
 
 
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>
-                (this,android.R.layout.select_dialog_item,pouringTypes);
-        //Getting the instance of AutoCompleteTextView
-        pouringTypeActv= (AutoCompleteTextView)findViewById(R.id.pouringType);
-        pouringTypeActv.setThreshold(1);//will start working from first character
-        pouringTypeActv.setAdapter(adapter1);//setting the adapter data into the AutoCompleteTextView
-        pouringTypeActv.setTextColor(Color.parseColor(colorString));
+        spinner = (Spinner)findViewById(R.id.spinner);
+        ArrayAdapter<String>adapter2 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item,pouringTypes);
 
-
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter2);
         namePlantEditText = (EditText) findViewById(R.id.plantName);
         pouringTimesEditText = (EditText) findViewById(R.id.plantPouringTimes);
         temperatureTextView = (TextView) findViewById(R.id.plantTemperature);
@@ -159,10 +157,11 @@ public class View_Plant extends Activity {
         String hum=String.valueOf(Global.humidity);
         namePlantEditText.setText(Global.myPlants.get(Global.indexOfPlant).namePlant);
         actv.setText(Global.myPlants.get(Global.indexOfPlant).type);
-        pouringTypeActv.setText(Global.myPlants.get(Global.indexOfPlant).pouringType);
+        spinner.setSelection(Global.myPlants.get(Global.indexOfPlant).pouringType);
         pouringTimesEditText.setText(pour);
         temperatureTextView.setText(temp+" °C");
         humidityTextView.setText(hum+" HD");
+
     }
     View.OnClickListener PouringInfoListener=new View.OnClickListener() {
 
@@ -186,7 +185,7 @@ public class View_Plant extends Activity {
 
         public void onClick(View view) {
             Global.myPlants.get(Global.indexOfPlant).namePlant=namePlantEditText.getText().toString();
-            Global.myPlants.get(Global.indexOfPlant).pouringType=pouringTypeActv.getText().toString();
+            Global.myPlants.get(Global.indexOfPlant).pouringType=spinner.getSelectedItemPosition();
             String s=pouringTimesEditText.getText().toString();
             boolean flag=true;
             for(int i=0;i<s.length();i++)

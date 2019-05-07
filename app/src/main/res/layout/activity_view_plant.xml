@@ -41,12 +41,12 @@
 
             <ImageButton
                 android:id="@+id/pouringInfoButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="330dp"
-                android:background="@color/aqua"
+                android:layout_width="64dp"
+                android:layout_height="57dp"
+                android:layout_marginLeft="300dp"
                 android:paddingRight="10dp"
-                android:src="@drawable/settings" />
+                android:background="#FFFFFF"
+                android:src="@drawable/wateringcan" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -161,24 +161,19 @@
             android:textColorHint="@color/blue"
             android:singleLine="true"
             />
-        <AutoCompleteTextView
-            android:id="@+id/pouringType"
+
+        <Spinner
+            android:id="@+id/spinner"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/edittext"
-            android:ems="3"
-            android:colorAccent="@color/blue"
             android:hint="Pouring type"
             android:nextFocusDown="@id/pouringLayout"
             android:paddingLeft="30dp"
-            android:singleLine="true"
             android:textColor="@color/aqua"
             android:textColorHint="@color/blue"
             android:textSize="20dp"
-            />
-
+            android:background="@drawable/edittext"
+            android:spinnerMode="dropdown"/>
     </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

@@ -43,7 +43,7 @@ public class Pouring_Info extends Activity {
 
     ImageButton backButton;
     TextView usedWater,nextPouring,pouringTimes;
-    Button saveInfoButton;
+    Button Pouringbutton;
     String currentTime,pour,pourType;
     int pourTypeInt;
     private Socket clientSocket;
@@ -55,7 +55,7 @@ public class Pouring_Info extends Activity {
         backButton = (ImageButton) findViewById(R.id.backButtonPouringInfo);
         pouringTimes = (TextView) findViewById(R.id.plantPouringTimes);
         usedWater = (TextView) findViewById(R.id.plantUsedWater);
-        saveInfoButton = (Button) findViewById(R.id.saveInfoPlantInfo);
+        Pouringbutton = (Button) findViewById(R.id.pourButton);
         nextPouring= (TextView) findViewById(R.id.nextPouring);
         autoPouring=(CheckBox)findViewById(R.id.autoPouring);
     }
@@ -145,7 +145,8 @@ public class Pouring_Info extends Activity {
 
             double pouringPeriod = ((double) (24.0 / (Integer.parseInt(pour)))) * 3600;
 
-            if (secondsCurrentTime - secondsLastPoured >= pouringPeriod) {
+            if (secondsCurrentTime - secondsLastPoured >= pouringPeriod)
+            {
                 if (secondsCurrentTime >= 24 * 3600) secondsCurrentTime -= 24 * 3600;
                 int next = (int) pouringPeriod + secondsCurrentTime;
                 if (next >= 24 * 3600) next -= 24 * 3600;
@@ -164,7 +165,7 @@ public class Pouring_Info extends Activity {
                 Global.myPlants.get(Global.indexOfPlant).nextPouring = nextPouringTime;
                 Global.myPlants.get(Global.indexOfPlant).lastPoured = currentTime;
             }
-            saveInfoButton.setOnClickListener(SaveInfoListener);
+            Pouringbutton.setOnClickListener(PouringButtonListener);
         }
         backButton.setOnClickListener(BackButtonListener);
 
@@ -219,11 +220,31 @@ public class Pouring_Info extends Activity {
         Global.myPlants.get(Global.indexOfPlant).nextPouring=nextPouringTime;
         Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
     }
-    View.OnClickListener SaveInfoListener=new View.OnClickListener() {
+    View.OnClickListener PouringButtonListener=new View.OnClickListener() {
 
         public void onClick(View view) {
             Pouring();
-            //TODO polivane
+            new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    try {
+                        clientSocket = new Socket(Global.ip, SERVERPORT);
+
+                        send="water on";
+                        //+pouringTimes.getText().toString()+" 1";//TODO its for daily only
+                        DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+                        BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                        outToServer.writeBytes(send);
+                        outToServer.flush();
+                        clientSocket.close();
+                        //izprastame na servera: <water> <1(1 za automatic - 0 za ednokratno)> <pouring times> <daily/weekly/monthly(1,2,3)>
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+
         }
     };
 }

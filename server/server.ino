@@ -160,6 +160,7 @@ void loop()
     Serial.println("connected to client");
     str=client.readStringUntil('\r\n');
     commands=splitString(str,' ');
+    client.println();
 
     if(commands[0]=="ip") client.println(ip);
     else if(commands[0]=="signup")
@@ -444,12 +445,19 @@ void loop()
     else if(commands[0]=="water")
     {
 
-      if(commands[1]=="off")
+      if(commands[1]=="on")
       {
-        digitalWrite(pompa, LOW);
+       double before=interruptCounter/(double)5880,now=0;
+       do
+       {
+        digitalWrite(pompa, HIGH);
         Serial.println(interruptCounter);
-        double dev= (double)interruptCounter/(double)5880;
-        client.println(dev);
+        now= (double)interruptCounter/(double)5880;
+        
+       }
+       while(before<now-0,1)
+       digitalWrite(pompa, LOW );
+       client.println(now);
       }
       else
       

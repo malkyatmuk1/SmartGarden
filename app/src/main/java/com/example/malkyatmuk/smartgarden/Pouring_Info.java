@@ -44,7 +44,7 @@ public class Pouring_Info extends Activity {
     ImageButton backButton;
     TextView usedWater,nextPouring,pouringTimes;
     Button saveInfoButton;
-    String currentTime,pour,pourType;
+    String currentTime,currentDay,pour,pourType;
     int pourTypeInt;
     private Socket clientSocket;
     String send;
@@ -109,6 +109,10 @@ public class Pouring_Info extends Activity {
             SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
             currentTime = mdformat.format(calendar.getTime());
 
+            SimpleDateFormat day= new SimpleDateFormat("dd:mm:yyyy");
+            currentDay = day.format(calendar.getTime());
+
+
             // last poured->to seconds;
             String lP = Global.myPlants.get(Global.indexOfPlant).lastPoured;
             String c = "" + lP.charAt(0);
@@ -140,9 +144,58 @@ public class Pouring_Info extends Activity {
             secondsCurrentTime += Integer.parseInt(c);
 
             //preminato 24 chasa
-            if (secondsCurrentTime < secondsLastPoured) secondsCurrentTime += 24 * 3600;
-
-
+            if (secondsCurrentTime < secondsLastPoured)
+            {
+                secondsCurrentTime += 24 * 3600;
+                String c0=""+currentDay.charAt(0);
+                String c1=""+currentDay.charAt(1);
+                String c3=""+currentDay.charAt(3);
+                String c4=""+currentDay.charAt(4);
+                String c6=""+currentDay.charAt(6);
+                String c7=""+currentDay.charAt(7);
+                String c8=""+currentDay.charAt(8);
+                String c9=""+currentDay.charAt(9);
+                int dayy=Integer.parseInt(c0)*10+Integer.parseInt(c1);
+                int month=Integer.parseInt(c3)*10+Integer.parseInt(c4);
+                int yearr=Integer.parseInt(c6)*1000+Integer.parseInt(c7)*100+Integer.parseInt(c8)*10+Integer.parseInt(c9);
+                if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12) {
+                    if(dayy==31) {
+                        month++;
+                        dayy=0;
+                        if(month==12)yearr++;
+                    }
+                }
+                else if(month==4 || month==6 || month==9 || month==11){
+                    if(dayy==30) {
+                        month++;
+                        dayy = 0;
+                    }
+                }
+                else if(month==2) {
+                    if(yearr%400==0 || (yearr%4==0 && yearr%100!=0))
+                    {
+                        if(dayy==29){
+                            month++;
+                            dayy=0;
+                        }
+                    }
+                    else
+                    {
+                        if(dayy==28){
+                            month++;
+                            dayy=0;
+                        }
+                    }
+                }
+                dayy++;
+                String dayyS,monthS;
+                if(dayy<10)dayyS="0"+String.valueOf(dayy);
+                else dayyS=String.valueOf(dayy);
+                if(month<10)monthS="0"+String.valueOf(month);
+                else monthS=String.valueOf(month);
+                currentDay=dayyS+":"+monthS+":"+String.valueOf(yearr);
+            }
+            currentDay=" "+currentDay;
             double pouringPeriod = ((double) (24.0 / (Integer.parseInt(pour)))) * 3600;
 
             if (secondsCurrentTime - secondsLastPoured >= pouringPeriod) {
@@ -161,7 +214,7 @@ public class Pouring_Info extends Activity {
                 next -= (next / 10) * 10;
                 nextPouringTime += String.valueOf(next % 10);
                 nextPouring.setText(nextPouringTime);
-                Global.myPlants.get(Global.indexOfPlant).nextPouring = nextPouringTime;
+                Global.myPlants.get(Global.indexOfPlant).nextPouring = nextPouringTime+currentDay;
                 Global.myPlants.get(Global.indexOfPlant).lastPoured = currentTime;
             }
             saveInfoButton.setOnClickListener(SaveInfoListener);
@@ -185,6 +238,8 @@ public class Pouring_Info extends Activity {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
         currentTime = mdformat.format(calendar.getTime());
+        SimpleDateFormat day= new SimpleDateFormat("dd:MM:yyyy");
+        currentDay = day.format(calendar.getTime());
         String lP=currentTime;
         String c="";
         c=""+lP.charAt(0);
@@ -203,7 +258,58 @@ public class Pouring_Info extends Activity {
         double pouringPeriod=((double)(24.0/(Integer.parseInt(pour))))*3600;
 
         int next=(int)pouringPeriod+secondsCurrentTime;
-        if(next>=24*3600)next-=24*3600;
+        if(next>=24*3600)
+        {
+            next-=24*3600;
+            String c0=""+currentDay.charAt(0);
+            String c1=""+currentDay.charAt(1);
+            String c3=""+currentDay.charAt(3);
+            String c4=""+currentDay.charAt(4);
+            String c6=""+currentDay.charAt(6);
+            String c7=""+currentDay.charAt(7);
+            String c8=""+currentDay.charAt(8);
+            String c9=""+currentDay.charAt(9);
+            int dayy=Integer.parseInt(c0)*10+Integer.parseInt(c1);
+            int month=Integer.parseInt(c3)*10+Integer.parseInt(c4);
+            int yearr=Integer.parseInt(c6)*1000+Integer.parseInt(c7)*100+Integer.parseInt(c8)*10+Integer.parseInt(c9);
+            if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12) {
+                if(dayy==31) {
+                    month++;
+                    dayy=0;
+                    if(month==12)yearr++;
+                }
+            }
+            else if(month==4 || month==6 || month==9 || month==11){
+                if(dayy==30) {
+                    month++;
+                    dayy = 0;
+                }
+            }
+            else if(month==2) {
+                if(yearr%400==0 || (yearr%4==0 && yearr%100!=0))
+                {
+                    if(dayy==29){
+                        month++;
+                        dayy=0;
+                    }
+                }
+                else
+                {
+                    if(dayy==28){
+                        month++;
+                        dayy=0;
+                    }
+                }
+            }
+            dayy++;
+
+            String dayyS,monthS;
+            if(dayy<10)dayyS="0"+String.valueOf(dayy);
+            else dayyS=String.valueOf(dayy);
+            if(month<10)monthS="0"+String.valueOf(month);
+            else monthS=String.valueOf(month);
+            currentDay=dayyS+":"+monthS+":"+String.valueOf(yearr);
+        }
         String nextPouringTime=String.valueOf(next/36000);
         next-=(next/36000)*36000;
         nextPouringTime+=String.valueOf(next/3600)+":";
@@ -215,8 +321,8 @@ public class Pouring_Info extends Activity {
         nextPouringTime+=String.valueOf(next/10);
         next-=(next/10)*10;
         nextPouringTime+=String.valueOf(next%10);
-        nextPouring.setText(nextPouringTime);
-        Global.myPlants.get(Global.indexOfPlant).nextPouring=nextPouringTime;
+        nextPouring.setText(nextPouringTime+" ");
+        Global.myPlants.get(Global.indexOfPlant).nextPouring=nextPouringTime+" "+currentDay;
         Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
     }
     View.OnClickListener SaveInfoListener=new View.OnClickListener() {

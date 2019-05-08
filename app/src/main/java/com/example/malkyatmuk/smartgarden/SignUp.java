@@ -59,7 +59,6 @@ public class SignUp extends Activity {
         backButton.setOnClickListener(BackButtonListener);
         signUpButton= (Button) findViewById(R.id.signupButton);
         signUpButton.setOnClickListener(signupButtonListener);
-
     }
     View.OnClickListener IpButtonListener=new View.OnClickListener() {
 

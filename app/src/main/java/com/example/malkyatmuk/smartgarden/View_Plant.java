@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.ConnectivityManager;
@@ -47,6 +48,7 @@ public class View_Plant extends Activity {
     ImageButton backButton,pouringButton;
     AutoCompleteTextView actv,pouringTypeActv;
     Spinner spinner;
+    SharedPreferences sp;
     LinearLayout pour;
     String[] language ={"C","C++","Java",".NET","iPhone","Android","ASP.NET","PHP"};
     String[] plantCommonNameEn ={"Amaryllis", "African Violet", "Angel Wing Begonia", "Barberton Daisy", "Beach Spider Lily", "Belladonna Lily", "Bird of Paradise",
@@ -67,7 +69,7 @@ public class View_Plant extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_plant);
-
+        sp= getSharedPreferences("login",Context.MODE_PRIVATE);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this,android.R.layout.select_dialog_item,plantCommonNameEn);
         //Getting the instance of AutoCompleteTextView
@@ -139,6 +141,27 @@ public class View_Plant extends Activity {
             if(flag==true) Global.myPlants.get(Global.indexOfPlant).pouring= Integer.parseInt(pouringTimesEditText.getText().toString());
             Global.myPlants.get(Global.indexOfPlant).type=actv.getText().toString();
             Global.fromView=true;
+
+            String ss="plantName"+"1";
+            sp.edit().putString(ss,Global.myPlants.get(Global.indexOfPlant).namePlant).apply();
+            ss="plantType"+"1";
+            sp.edit().putString(ss,Global.myPlants.get(Global.indexOfPlant).type).apply();
+            ss="plantPouring"+"1";
+            sp.edit().putInt(ss,Global.myPlants.get(Global.indexOfPlant).pouring).apply();
+            ss="plantIp"+"1";
+            sp.edit().putString(ss,Global.myPlants.get(Global.indexOfPlant).ipPlant).apply();
+            ss="plantLastPoured"+"1";
+            sp.edit().putString(ss,Global.myPlants.get(Global.indexOfPlant).lastPoured).apply();
+            ss="plantNextPouring"+"1";
+            sp.edit().putString(ss,Global.myPlants.get(Global.indexOfPlant).nextPouring).apply();
+            ss="plantPouringType"+"1";
+            sp.edit().putInt(ss,Global.myPlants.get(Global.indexOfPlant).pouringType).apply();
+            ss="plantAutoPouring"+"1";
+            sp.edit().putBoolean(ss,Global.myPlants.get(Global.indexOfPlant).autoPouring).apply();
+            ss="plantLastPouredDay"+"1";
+            sp.edit().putString(ss,Global.myPlants.get(Global.indexOfPlant).lastPouredDay).apply();
+            ss="plantNextPouringDay"+"1";
+            sp.edit().putString(ss,Global.myPlants.get(Global.indexOfPlant).nextPouringDay).apply();
             Intent intent = new Intent(view.getContext(), Start_menu.class);
             startActivity(intent);
             finish();

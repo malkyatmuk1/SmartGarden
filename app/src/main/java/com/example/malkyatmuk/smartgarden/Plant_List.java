@@ -1,5 +1,6 @@
 package com.example.malkyatmuk.smartgarden;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -30,7 +31,6 @@ public class Plant_List extends Fragment {
     Button viewPlant;
     View view;
     GridView listView;
-
     public void readPlants(View view,boolean isProgressbar) {
 
 //        if (isProgressbar) progressBar.setVisibility(View.VISIBLE);
@@ -42,7 +42,7 @@ public class Plant_List extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
         if(Global.permission=='u' || Global.permission=='a'){
-           view  = inflater.inflate(R.layout.fragment_list_of_plants, container, false);
+            view  = inflater.inflate(R.layout.fragment_list_of_plants, container, false);
             listView = (GridView) view.findViewById(R.id.card_listView);
             fab=(FloatingActionButton) view.findViewById(R.id.fab);
             fab.setOnClickListener(FabButtonListener);
@@ -65,6 +65,8 @@ public class Plant_List extends Fragment {
 
 
     }
+
+
     View.OnClickListener FabButtonListener=new View.OnClickListener() {
         @Override
         public void onClick(View view) {

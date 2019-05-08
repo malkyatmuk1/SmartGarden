@@ -32,6 +32,30 @@ public class Start extends AppCompatActivity {
             Global.ip=sp.getString("ip","");
             Global.setIP(Global.ip,getApplicationContext());
             if(sp.getBoolean("logged",false)){
+                Plants pl = new Plants();
+                String ss="plantName"+"1";
+                pl.namePlant = sp.getString(ss,"");
+                ss="plantType"+"1";
+                pl.type=sp.getString(ss,"");
+                ss="plantPouring"+"1";
+                pl.pouring=sp.getInt(ss,1);
+                ss="plantIp"+"1";
+                pl.ipPlant=sp.getString(ss,"");
+                ss="plantLastPoured"+"1";
+                pl.lastPoured=sp.getString(ss,"00:00:00");
+                ss="plantNextPouring"+"1";
+                pl.nextPouring=sp.getString(ss,"Unknown");
+                ss="plantPouringType"+"1";
+                pl.pouringType=sp.getInt(ss,0);
+                ss="plantAutoPouring"+"1";
+                pl.autoPouring=sp.getBoolean(ss,false);
+                ss="plantLastPouredDay"+"1";
+                pl.lastPouredDay=sp.getString(ss,"");
+                ss="plantNextPouringDay"+"1";
+                pl.nextPouringDay=sp.getString(ss,"");
+                if(pl.ipPlant!="")
+                Global.myPlants.add(pl);
+                if(pl.lastPoured.length()==0)pl.lastPoured="00:00:00";
                 Global.username=sp.getString("username","");
                 Global.password=sp.getString("password","");
                 if(sp.getString("permission","").equals("a"))

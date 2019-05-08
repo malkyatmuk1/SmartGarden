@@ -38,8 +38,9 @@ public class Global extends Application {
     public static boolean signedIn=false;
     public static boolean checksignin=false;
     public static boolean checkProgress=false;
-    public  static boolean fromView=false;
+    public static boolean fromView=false;
     public static boolean goback;
+    public static boolean fromDeleteShPr=false;
 
     public static ArrayList<String> users= new ArrayList<String>();
 

@@ -96,7 +96,8 @@ public class Adapter extends BaseAdapter {
 
                 notifyDataSetChanged();
                 mList.remove(position);
-
+                Intent intent = new Intent(mContext, DeleteSharedPreferences.class);
+                mContext.startActivity(intent);
             }
 
         });

@@ -1,6 +1,7 @@
 package com.example.malkyatmuk.smartgarden;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
@@ -31,7 +32,7 @@ public class Adapter_List extends BaseAdapter {
     private ArrayList<String> mList;
     private String[] spliter;
     private String modif;
-
+    SharedPreferences sp;
     public Adapter_List(Context context,ArrayList<String> list){
         mContext=context;
         mList=list;
@@ -67,7 +68,6 @@ public class Adapter_List extends BaseAdapter {
         else {
             holder = (ViewHolder) convertView.getTag();
         }
-
         holder.DelButton.setOnClickListener(new View.OnClickListener() {
 
             @Override

@@ -2,7 +2,9 @@ package com.example.malkyatmuk.smartgarden;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -27,7 +29,7 @@ public class Pouring_Info extends Activity {
     ImageButton backButton;
     TextView usedWater,nextPouring,pouringTimes;
     Button Pouringbutton;
-
+    SharedPreferences sp;
     String currentTime,currentDay,pour,pourType;
     int pourTypeInt;
     private Socket clientSocket;
@@ -36,6 +38,7 @@ public class Pouring_Info extends Activity {
     private static final int SERVERPORT = 3030;
     public void init()
     {
+        sp= getSharedPreferences("login", Context.MODE_PRIVATE);
         backButton = (ImageButton) findViewById(R.id.backButtonPouringInfo);
         backButton.setOnClickListener(BackButtonListener);
         pouringTimes = (TextView) findViewById(R.id.plantPouringTimes);
@@ -53,7 +56,7 @@ public class Pouring_Info extends Activity {
         String lastPouring = String.valueOf(Global.myPlants.get(Global.indexOfPlant).lastPoured);
         usedWater.setText(usedWaterValue + " l");
         pouringTimes.setText(pour + " pouring times " + pourType);
-        nextPouring.setText(Global.myPlants.get(Global.indexOfPlant).nextPouring);
+        nextPouring.setText(Global.myPlants.get(Global.indexOfPlant).nextPouring+" "+Global.myPlants.get(Global.indexOfPlant).nextPouringDay);
         autoPouring.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
@@ -78,11 +81,10 @@ public class Pouring_Info extends Activity {
         else {
             if (!Global.myPlants.get(Global.indexOfPlant).nextPouring.equals("Unknown")) {
 
-
                 Calendar calendar = Calendar.getInstance();
                 SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
                 currentTime = mdformat.format(calendar.getTime());
-                SimpleDateFormat day = new SimpleDateFormat("dd:mm:yyyy");
+                SimpleDateFormat day = new SimpleDateFormat("dd:MM:yyyy");
                 currentDay = day.format(calendar.getTime());
 
                 // last poured->to seconds;
@@ -363,7 +365,7 @@ public class Pouring_Info extends Activity {
             next-=(next/10)*10;
             nextPouringTime+=String.valueOf(next%10);
             nextPouring.setText(nextPouringTime+" "+currentDay);
-            Global.myPlants.get(Global.indexOfPlant).nextPouring=nextPouringTime+" "+currentDay;
+            Global.myPlants.get(Global.indexOfPlant).nextPouring=nextPouringTime;
             Global.myPlants.get(Global.indexOfPlant).nextPouringDay=currentDay;
             Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
             Global.myPlants.get(Global.indexOfPlant).lastPouredDay=currDay;
@@ -480,6 +482,14 @@ public class Pouring_Info extends Activity {
                 Global.myPlants.get(Global.indexOfPlant).lastPouredDay=currDay;
             }
         }
+        String ss="plantLastPoured"+"1";
+        sp.edit().putString(ss,Global.myPlants.get(Global.indexOfPlant).lastPoured).apply();
+        ss="plantNextPouring"+"1";
+        sp.edit().putString(ss,Global.myPlants.get(Global.indexOfPlant).nextPouring).apply();
+        ss="plantLastPouredDay"+"1";
+        sp.edit().putString(ss,Global.myPlants.get(Global.indexOfPlant).lastPouredDay).apply();
+        ss="plantNextPouringDay"+"1";
+        sp.edit().putString(ss,Global.myPlants.get(Global.indexOfPlant).nextPouringDay).apply();
     }
     View.OnClickListener PouringButtonListener=new View.OnClickListener() {
 
@@ -497,7 +507,7 @@ public class Pouring_Info extends Activity {
                         //+pouringTimes.getText().toString()+" 1";//TODO its for daily only
                         DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
                         inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                       inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                        inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                         outToServer.writeBytes(send);
                         outToServer.flush();
                         line = inFromServer.readLine();

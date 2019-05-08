@@ -39,6 +39,7 @@ public class Start_menu<LogoutClickListener> extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_drawer_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -85,7 +86,14 @@ public class Start_menu<LogoutClickListener> extends AppCompatActivity
         MenuItem logoutButton=(MenuItem) navigation.getMenu().findItem(R.id.itemLogout);
 
         logoutButton.setOnMenuItemClickListener(LogoutClickListener);
-
+        if(Global.fromDeleteShPr==true)
+        {
+            Global.fromDeleteShPr=false;
+            Fragment fragment= new Plant_List();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, fragment);
+            ft.commit();
+        }
     }
     View.OnClickListener NewNicknameOrPassword=new View.OnClickListener() {
         @Override

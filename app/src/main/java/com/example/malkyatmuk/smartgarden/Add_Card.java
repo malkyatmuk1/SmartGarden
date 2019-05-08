@@ -54,6 +54,7 @@ public class Add_Card extends AppCompatActivity {
     CheckBox ipMatch;
     CardView card;
     TextInputLayout ip;
+    SharedPreferences sp;
     String colorString="#424CA6";
     String[] language ={"C","C++","Java",".NET","iPhone","Android","ASP.NET","PHP"};
     String[] plantCommonNameEn ={"Amaryllis", "African Violet", "Angel Wing Begonia", "Barberton Daisy", "Beach Spider Lily", "Belladonna Lily", "Bird of Paradise",
@@ -73,7 +74,7 @@ public class Add_Card extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_card);
 
-
+        sp= getSharedPreferences("login",Context.MODE_PRIVATE);
         card= (CardView) findViewById(R.id.addCard);
         ip= (TextInputLayout) findViewById(R.id.ipLayout);
         name = (EditText) findViewById(R.id.namePlant);
@@ -147,6 +148,13 @@ public class Add_Card extends AppCompatActivity {
                 pl.type=typeOfPlant;
                 pl.ipPlant=Global.ip;
                 Global.myPlants.add(pl);
+                String ss="plantName"+"1";
+                sp.edit().putString(ss,pl.namePlant).apply();
+                ss="plantType"+"1";
+                sp.edit().putString(ss,pl.type).apply();
+                ss="plantIp"+"1";
+                sp.edit().putString(ss,pl.ipPlant).apply();
+
                 finish();
             }
             else {
@@ -157,6 +165,12 @@ public class Add_Card extends AppCompatActivity {
                     pl.type = typeOfPlant;
                     pl.ipPlant = ipPlant.getText().toString();
                     Global.myPlants.add(pl);
+                    String ss="plantName"+"1";
+                    sp.edit().putString(ss,pl.namePlant).apply();
+                    ss="plantType"+"1";
+                    sp.edit().putString(ss,pl.type).apply();
+                    ss="plantIp"+"1";
+                    sp.edit().putString(ss,pl.ipPlant).apply();
                     finish();
                 }
                 else ipPlant.setHint(

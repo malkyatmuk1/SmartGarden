@@ -43,7 +43,7 @@ public class Pouring_Info extends Activity {
         Pouringbutton = (Button) findViewById(R.id.pourButton);
         nextPouring= (TextView) findViewById(R.id.nextPouring);
         autoPouring=(CheckBox)findViewById(R.id.autoPouring);
-
+        Pouringbutton.setOnClickListener(PouringButtonListener);
         String usedWaterValue = String.valueOf(Global.usedWater);
         pour = String.valueOf(Global.myPlants.get(Global.indexOfPlant).pouring);
         pourTypeInt = Global.myPlants.get(Global.indexOfPlant).pouringType;
@@ -134,21 +134,17 @@ public class Pouring_Info extends Activity {
                 secondsCurrentTime += Integer.parseInt(c) * 10;
                 c = "" + lP.charAt(7);
                 secondsCurrentTime += Integer.parseInt(c);
-
                 //preminato 24 chasa
-
-
                 if (secondsCurrentTime < secondsLastPoured) secondsCurrentTime += 24 * 3600;
                 if(Global.myPlants.get(Global.indexOfPlant).pouringType==0) {
                     double pouringPeriod = ((double) (24.0 / (Integer.parseInt(pour)))) * 3600;
                     if (secondsCurrentTime - secondsLastPoured >= pouringPeriod) {
                         //TODO alarm
                     }
-                    Pouringbutton.setOnClickListener(PouringButtonListener);
                 }
                 else if(Global.myPlants.get(Global.indexOfPlant).pouringType==1) {
                     if (Global.myPlants.get(Global.indexOfPlant).pouring == 1) {
-                        
+
                     }
                     else if (Global.myPlants.get(Global.indexOfPlant).pouring == 2) {
 
@@ -223,6 +219,56 @@ public class Pouring_Info extends Activity {
             }
         }).start();
     }
+    public void DaysMaintaining(int daysAfter)
+    {
+        String c0=""+currentDay.charAt(0);
+        String c1=""+currentDay.charAt(1);
+        String c3=""+currentDay.charAt(3);
+        String c4=""+currentDay.charAt(4);
+        String c6=""+currentDay.charAt(6);
+        String c7=""+currentDay.charAt(7);
+        String c8=""+currentDay.charAt(8);
+        String c9=""+currentDay.charAt(9);
+        int dayy=Integer.parseInt(c0)*10+Integer.parseInt(c1);
+        int month=Integer.parseInt(c3)*10+Integer.parseInt(c4);
+        int yearr=Integer.parseInt(c6)*1000+Integer.parseInt(c7)*100+Integer.parseInt(c8)*10+Integer.parseInt(c9);
+        dayy+=daysAfter;
+        if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12) {
+            if(dayy>31) {
+                month++;
+                dayy-=31;
+                if(month==12)yearr++;
+            }
+        }
+        else if(month==4 || month==6 || month==9 || month==11){
+            if(dayy>30) {
+                month++;
+                dayy-=30;
+            }
+        }
+        else if(month==2) {
+            if(yearr%400==0 || (yearr%4==0 && yearr%100!=0))
+            {
+                if(dayy>29){
+                    month++;
+                    dayy-=29;
+                }
+            }
+            else
+            {
+                if(dayy>28){
+                    month++;
+                    dayy-=28;
+                }
+            }
+        }
+        String dayyS,monthS;
+        if(dayy<10)dayyS="0"+String.valueOf(dayy);
+        else dayyS=String.valueOf(dayy);
+        if(month<10)monthS="0"+String.valueOf(month);
+        else monthS=String.valueOf(month);
+        currentDay=dayyS+":"+monthS+":"+String.valueOf(yearr);
+    }
     public void Pouring()
     {
         //water 0 (1 za automatic)
@@ -233,6 +279,7 @@ public class Pouring_Info extends Activity {
         currentTime = mdformat.format(calendar.getTime());
         SimpleDateFormat day= new SimpleDateFormat("dd:MM:yyyy");
         currentDay = day.format(calendar.getTime());
+        String currDay=currentDay;
         String lP=currentTime;
         String c="";
         c=""+lP.charAt(0);
@@ -248,75 +295,191 @@ public class Pouring_Info extends Activity {
         c=""+lP.charAt(7);
         secondsCurrentTime+=Integer.parseInt(c);
 
-        double pouringPeriod=((double)(24.0/(Integer.parseInt(pour))))*3600;
 
-        int next=(int)pouringPeriod+secondsCurrentTime;
-        if(next>=24*3600)
-        {
-            next-=24*3600;
-            String c0=""+currentDay.charAt(0);
-            String c1=""+currentDay.charAt(1);
-            String c3=""+currentDay.charAt(3);
-            String c4=""+currentDay.charAt(4);
-            String c6=""+currentDay.charAt(6);
-            String c7=""+currentDay.charAt(7);
-            String c8=""+currentDay.charAt(8);
-            String c9=""+currentDay.charAt(9);
-            int dayy=Integer.parseInt(c0)*10+Integer.parseInt(c1);
-            int month=Integer.parseInt(c3)*10+Integer.parseInt(c4);
-            int yearr=Integer.parseInt(c6)*1000+Integer.parseInt(c7)*100+Integer.parseInt(c8)*10+Integer.parseInt(c9);
-            if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12) {
-                if(dayy==31) {
-                    month++;
-                    dayy=0;
-                    if(month==12)yearr++;
-                }
-            }
-            else if(month==4 || month==6 || month==9 || month==11){
-                if(dayy==30) {
-                    month++;
-                    dayy = 0;
-                }
-            }
-            else if(month==2) {
-                if(yearr%400==0 || (yearr%4==0 && yearr%100!=0))
-                {
-                    if(dayy==29){
+        if(Global.myPlants.get(Global.indexOfPlant).pouringType==0) {
+            double pouringPeriod=((double)(24.0/(Integer.parseInt(pour))))*3600;
+            int next=(int)pouringPeriod+secondsCurrentTime;
+            if(next>=24*3600)
+            {
+                next-=24*3600;
+                currentDay=currDay;
+                String c0=""+currentDay.charAt(0);
+                String c1=""+currentDay.charAt(1);
+                String c3=""+currentDay.charAt(3);
+                String c4=""+currentDay.charAt(4);
+                String c6=""+currentDay.charAt(6);
+                String c7=""+currentDay.charAt(7);
+                String c8=""+currentDay.charAt(8);
+                String c9=""+currentDay.charAt(9);
+                int dayy=Integer.parseInt(c0)*10+Integer.parseInt(c1);
+                int month=Integer.parseInt(c3)*10+Integer.parseInt(c4);
+                int yearr=Integer.parseInt(c6)*1000+Integer.parseInt(c7)*100+Integer.parseInt(c8)*10+Integer.parseInt(c9);
+                if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12) {
+                    if(dayy==31) {
                         month++;
                         dayy=0;
+                        if(month==12)yearr++;
                     }
                 }
-                else
-                {
-                    if(dayy==28){
+                else if(month==4 || month==6 || month==9 || month==11){
+                    if(dayy==30) {
                         month++;
-                        dayy=0;
+                        dayy = 0;
                     }
                 }
+                else if(month==2) {
+                    if(yearr%400==0 || (yearr%4==0 && yearr%100!=0))
+                    {
+                        if(dayy==29){
+                            month++;
+                            dayy=0;
+                        }
+                    }
+                    else
+                    {
+                        if(dayy==28){
+                            month++;
+                            dayy=0;
+                        }
+                    }
+                }
+                dayy++;
+                String dayyS,monthS;
+                if(dayy<10)dayyS="0"+String.valueOf(dayy);
+                else dayyS=String.valueOf(dayy);
+                if(month<10)monthS="0"+String.valueOf(month);
+                else monthS=String.valueOf(month);
+                currentDay=dayyS+":"+monthS+":"+String.valueOf(yearr);
             }
-            dayy++;
-
-            String dayyS,monthS;
-            if(dayy<10)dayyS="0"+String.valueOf(dayy);
-            else dayyS=String.valueOf(dayy);
-            if(month<10)monthS="0"+String.valueOf(month);
-            else monthS=String.valueOf(month);
-            currentDay=dayyS+":"+monthS+":"+String.valueOf(yearr);
+            String nextPouringTime=String.valueOf(next/36000);
+            next-=(next/36000)*36000;
+            nextPouringTime+=String.valueOf(next/3600)+":";
+            next-=(next/3600)*3600;
+            nextPouringTime+=String.valueOf(next/600);
+            next-=(next/600)*600;
+            nextPouringTime+=String.valueOf(next/60)+":";
+            next-=(next/60)*60;
+            nextPouringTime+=String.valueOf(next/10);
+            next-=(next/10)*10;
+            nextPouringTime+=String.valueOf(next%10);
+            nextPouring.setText(nextPouringTime+" "+currentDay);
+            Global.myPlants.get(Global.indexOfPlant).nextPouring=nextPouringTime+" "+currentDay;
+            Global.myPlants.get(Global.indexOfPlant).nextPouringDay=currentDay;
+            Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
+            Global.myPlants.get(Global.indexOfPlant).lastPouredDay=currDay;
         }
-        String nextPouringTime=String.valueOf(next/36000);
-        next-=(next/36000)*36000;
-        nextPouringTime+=String.valueOf(next/3600)+":";
-        next-=(next/3600)*3600;
-        nextPouringTime+=String.valueOf(next/600);
-        next-=(next/600)*600;
-        nextPouringTime+=String.valueOf(next/60)+":";
-        next-=(next/60)*60;
-        nextPouringTime+=String.valueOf(next/10);
-        next-=(next/10)*10;
-        nextPouringTime+=String.valueOf(next%10);
-        nextPouring.setText(nextPouringTime+" ");
-        Global.myPlants.get(Global.indexOfPlant).nextPouring=nextPouringTime+" "+currentDay;
-        Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
+        else if(Global.myPlants.get(Global.indexOfPlant).pouringType==1) {
+            if (Global.myPlants.get(Global.indexOfPlant).pouring == 1) {
+                currentDay=currDay;
+                DaysMaintaining(7);
+                nextPouring.setText(currentTime+" "+currentDay);
+                Global.myPlants.get(Global.indexOfPlant).nextPouring=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).nextPouringDay=currentDay;
+                Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).lastPouredDay=currDay;
+            }
+            else if (Global.myPlants.get(Global.indexOfPlant).pouring == 2) {
+                currentDay=currDay;
+                DaysMaintaining(3);
+                nextPouring.setText(currentTime+" "+currentDay);
+                Global.myPlants.get(Global.indexOfPlant).nextPouring=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).nextPouringDay=currentDay;
+                Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).lastPouredDay=currDay;
+            }
+            else if (Global.myPlants.get(Global.indexOfPlant).pouring == 3) {
+                currentDay=currDay;
+                DaysMaintaining(2);
+                nextPouring.setText(currentTime+" "+currentDay);
+                Global.myPlants.get(Global.indexOfPlant).nextPouring=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).nextPouringDay=currentDay;
+                Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).lastPouredDay=currDay;
+            }
+            else if (Global.myPlants.get(Global.indexOfPlant).pouring == 4) {
+                currentDay=currDay;
+                DaysMaintaining(2);
+                nextPouring.setText(currentTime+" "+currentDay);
+                Global.myPlants.get(Global.indexOfPlant).nextPouring=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).nextPouringDay=currentDay;
+                Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).lastPouredDay=currDay;
+            }
+            else if (Global.myPlants.get(Global.indexOfPlant).pouring == 5) {
+                currentDay=currDay;
+                DaysMaintaining(1);
+                nextPouring.setText(currentTime+" "+currentDay);
+                Global.myPlants.get(Global.indexOfPlant).nextPouring=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).nextPouringDay=currentDay;
+                Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).lastPouredDay=currDay;
+            }
+            else if (Global.myPlants.get(Global.indexOfPlant).pouring == 6) {
+                currentDay=currDay;
+                DaysMaintaining(1);
+                nextPouring.setText(currentTime+" "+currentDay);
+                Global.myPlants.get(Global.indexOfPlant).nextPouring=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).nextPouringDay=currentDay;
+                Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).lastPouredDay=currDay;
+            }
+        }
+        else if(Global.myPlants.get(Global.indexOfPlant).pouringType==2) {
+            if (Global.myPlants.get(Global.indexOfPlant).pouring == 1) {
+                currentDay=currDay;
+                DaysMaintaining(30);
+                nextPouring.setText(currentTime+" "+currentDay);
+                Global.myPlants.get(Global.indexOfPlant).nextPouring=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).nextPouringDay=currentDay;
+                Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).lastPouredDay=currDay;
+            }
+            else if (Global.myPlants.get(Global.indexOfPlant).pouring == 2) {
+                currentDay=currDay;
+                DaysMaintaining(15);
+                nextPouring.setText(currentTime+" "+currentDay);
+                Global.myPlants.get(Global.indexOfPlant).nextPouring=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).nextPouringDay=currentDay;
+                Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).lastPouredDay=currDay;
+            }
+            else if (Global.myPlants.get(Global.indexOfPlant).pouring == 3) {
+                currentDay=currDay;
+                DaysMaintaining(10);
+                nextPouring.setText(currentTime+" "+currentDay);
+                Global.myPlants.get(Global.indexOfPlant).nextPouring=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).nextPouringDay=currentDay;
+                Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).lastPouredDay=currDay;
+            }
+            else if (Global.myPlants.get(Global.indexOfPlant).pouring == 4) {
+                currentDay=currDay;
+                DaysMaintaining(8);
+                nextPouring.setText(currentTime+" "+currentDay);
+                Global.myPlants.get(Global.indexOfPlant).nextPouring=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).nextPouringDay=currentDay;
+                Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).lastPouredDay=currDay;
+            }
+            else if (Global.myPlants.get(Global.indexOfPlant).pouring == 5) {
+                currentDay=currDay;
+                DaysMaintaining(6);
+                nextPouring.setText(currentTime+" "+currentDay);
+                Global.myPlants.get(Global.indexOfPlant).nextPouring=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).nextPouringDay=currentDay;
+                Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).lastPouredDay=currDay;
+            }
+            else if (Global.myPlants.get(Global.indexOfPlant).pouring == 6) {
+                currentDay=currDay;
+                DaysMaintaining(5);
+                nextPouring.setText(currentTime+" "+currentDay);
+                Global.myPlants.get(Global.indexOfPlant).nextPouring=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).nextPouringDay=currentDay;
+                Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
+                Global.myPlants.get(Global.indexOfPlant).lastPouredDay=currDay;
+            }
+        }
     }
     View.OnClickListener PouringButtonListener=new View.OnClickListener() {
 

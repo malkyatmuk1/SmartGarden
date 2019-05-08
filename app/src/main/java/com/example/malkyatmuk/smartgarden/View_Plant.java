@@ -121,7 +121,6 @@ public class View_Plant extends Activity {
         }
     };
     View.OnClickListener SaveInfoListener=new View.OnClickListener() {
-
         public void onClick(View view) {
             Global.myPlants.get(Global.indexOfPlant).namePlant=namePlantEditText.getText().toString();
             Global.myPlants.get(Global.indexOfPlant).pouringType=spinner.getSelectedItemPosition();

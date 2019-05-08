@@ -160,9 +160,7 @@ void loop()
     Serial.println("connected to client");
     str=client.readStringUntil('\r\n');
     commands=splitString(str,' ');
-    client.println();
-
-    if(commands[0]=="ip") client.println(ip);
+      if(commands[0]=="ip") client.println(ip);
     else if(commands[0]=="signup")
     {
 
@@ -447,23 +445,21 @@ void loop()
 
       if(commands[1]=="on")
       {
-       double before=interruptCounter/(double)5880,now=0;
-       do
-       {
-        digitalWrite(pompa, HIGH);
-        Serial.println(interruptCounter);
-        now= (double)interruptCounter/(double)5880;
-        
-       }
-       while(before<now-0,1)
+      
+      double now;
+     
+       digitalWrite(pompa, HIGH);
+      delay(8000);
+      
        digitalWrite(pompa, LOW );
+       now=interruptCounter/(double)5880;
        client.println(now);
       }
       else
       
       {
        
-        digitalWrite(pompa, HIGH);
+        digitalWrite(pompa, LOW);
                                      
       }
      }      

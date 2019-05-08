@@ -482,13 +482,14 @@ public class Pouring_Info extends Activity {
                 Global.myPlants.get(Global.indexOfPlant).lastPouredDay=currDay;
             }
         }
-        String ss="plantLastPoured"+"1";
+        String indx=String.valueOf(Global.indexOfPlant);
+        String ss="plantLastPoured"+indx;
         sp.edit().putString(ss,Global.myPlants.get(Global.indexOfPlant).lastPoured).apply();
-        ss="plantNextPouring"+"1";
+        ss="plantNextPouring"+indx;
         sp.edit().putString(ss,Global.myPlants.get(Global.indexOfPlant).nextPouring).apply();
-        ss="plantLastPouredDay"+"1";
+        ss="plantLastPouredDay"+indx;
         sp.edit().putString(ss,Global.myPlants.get(Global.indexOfPlant).lastPouredDay).apply();
-        ss="plantNextPouringDay"+"1";
+        ss="plantNextPouringDay"+indx;
         sp.edit().putString(ss,Global.myPlants.get(Global.indexOfPlant).nextPouringDay).apply();
     }
     View.OnClickListener PouringButtonListener=new View.OnClickListener() {

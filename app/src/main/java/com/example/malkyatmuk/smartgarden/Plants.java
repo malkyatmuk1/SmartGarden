@@ -17,6 +17,7 @@ public  class Plants{
     public  double usedWater;
     public  boolean inside;
     public  boolean autoPouring;
+    public  int index;
     Plants()
     {
         namePlant="";
@@ -33,6 +34,7 @@ public  class Plants{
         autoPouring=false;
         lastPouredDay="";
         nextPouringDay="";
+        index=10;
     }
     public String getName() {
         return namePlant;

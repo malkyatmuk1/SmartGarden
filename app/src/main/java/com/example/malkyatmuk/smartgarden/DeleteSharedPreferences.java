@@ -11,25 +11,27 @@ public class DeleteSharedPreferences extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sp = getSharedPreferences("login", Context.MODE_PRIVATE);
-        String ss="plantName"+"1";
+
+        String indx=String.valueOf(Global.toDelete);
+        String ss="plantName"+indx;
         sp.edit().remove(ss).commit();
-        ss="plantType"+"1";
+        ss="plantType"+indx;
         sp.edit().remove(ss).commit();
-        ss="plantPouring"+"1";
+        ss="plantPouring"+indx;
         sp.edit().remove(ss).commit();
-        ss="plantIp"+"1";
+        ss="plantIp"+indx;
         sp.edit().remove(ss).commit();
-        ss="plantLastPoured"+"1";
+        ss="plantLastPoured"+indx;
         sp.edit().remove(ss).commit();
-        ss="plantNextPouring"+"1";
+        ss="plantNextPouring"+indx;
         sp.edit().remove(ss).commit();
-        ss="plantPouringType"+"1";
+        ss="plantPouringType"+indx;
         sp.edit().remove(ss).commit();
-        ss="plantAutoPouring"+"1";
+        ss="plantAutoPouring"+indx;
         sp.edit().remove(ss).commit();
-        ss="plantLastPouredDay"+"1";
+        ss="plantLastPouredDay"+indx;
         sp.edit().remove(ss).commit();
-        ss="plantNextPouringDay"+"1";
+        ss="plantNextPouringDay"+indx;
         sp.edit().remove(ss).commit();
         Global.fromDeleteShPr=true;
         Intent intent = new Intent(getApplicationContext(), Start_menu.class);

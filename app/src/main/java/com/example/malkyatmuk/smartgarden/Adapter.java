@@ -93,7 +93,7 @@ public class Adapter extends BaseAdapter {
 
             @Override
             public void onClick(View v) {
-
+                Global.toDelete=Global.myPlants.get(position).index;
                 notifyDataSetChanged();
                 mList.remove(position);
                 Intent intent = new Intent(mContext, DeleteSharedPreferences.class);

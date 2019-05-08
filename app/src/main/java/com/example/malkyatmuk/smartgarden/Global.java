@@ -23,7 +23,7 @@ public class Global extends Application {
     public static double humidity=0.0;
     public static double temperature=0.0;
     public static double usedWater=0.0;
-
+    public static int toDelete=0;
     public static ArrayList <Plants> myPlants=new ArrayList<Plants>();
     public static ArrayList<String> plants=new ArrayList<String>();
     public static double longetudeHome=0;

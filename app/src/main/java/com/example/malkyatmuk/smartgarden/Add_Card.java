@@ -144,33 +144,62 @@ public class Add_Card extends AppCompatActivity {
             }*/
             if(ipMatch.isChecked()) {
                 Plants pl = new Plants();
+                int indexFinal=-1;
+                int[] indexes={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+                for(int i=0;i<Global.myPlants.size();i++) {
+                    indexes[Global.myPlants.get(i).index] =1;
+                }
+                for(int i=0;i<20;i++)
+                {
+                    if(indexes[i]==1)indexFinal=i;
+                    else break;
+                }
+                indexFinal++;
                 pl.namePlant = nameOfPlant;
                 pl.type=typeOfPlant;
                 pl.ipPlant=Global.ip;
+                pl.index=indexFinal;
                 Global.myPlants.add(pl);
-                String ss="plantName"+"1";
+                String indx=String.valueOf(indexFinal);
+                String ss="plantName"+indx;
                 sp.edit().putString(ss,pl.namePlant).apply();
-                ss="plantType"+"1";
+                ss="plantType"+indx;
                 sp.edit().putString(ss,pl.type).apply();
-                ss="plantIp"+"1";
+                ss="plantIp"+indx;
                 sp.edit().putString(ss,pl.ipPlant).apply();
-
+                ss="plantIndex"+indx;
+                sp.edit().putInt(ss,pl.index).apply();
                 finish();
             }
             else {
 
                 if (ipPlant.getText().toString().length() != 0) {
                     Plants pl = new Plants();
+                    int indexFinal=-1;
+                    int[] indexes={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+                    for(int i=0;i<Global.myPlants.size();i++) {
+                        indexes[Global.myPlants.get(i).index] =1;
+                    }
+                    for(int i=0;i<20;i++)
+                    {
+                        if(indexes[i]==1)indexFinal=i;
+                        else break;
+                    }
+                    indexFinal++;
                     pl.namePlant = nameOfPlant;
                     pl.type = typeOfPlant;
                     pl.ipPlant = ipPlant.getText().toString();
+                    pl.index=indexFinal;
                     Global.myPlants.add(pl);
-                    String ss="plantName"+"1";
+                    String indx=String.valueOf(indexFinal);
+                    String ss="plantName"+indx;
                     sp.edit().putString(ss,pl.namePlant).apply();
-                    ss="plantType"+"1";
+                    ss="plantType"+indx;
                     sp.edit().putString(ss,pl.type).apply();
-                    ss="plantIp"+"1";
+                    ss="plantIp"+indx;
                     sp.edit().putString(ss,pl.ipPlant).apply();
+                    ss="plantIndex"+indx;
+                    sp.edit().putInt(ss,pl.index).apply();
                     finish();
                 }
                 else ipPlant.setHint(

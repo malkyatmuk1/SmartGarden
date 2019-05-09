@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -61,7 +62,7 @@ public class Adapter_List extends BaseAdapter {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.list_item, parent, false);
             holder.textView = (TextView) convertView.findViewById(R.id.name);
-            holder.DelButton = (Button) convertView.findViewById(R.id.delete);
+            holder.DelButton = (ImageButton) convertView.findViewById(R.id.delete);
             holder.switchP = (Switch) convertView.findViewById(R.id.switchPerm);
             convertView.setTag(holder);
         }
@@ -184,7 +185,7 @@ public class Adapter_List extends BaseAdapter {
 
     class ViewHolder{
         TextView textView;
-        Button DelButton;
+        ImageButton DelButton;
         Switch switchP;
     }
 }

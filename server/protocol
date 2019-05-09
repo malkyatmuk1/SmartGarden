@@ -47,3 +47,9 @@ return:
 setWifi ssid password adminusername adminpass
 return nothing
 --------------------------
+water on
+return liters
+--------------------------
+flowMeter
+return liters
+--------------------------

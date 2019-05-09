@@ -68,10 +68,11 @@
                     android:layout_marginTop="15dp"
                     android:background="@drawable/edittext"
                     android:paddingLeft="15dp"
-                    android:textColor="@color/aqua"
+                    android:textColorHint="@color/greyText"
+                    android:textColor="@color/greyText"
                     android:textSize="15dp"
                     android:hint="Type"
-                    android:textColorHint="@color/aqua"
+
                     android:singleLine="true"
                     android:ems="10">
                 </AutoCompleteTextView>

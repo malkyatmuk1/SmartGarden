@@ -96,8 +96,8 @@ public class Adapter extends BaseAdapter {
                 Global.toDelete=Global.myPlants.get(position).index;
                 notifyDataSetChanged();
                 mList.remove(position);
-                Intent intent = new Intent(mContext, DeleteSharedPreferences.class);
-                mContext.startActivity(intent);
+
+                new DeleteSharedPreferences().execute(mContext);
             }
 
         });

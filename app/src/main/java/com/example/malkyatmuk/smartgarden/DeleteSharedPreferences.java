@@ -4,37 +4,47 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 
-public class DeleteSharedPreferences extends Activity {
-    SharedPreferences sp;
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        sp = getSharedPreferences("login", Context.MODE_PRIVATE);
+public class DeleteSharedPreferences extends AsyncTask<Context, Void, Void> {
+
+     @Override
+    protected Void doInBackground(Context... params) {
+         SharedPreferences sp;
+         Context context = params[0];
+         SharedPreferences prefs =
+                 context.getSharedPreferences("login", Context.MODE_PRIVATE);
+
+         String myBackgroundPreference = prefs.getString("preference name", "default value");
 
         String indx=String.valueOf(Global.toDelete);
         String ss="plantName"+indx;
-        sp.edit().remove(ss).commit();
+        prefs.edit().remove(ss).apply();
         ss="plantType"+indx;
-        sp.edit().remove(ss).commit();
+        prefs.edit().remove(ss).apply();
         ss="plantPouring"+indx;
-        sp.edit().remove(ss).commit();
+         prefs.edit().remove(ss).apply();
         ss="plantIp"+indx;
-        sp.edit().remove(ss).commit();
+         prefs.edit().remove(ss).apply();
         ss="plantLastPoured"+indx;
-        sp.edit().remove(ss).commit();
+         prefs.edit().remove(ss).apply();
         ss="plantNextPouring"+indx;
-        sp.edit().remove(ss).commit();
+         prefs.edit().remove(ss).apply();
         ss="plantPouringType"+indx;
-        sp.edit().remove(ss).commit();
+         prefs.edit().remove(ss).apply();
         ss="plantAutoPouring"+indx;
-        sp.edit().remove(ss).commit();
+         prefs.edit().remove(ss).apply();
         ss="plantLastPouredDay"+indx;
-        sp.edit().remove(ss).commit();
+         prefs.edit().remove(ss).apply();
         ss="plantNextPouringDay"+indx;
-        sp.edit().remove(ss).commit();
+         prefs.edit().remove(ss).apply();
+
+
         Global.fromDeleteShPr=true;
-        Intent intent = new Intent(getApplicationContext(), Start_menu.class);
-        startActivity(intent);
+        return null;
     }
+
+
 }

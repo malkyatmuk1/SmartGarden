@@ -13,8 +13,10 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import java.io.BufferedReader;
@@ -25,54 +27,104 @@ import java.net.Socket;
 
 public class Plant_List extends Fragment {
 
-    String[] gen=new String[]{"There are no other users!"};
-    ProgressBar progressBar;
+    String[] gen = new String[]{"There are no plants!~"};
+    //ProgressBar progressBar;
     FloatingActionButton fab;
     Button viewPlant;
     View view;
     GridView listView;
-    public void readPlants(View view,boolean isProgressbar) {
+    Adapter adapter;
 
-//        if (isProgressbar) progressBar.setVisibility(View.VISIBLE);
+    public void readPlants(View view, boolean isProgressbar) {
+
+        final GridView gridView = (GridView) view.findViewById(R.id.card_listView);
+       // progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+    //    if (isProgressbar) progressBar.setVisibility(View.VISIBLE);
+        Global.users.clear();
         final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        class LongOperationRestart extends AsyncTask<String, Void, Void> {
+            private static final int SERVERPORT = 3030;
+            private String SERVER_IP;
+            private Socket clientSocket;
+
+
+            @Override
+            protected void onPostExecute(Void result) {
+            //    progressBar.setVisibility(View.GONE);
+                ArrayAdapter mAdapter_List;
+                if (Global.myPlants.isEmpty()) {
+                    mAdapter_List = new ArrayAdapter(getContext(), R.layout.listview_general, R.id.name_general, gen);
+                    gridView.setAdapter(mAdapter_List);
+                    mAdapter_List.notifyDataSetChanged();
+                } else {
+                   Adapter adapter = new Adapter(getContext(), Global.myPlants);
+                    listView.setAdapter(adapter);
+
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            protected Void doInBackground(String... strings) {
+                return null;
+            }
+
+            @Override
+            protected void onPreExecute() {
+            }
+
+            @Override
+            protected void onProgressUpdate(Void... values) {
+            }
+        }
+        new LongOperationRestart().execute("");
+
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState){
-        if(Global.permission=='u' || Global.permission=='a'){
-            view  = inflater.inflate(R.layout.fragment_list_of_plants, container, false);
+                             @Nullable Bundle savedInstanceState) {
+        if (Global.permission == 'u' || Global.permission == 'a') {
+            view = inflater.inflate(R.layout.fragment_list_of_plants, container, false);
             listView = (GridView) view.findViewById(R.id.card_listView);
-            fab=(FloatingActionButton) view.findViewById(R.id.fab);
+            fab = (FloatingActionButton) view.findViewById(R.id.fab);
             fab.setOnClickListener(FabButtonListener);
             //progressBar=(ProgressBar) view.findViewById(R.id.progressBar);
-            readPlants(view,false);
-            Global.fromView=false;
+            readPlants(view, false);
+            Global.fromView = false;
 
 
-            Adapter adapter = new Adapter(getContext(),Global.myPlants);
+           adapter = new Adapter(getContext(), Global.myPlants);
             listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
             new LongOperation().execute("");
+
             return view;
-                       }
-        else
-        {
-             view = inflater.inflate(R.layout.fragment_users_nopermission, container, false);
+        } else {
+            view = inflater.inflate(R.layout.fragment_users_nopermission, container, false);
             return view;
         }
 
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        readPlants(view,false);
+        adapter.notifyDataSetChanged();
+    }
 
-    View.OnClickListener FabButtonListener=new View.OnClickListener() {
+    View.OnClickListener FabButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            startActivity(new Intent(view.getContext(),Add_Card.class));
+
+            startActivityForResult(new Intent(view.getContext(), Add_Card.class), 0);
+
         }
     };
+
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -86,12 +138,14 @@ public class Plant_List extends Fragment {
                 @Override
                 public void onRefresh() {
                     readPlants(view, false);
+
                     sr.setRefreshing(false);
                 }
             });
 
         }
     }
+
     class LongOperation extends AsyncTask<String, Void, Void> {
         private static final int SERVERPORT = 3030;
         private String SERVER_IP;
@@ -111,7 +165,7 @@ public class Plant_List extends Fragment {
                 outToServer.flush();
 
                 line = inFromServer.readLine();
-                Global.humidity=Double.parseDouble(line);
+                Global.humidity = Double.parseDouble(line);
                 clientSocket.close();
 
                 clientSocket = new Socket(Global.ip, SERVERPORT);
@@ -121,7 +175,7 @@ public class Plant_List extends Fragment {
                 outToServer.flush();
 
                 line = inFromServer.readLine();
-                Global.temperature=Double.parseDouble(line);
+                Global.temperature = Double.parseDouble(line);
                 clientSocket.close();
 
 

@@ -24,13 +24,19 @@
         android:layout_weight="10"
         >
 
+
     </RelativeLayout>
+
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="right"
         >
+
+
+
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"

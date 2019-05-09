@@ -101,7 +101,7 @@ public class Add_Card extends AppCompatActivity {
         typePlant= (AutoCompleteTextView)findViewById(R.id.plantType);
         typePlant.setThreshold(1);//will start working from first character
         typePlant.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
-        typePlant.setTextColor(Color.parseColor(colorString));
+        adapter.notifyDataSetChanged();
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -170,6 +170,7 @@ public class Add_Card extends AppCompatActivity {
                 ss="plantIndex"+indx;
                 sp.edit().putInt(ss,pl.index).apply();
                 finish();
+
             }
             else {
 
@@ -191,6 +192,7 @@ public class Add_Card extends AppCompatActivity {
                     pl.ipPlant = ipPlant.getText().toString();
                     pl.index=indexFinal;
                     Global.myPlants.add(pl);
+
                     String indx=String.valueOf(indexFinal);
                     String ss="plantName"+indx;
                     sp.edit().putString(ss,pl.namePlant).apply();
@@ -200,12 +202,15 @@ public class Add_Card extends AppCompatActivity {
                     sp.edit().putString(ss,pl.ipPlant).apply();
                     ss="plantIndex"+indx;
                     sp.edit().putInt(ss,pl.index).apply();
+
                     finish();
                 }
                 else ipPlant.setHint(
                         "     must be entered"
                 );
             }
+
+
         }
     };
 }

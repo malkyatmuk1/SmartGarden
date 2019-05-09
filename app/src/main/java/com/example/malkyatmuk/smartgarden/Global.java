@@ -34,6 +34,8 @@ public class Global extends Application {
     public static String wifiPassword="";
     public static String ip="";
     public static String directip="192.168.4.1";
+    public static boolean needToBreak=false;
+    public static boolean isItFromAuto=false;
     public static boolean ipsignin=false;
     public static boolean signedIn=false;
     public static boolean checksignin=false;

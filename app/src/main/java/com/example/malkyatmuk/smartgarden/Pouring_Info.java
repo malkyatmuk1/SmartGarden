@@ -62,9 +62,11 @@ public class Pouring_Info extends Activity {
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                 if(isChecked==true) {
                     Global.myPlants.get(Global.indexOfPlant).autoPouring=true;
-                    AutoPouring();
+                    Global.needToBreak=false;
+                    Auto_Pouring();
                 }
                 else {
+                    Global.needToBreak=true;
                     Global.myPlants.get(Global.indexOfPlant).autoPouring=false;
                 }
             }
@@ -77,7 +79,7 @@ public class Pouring_Info extends Activity {
 
         init();
 
-        if(Global.myPlants.get(Global.indexOfPlant).autoPouring==true)AutoPouring();
+        if(Global.myPlants.get(Global.indexOfPlant).autoPouring==true)Auto_Pouring();
         else {
             if (!Global.myPlants.get(Global.indexOfPlant).nextPouring.equals("Unknown")) {
 
@@ -194,33 +196,6 @@ public class Pouring_Info extends Activity {
             finish();
         }
     };
-    public void AutoPouring()
-    {
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    clientSocket = new Socket(Global.ip, SERVERPORT);
-
-                    send="water 1 "+pouringTimes.getText().toString()+" 1";//TODO its for daily only
-                    DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-                    BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                    outToServer.writeBytes(send);
-                    outToServer.flush();
-                        /*OutputStreamWriter os=new OutputStreamWriter(clientSocket.getOutputStream());
-                        PrintWriter out=new PrintWriter(os);
-                        out.write(send);
-                        os.flush();*/
-
-                    clientSocket.close();
-                    //izprastame na servera: <water> <1(1 za automatic - 0 za ednokratno)> <pouring times> <daily/weekly/monthly(1,2,3)>
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
     public void DaysMaintaining(int daysAfter)
     {
         String c0=""+currentDay.charAt(0);
@@ -364,7 +339,7 @@ public class Pouring_Info extends Activity {
             nextPouringTime+=String.valueOf(next/10);
             next-=(next/10)*10;
             nextPouringTime+=String.valueOf(next%10);
-            nextPouring.setText(nextPouringTime+" "+currentDay);
+            if(Global.isItFromAuto==false)nextPouring.setText(nextPouringTime+" "+currentDay);
             Global.myPlants.get(Global.indexOfPlant).nextPouring=nextPouringTime;
             Global.myPlants.get(Global.indexOfPlant).nextPouringDay=currentDay;
             Global.myPlants.get(Global.indexOfPlant).lastPoured=currentTime;
@@ -491,40 +466,82 @@ public class Pouring_Info extends Activity {
         sp.edit().putString(ss,Global.myPlants.get(Global.indexOfPlant).lastPouredDay).apply();
         ss="plantNextPouringDay"+indx;
         sp.edit().putString(ss,Global.myPlants.get(Global.indexOfPlant).nextPouringDay).apply();
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    clientSocket = new Socket(Global.ip, SERVERPORT);
+                    BufferedReader inFromServer;
+                    String line;
+                    send="water on";
+                    //+pouringTimes.getText().toString()+" 1";//TODO its for daily only
+                    DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+                    inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                    inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                    outToServer.writeBytes(send);
+                    outToServer.flush();
+                    line = inFromServer.readLine();
+                    //usedWater.setText(line);
+                    clientSocket.close();
+                    //izprastame na servera: <water> <1(1 za automatic - 0 za ednokratno)> <pouring times> <daily/weekly/monthly(1,2,3)>
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
-    View.OnClickListener PouringButtonListener=new View.OnClickListener() {
+    public void Auto_Pouring()
+    {
+        class AutoPouring1 extends AsyncTask<Context, Void, Void> {
+            private static final int SERVERPORT = 3030;
+            private String SERVER_IP;
+            private Socket clientSocket;
+            String currentTime, currentDay, dayNow;
 
-        public void onClick(View view) {
-            Pouring();
-            new Thread(new Runnable() {
-
-                @Override
-                public void run() {
-                    try {
-                        clientSocket = new Socket(Global.ip, SERVERPORT);
-                        BufferedReader inFromServer;
-                        String line;
-                        send="water on";
-                        //+pouringTimes.getText().toString()+" 1";//TODO its for daily only
-                        DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-                        inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                        inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                        outToServer.writeBytes(send);
-                        outToServer.flush();
-                        line = inFromServer.readLine();
-                        usedWater.setText(line);
-                        clientSocket.close();
-                        //izprastame na servera: <water> <1(1 za automatic - 0 za ednokratno)> <pouring times> <daily/weekly/monthly(1,2,3)>
-                    } catch (IOException e) {
-                        e.printStackTrace();
+            @SuppressLint("WrongThread")
+            @Override
+            protected Void doInBackground(Context... params) {
+                for (; ; ) {
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
+                    String cTime = mdformat.format(calendar.getTime());
+                    SimpleDateFormat day = new SimpleDateFormat("dd:MM:yyyy");
+                    String cDay = day.format(calendar.getTime());
+                    for (int i = 0; i < Global.myPlants.size(); i++) {
+                        dayNow = "";
+                        if (Global.myPlants.get(i).nextPouringDay.equals(cDay)) {
+                            dayNow = Global.myPlants.get(i).nextPouring;
+                            boolean flag = true;
+                            for (int j = 0; j < dayNow.length(); j++) {
+                                if (dayNow.charAt(j) > cTime.charAt(j)) {
+                                    flag = false;
+                                    break;
+                                }
+                                if (dayNow.charAt(j) < cTime.charAt(j)) {
+                                    break;
+                                }
+                            }
+                            if (flag == true) {
+                                Global.isItFromAuto=true;
+                                Pouring();
+                            }
+                        }
+                    }
+                    if(Global.needToBreak==true)
+                    {
+                        break;
                     }
                 }
-            }).start();
-
+                return null;
+            }
+        }
+        new AutoPouring1().execute(this);
+    }
+    View.OnClickListener PouringButtonListener=new View.OnClickListener() {
+        public void onClick(View view) {
+            Global.isItFromAuto=false;
+            Pouring();
         }
     };
 }
-
-
-
-

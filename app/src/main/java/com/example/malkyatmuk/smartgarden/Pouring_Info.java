@@ -46,6 +46,14 @@ public class Pouring_Info extends Activity {
         Pouringbutton = (Button) findViewById(R.id.pourButton);
         nextPouring= (TextView) findViewById(R.id.nextPouring);
         autoPouring=(CheckBox)findViewById(R.id.autoPouring);
+        if(Global.myPlants.get(Global.indexOfPlant).autoPouring==true)
+        {
+            autoPouring.setChecked(true);
+        }
+        else
+        {
+            autoPouring.setChecked(false);
+        }
         Pouringbutton.setOnClickListener(PouringButtonListener);
         String usedWaterValue = String.valueOf(Global.usedWater);
         pour = String.valueOf(Global.myPlants.get(Global.indexOfPlant).pouring);
@@ -63,11 +71,15 @@ public class Pouring_Info extends Activity {
                 if(isChecked==true) {
                     Global.myPlants.get(Global.indexOfPlant).autoPouring=true;
                     Global.needToBreak=false;
+                    String ss="plantAutoPouring"+String.valueOf(Global.myPlants.get(Global.indexOfPlant).index);
+                    sp.edit().putBoolean(ss,true).apply();
                     Auto_Pouring();
                 }
                 else {
                     Global.needToBreak=true;
                     Global.myPlants.get(Global.indexOfPlant).autoPouring=false;
+                    String ss="plantAutoPouring"+String.valueOf(Global.myPlants.get(Global.indexOfPlant).index);
+                    sp.edit().putBoolean(ss,false).apply();
                 }
             }
         });

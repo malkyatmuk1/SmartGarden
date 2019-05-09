@@ -494,7 +494,7 @@ public class Pouring_Info extends Activity {
                     outToServer.writeBytes(send);
                     outToServer.flush();
                     line = inFromServer.readLine();
-                    //usedWater.setText(line);
+                    if(Global.isItFromAuto==false)usedWater.setText(line);
                     clientSocket.close();
                     //izprastame na servera: <water> <1(1 za automatic - 0 za ednokratno)> <pouring times> <daily/weekly/monthly(1,2,3)>
                 } catch (IOException e) {

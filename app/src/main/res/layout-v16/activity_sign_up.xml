@@ -13,40 +13,39 @@
         tools:context=".SignUp"
         android:orientation="vertical"
         android:gravity="fill_vertical">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:gravity="top"
-        android:layout_marginTop="10dp">
-        <RelativeLayout
-            android:id="@+id/relativeLayout1"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white">
-            <ImageButton
-                android:id="@+id/backButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="left"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="20dp"
-                android:background="@color/white"
-                android:src="@drawable/left_arrow_aqua" />
-            <ImageButton
-                android:id="@+id/ipButton"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_alignParentRight="true"
-                android:layout_gravity="right"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="40dp"
-                android:background="@color/white"
-                android:foregroundGravity="right|center_vertical"
-                android:src="@drawable/ip" />
-        </RelativeLayout>
-    </LinearLayout>
-
+            android:background="@android:color/white"
+            android:gravity="top"
+            android:layout_marginTop="10dp">
+            <RelativeLayout
+                android:id="@+id/relativeLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white">
+                <ImageButton
+                    android:id="@+id/backButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/white"
+                    android:src="@drawable/left_arrow_aqua" />
+                <ImageButton
+                    android:id="@+id/ipButton"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="40dp"
+                    android:background="@color/white"
+                    android:foregroundGravity="right|center_vertical"
+                    android:src="@drawable/ip" />
+            </RelativeLayout>
+        </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -79,7 +78,7 @@
             android:gravity="center_horizontal"
             android:text="Now fill your Login \n information"
             android:textColor="@color/greyText"
-            android:textSize="20dp"/>
+            android:textSize="20dp" />
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -92,15 +91,13 @@
             android:id="@+id/info"
             android:layout_gravity="center"
             android:textColor="@color/red"
-            android:textSize="10dp"
-            />
+            android:textSize="10dp"  />
         <android.support.design.widget.TextInputLayout
             android:id="@+id/usernameLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColorHint="@color/blue" >
-
         <EditText
             android:id="@+id/usernameEditText"
             android:layout_width="300dp"
@@ -115,8 +112,7 @@
             android:textColor="@color/blue"
             android:textSize="15dp"
             android:singleLine="true"
-            android:nextFocusDown="@+id/firstpassEditText"
-            />
+            android:nextFocusDown="@+id/firstpassEditText" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:id="@+id/firstpassLayout"
@@ -124,7 +120,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColorHint="@color/blue" >
-
             <EditText
                 android:id="@+id/firstpassEditText"
                 android:layout_width="300dp"
@@ -133,7 +128,6 @@
                 android:background="@drawable/edittext"
                 android:fontFamily="@font/titillium_weblight"
                 android:hint="Password"
-
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:paddingLeft="30dp"
@@ -146,8 +140,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColorHint="@color/blue"
-            >
+            android:textColorHint="@color/blue">
         <EditText
             android:id="@+id/secondpassEditText"
             android:layout_width="300dp"
@@ -197,6 +190,6 @@
             android:text="Already have an account? Sign in"
             android:textColor="@color/blue"
             android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
 </ScrollView>

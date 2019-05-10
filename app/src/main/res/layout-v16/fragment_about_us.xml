@@ -1,46 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="bottom"
+    android:gravity="bottom"
+    android:theme="@style/ThemeOverlay.AppCompat"
+    android:background="@drawable/aboutus_background"
+    >
+<LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/footer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/aboutus_background"
+    android:layout_height="wrap_content"
+
     android:gravity="center"
     android:layout_gravity="center_horizontal"
     android:orientation="vertical"
-    android:theme="@style/ThemeOverlay.AppCompat">
+    >
    <ImageView
        android:layout_width="200dp"
        android:layout_height="200dp"
        android:src="@drawable/biglogo"
-       android:layout_gravity="center_horizontal"
-       />
-    <TextView
+       android:layout_gravity="center_horizontal" />
+   <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="V 1.0"
+        android:text="V 1.7.160"
         android:textAllCaps="true"
         android:gravity="center_horizontal"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20dp"
         android:textStyle="bold"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:padding="30dp"
         android:text="We are Tanya Naidenova and Daniel Velichkov and we study in Math High School in Plovdiv, Bulgaria. Our mission is to make the world a better place to live in. We hope that this application will be useful for many people."
         android:textAlignment="center"
-        android:gravity="center_horizontal"
-        android:textSize="15dp"
         android:textColor="@color/greyText"
-        android:padding="30dp"/>
-    <TextView
+        android:textSize="15dp" />
+
+</LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:text="tanya.naidenova@abv.bg 0898855763
-dani.levski00@gmail.com 0988922448"
-        android:textColor="@color/greyText"/>
+        android:layout_height="149dp"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="tanya.naidenova@abv.bg 0898855763 \n
+ dani.levski00@gmail.com 0988922448"
+            android:textColor="@color/greyText"
+            android:layout_marginBottom="10dp"
+            />
+    </LinearLayout>
+
+
 </LinearLayout>

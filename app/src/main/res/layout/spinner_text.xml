@@ -8,5 +8,4 @@
     android:layout_height="wrap_content"
     android:ellipsize="marquee"
     android:paddingLeft="2dp"
-    android:textColor="@color/blue"
-    />
+    android:textColor="@color/blue" />

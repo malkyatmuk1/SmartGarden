@@ -25,8 +25,7 @@
         android:layout_height="wrap_content"
         android:elevation="5dp"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/edittext_white"
-        >
+        android:background="@drawable/edittext_white">
         <EditText
             android:id="@+id/email"
             android:layout_width="300dp"
@@ -60,8 +59,7 @@
             android:maxLines="4"
             android:gravity="start"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/edittext_white"
-            />
+            android:background="@drawable/edittext_white" />
     </FrameLayout>
     <Button
         android:id="@+id/submitButton"

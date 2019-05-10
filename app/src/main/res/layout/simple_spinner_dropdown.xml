@@ -12,5 +12,4 @@
     android:singleLine="true"
     android:background="@color/white"
     android:textColor="@color/greyText"
-    android:textAlignment="center"
-    />
+    android:textAlignment="center" />

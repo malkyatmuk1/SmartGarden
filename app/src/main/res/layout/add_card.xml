@@ -12,36 +12,75 @@
     android:layout_gravity="center"
     app:cardCornerRadius="20dp"
     android:layout_marginBottom="80dp"
-
-    android:foregroundGravity="center_vertical"
-    >
-        <LinearLayout
+    android:foregroundGravity="center_vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_margin="10dp" >
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/plant"
+            android:layout_gravity="center_horizontal" />
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/nameLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_margin="10dp"
-
-            >
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/plant"
-                android:layout_gravity="center_horizontal"
-                />
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/nameLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColorHint="@color/blue" >
-            <EditText
-                android:id="@+id/namePlant"
+            android:textColorHint="@color/blue" >
+        <EditText
+            android:id="@+id/namePlant"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal"
+            android:hint="Name"
+            android:textSize="15dp"
+            android:paddingLeft="10dp"
+            android:textColorHint="@color/greyText"
+            android:textColor="@color/greyText"
+            android:layout_marginTop="10dp"
+            android:singleLine="true"
+            android:nextFocusDown="@+id/pouringTimes"
+            android:background="@drawable/edittext" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/typeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColorHint="@color/blue" >
+            <AutoCompleteTextView
+                android:id="@+id/plantType"
                 android:layout_width="150dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_horizontal"
-                android:hint="Name"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/edittext"
+                android:paddingLeft="15dp"
+                android:textColorHint="@color/greyText"
+                android:textColor="@color/greyText"
+                android:textSize="15dp"
+                android:hint="Type"
+                android:singleLine="true"
+                android:ems="10">
+            </AutoCompleteTextView>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/ipLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColorHint="@color/blue">
+            <EditText
+                android:id="@+id/ipPlant"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:hint="IP"
                 android:textSize="15dp"
                 android:paddingLeft="10dp"
                 android:textColorHint="@color/greyText"
@@ -49,94 +88,36 @@
                 android:layout_marginTop="10dp"
                 android:singleLine="true"
                 android:nextFocusDown="@+id/pouringTimes"
-
-                android:background="@drawable/edittext"
-                />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/typeLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColorHint="@color/blue"
-                >
-                <AutoCompleteTextView
-                    android:id="@+id/plantType"
-                    android:layout_width="150dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/edittext"
-                    android:paddingLeft="15dp"
-                    android:textColorHint="@color/greyText"
-                    android:textColor="@color/greyText"
-                    android:textSize="15dp"
-                    android:hint="Type"
-
-                    android:singleLine="true"
-                    android:ems="10">
-                </AutoCompleteTextView>
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/ipLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColorHint="@color/blue"
-                >
-                <EditText
-                    android:id="@+id/ipPlant"
-                    android:layout_width="150dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_horizontal"
-                    android:hint="IP"
-                    android:textSize="15dp"
-                    android:paddingLeft="10dp"
-                    android:textColorHint="@color/greyText"
-                    android:textColor="@color/greyText"
-                    android:layout_marginTop="10dp"
-                    android:singleLine="true"
-                    android:nextFocusDown="@+id/pouringTimes"
-
-                    android:background="@drawable/edittext"
-                    />
-            </android.support.design.widget.TextInputLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:orientation="horizontal"
-                >
-                <TextView
+                android:background="@drawable/edittext" />
+        </android.support.design.widget.TextInputLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:orientation="horizontal">
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Plant's IP matches yours?"
                 android:fontFamily="@font/tt_corals_thin_demo"
                 android:textColor="@color/blue"
-                android:textSize="10dp"
-                />
-
-                <CheckBox
-                    android:id="@+id/ipMatch"
-                    android:layout_width="30dp"
-                    android:layout_height="20dp"
-                    android:buttonTint="@color/aqua"
-                    android:text="Plant's IP matches yours?"
-                    />
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/addButton"
-                android:layout_width="150dp"
-                android:layout_height="30dp"
-                android:text="Add"
-                android:textAllCaps="false"
-                android:drawableRight="@drawable/right_arrow_button"
-                android:background="@drawable/button"
-                android:textSize="15dp"
-                android:layout_marginTop="10dp"
-                />
-
+                android:textSize="10dp" />
+            <CheckBox
+                android:id="@+id/ipMatch"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:buttonTint="@color/aqua"
+                android:text="Plant's IP matches yours?" />
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:text="Add"
+            android:textAllCaps="false"
+            android:drawableRight="@drawable/right_arrow_button"
+            android:background="@drawable/button"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

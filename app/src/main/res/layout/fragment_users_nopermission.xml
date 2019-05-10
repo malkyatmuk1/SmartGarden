@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/nopermission"
-    android:background="@drawable/sad"    >
+    android:background="@drawable/sad" >
 
     <TextView
         android:layout_width="wrap_content"
@@ -14,9 +14,6 @@
         android:textSize="30dp"
         android:fontFamily="@font/tt_corals_thin_demo"
         android:gravity="center"
-        android:textStyle="bold"
-
-        />
-
+        android:textStyle="bold" />
 
 </LinearLayout>

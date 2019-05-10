@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:targetApi="11"
-
     tools:context=".IP"
     android:orientation="vertical"
     android:gravity="top">
@@ -29,7 +28,6 @@
                 android:layout_marginBottom="40dp"
                 android:background="@color/white"
                 android:src="@drawable/left_arrow_aqua" />
-
         </RelativeLayout>
     </LinearLayout>
     <LinearLayout
@@ -37,8 +35,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.5"
         android:orientation="vertical"
-        android:gravity="center"
-        >
+        android:gravity="center" >
         <TextView
             android:id="@+id/welcome"
             android:layout_width="match_parent"
@@ -48,12 +45,9 @@
             android:textAlignment="center"
             android:textSize="40sp"
             android:textColor="@color/aqua"
-            android:layout_marginBottom="10dp"
-            />
-
+            android:layout_marginBottom="10dp" />
         <EditText
             android:id="@+id/ip"
-
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
@@ -66,9 +60,7 @@
             android:textSize="15dp"
             android:inputType="numberDecimal"
             android:digits="0123456789."
-            android:hint="IP"
-            />
-
+            android:hint="IP" />
         <Button
             android:id="@+id/applyIpButton"
             android:layout_width="300dp"
@@ -83,7 +75,6 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="15dp" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

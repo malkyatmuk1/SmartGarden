@@ -24,7 +24,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 /**
- * Created by malkyatmuk on 10/24/17.
+ * Created by malkyatmuk on 10/24/18.
  */
 
 
@@ -94,7 +94,6 @@ public class Adapter_List extends BaseAdapter {
                             outToServer.writeBytes("del " +  name+ " " + Global.username + " " + Global.password + '\n');
                             outToServer.flush();
 
-
                             clientSocket.close();
                         } catch (IOException e) {
                             System.out.println("Exception " + e);
@@ -147,7 +146,6 @@ public class Adapter_List extends BaseAdapter {
                                 outToServer.writeBytes("setPermission " +name + " n " + Global.username + " " + Global.password + '\n');
                             modif = inFromServer.readLine();
                             mList.set(position, name + " " + modif);
-
                             outToServer.flush();
                             clientSocket.close();
                         } catch (IOException e) {
@@ -157,9 +155,7 @@ public class Adapter_List extends BaseAdapter {
                     }
 
                     @Override
-                    protected void onPostExecute(Void result) {
-
-                    }
+                    protected void onPostExecute(Void result) {}
 
                     @Override
                     protected void onPreExecute() {}
@@ -167,9 +163,7 @@ public class Adapter_List extends BaseAdapter {
                     @Override
                     protected void onProgressUpdate(Void... values) {}
                 }
-                new LongOperation().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);;
-
-
+                new LongOperation().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
         };
 

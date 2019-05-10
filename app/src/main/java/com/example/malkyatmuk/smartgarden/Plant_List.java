@@ -28,7 +28,6 @@ import java.net.Socket;
 public class Plant_List extends Fragment {
 
     String[] gen = new String[]{"There are no plants!~"};
-    //ProgressBar progressBar;
     FloatingActionButton fab;
     Button viewPlant;
     View view;
@@ -38,8 +37,6 @@ public class Plant_List extends Fragment {
     public void readPlants(View view, boolean isProgressbar) {
 
         final GridView gridView = (GridView) view.findViewById(R.id.card_listView);
-       // progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-    //    if (isProgressbar) progressBar.setVisibility(View.VISIBLE);
         Global.users.clear();
         final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         class LongOperationRestart extends AsyncTask<String, Void, Void> {
@@ -47,19 +44,17 @@ public class Plant_List extends Fragment {
             private String SERVER_IP;
             private Socket clientSocket;
 
-
             @Override
             protected void onPostExecute(Void result) {
-            //    progressBar.setVisibility(View.GONE);
                 ArrayAdapter mAdapter_List;
                 if (Global.myPlants.isEmpty()) {
                     mAdapter_List = new ArrayAdapter(getContext(), R.layout.listview_general, R.id.name_general, gen);
                     gridView.setAdapter(mAdapter_List);
                     mAdapter_List.notifyDataSetChanged();
-                } else {
+                }
+                else {
                    Adapter adapter = new Adapter(getContext(), Global.myPlants);
                     listView.setAdapter(adapter);
-
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -70,12 +65,10 @@ public class Plant_List extends Fragment {
             }
 
             @Override
-            protected void onPreExecute() {
-            }
+            protected void onPreExecute() {}
 
             @Override
-            protected void onProgressUpdate(Void... values) {
-            }
+            protected void onProgressUpdate(Void... values) {}
         }
         new LongOperationRestart().execute("");
 
@@ -90,23 +83,18 @@ public class Plant_List extends Fragment {
             listView = (GridView) view.findViewById(R.id.card_listView);
             fab = (FloatingActionButton) view.findViewById(R.id.fab);
             fab.setOnClickListener(FabButtonListener);
-            //progressBar=(ProgressBar) view.findViewById(R.id.progressBar);
             readPlants(view, false);
             Global.fromView = false;
-
-
-           adapter = new Adapter(getContext(), Global.myPlants);
+            adapter = new Adapter(getContext(), Global.myPlants);
             listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
             new LongOperation().execute("");
-
             return view;
-        } else {
+        }
+        else {
             view = inflater.inflate(R.layout.fragment_users_nopermission, container, false);
             return view;
         }
-
-
     }
 
     @Override
@@ -119,16 +107,13 @@ public class Plant_List extends Fragment {
     View.OnClickListener FabButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
             startActivityForResult(new Intent(view.getContext(), Add_Card.class), 0);
-
         }
     };
 
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
         getActivity().setTitle("Plants List");
         view.setFocusable(false);
@@ -138,11 +123,9 @@ public class Plant_List extends Fragment {
                 @Override
                 public void onRefresh() {
                     readPlants(view, false);
-
                     sr.setRefreshing(false);
                 }
             });
-
         }
     }
 
@@ -154,7 +137,7 @@ public class Plant_List extends Fragment {
         protected Void doInBackground(String... Param) {
 
             try {
-
+                // Get Humidity
                 Socket clientSocket;
                 clientSocket = new Socket(Global.ip, SERVERPORT);
                 BufferedReader inFromServer;
@@ -163,17 +146,16 @@ public class Plant_List extends Fragment {
                 inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 outToServer.writeBytes("Humidity true" + '\n');
                 outToServer.flush();
-
                 line = inFromServer.readLine();
                 Global.humidity = Double.parseDouble(line);
                 clientSocket.close();
 
+                //Get temperature from Humidity sensor
                 clientSocket = new Socket(Global.ip, SERVERPORT);
                 outToServer = new DataOutputStream(clientSocket.getOutputStream());
                 inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 outToServer.writeBytes("Humidity false" + '\n');
                 outToServer.flush();
-
                 line = inFromServer.readLine();
                 Global.temperature = Double.parseDouble(line);
                 clientSocket.close();

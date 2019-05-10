@@ -56,7 +56,6 @@ public class WifiDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         return  AutoOrHandDialog(getActivity());
-
     }
 
     class WifiReceiver extends BroadcastReceiver {
@@ -108,8 +107,6 @@ public class WifiDialog extends DialogFragment {
                         Log.e("tukotPass","SledLog1");
                         lg.execute("");
 
-
-//                        progressBar.setVisibility(View.VISIBLE);
                     }
                 })
                 .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -189,7 +186,6 @@ class LongOperation extends AsyncTask<String, Void, Void> {
     {
 
         super();
-        Log.e("hh","vKonstruktora");
         this.mContext=context;
         this.wifi=wifiManager;
     }
@@ -203,28 +199,22 @@ class LongOperation extends AsyncTask<String, Void, Void> {
         Log.e("tukotPass", msg);
         while(!mWifi.isConnected()){if(mWifi.isConnected()) msg="yes";
         else {msg="no"; mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);}
-            Log.e("tukotPass", msg);};
+        }
         try {
 
             int SERVERPORT = 3030;
             InetAddress ip = InetAddress.getByName(Global.directip);
-            Log.e("p", "tuk");
             Thread.sleep(2000);
             Socket clientSocket = new Socket("192.168.4.1", SERVERPORT);
-            Log.e("phg", "tuk");
             String send = "ip\n";
 
             DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
             BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             outToServer.writeBytes(send);
-
             outToServer.flush();
-
 
             String modifiedSentence = inFromServer.readLine();
             Global.ip = modifiedSentence;
-            //  Global.setIP(modifiedSentence, mContext);
-
             clientSocket.close();
             wifi.disconnect();
 
@@ -233,7 +223,6 @@ class LongOperation extends AsyncTask<String, Void, Void> {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
 
         return null;
     }

@@ -114,8 +114,6 @@ public class SignIn extends AppCompatActivity {
 
             if (true) {
                 SERVER_IP = Global.directip;
-                //Global.setIP(Global.directip, getApplicationContext());
-                //Global.setIP(Global.directip, getApplicationContext());
             } else {
                 if (Global.ip.isEmpty()) {
                     //  WifiDialog wifidialog=new WifiDialog();
@@ -131,34 +129,15 @@ public class SignIn extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
-                        //Log.d("dani","tuk");
-                        //Thread.sleep(2000);
                         clientSocket = new Socket(Global.ip, SERVERPORT);
-                        /*
-                                    send = "signin " + usernameEditText.getText() + " " + passwordEditText.getText() + '\n';
-                                    incorrectUserOrPass.setText(send);
-                                    incorrectUserOrPass.setVisibility(View.VISIBLE);
-                            this put here force the program to shut down after clicking on signin button
-                         */
-                        send = "signin " + usernameEditText.getText() + " " + passwordEditText.getText() + '\n';
+                                             send = "signin " + usernameEditText.getText() + " " + passwordEditText.getText() + '\n';
 
                         DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
                         BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                         outToServer.writeBytes(send);
                         outToServer.flush();
-                        /*OutputStreamWriter os=new OutputStreamWriter(clientSocket.getOutputStream());
-                        PrintWriter out=new PrintWriter(os);
-                        out.write(send);
-                        os.flush();
-
-                        BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                        */
                         modifiedSentence=inFromServer.readLine();
 
-                        //incorrectUserOrPass.setText(modifiedSentence);
-                        //Intent intent = new Intent(getApplicationContext(), Start_menu.class);
-                        //startActivity(intent);
-                        //finish();
                         if (modifiedSentence.equals("IncorrectPass")){
                             incorrectUserOrPass.post(new Runnable() {
                                 public void run() {
@@ -175,10 +154,7 @@ public class SignIn extends AppCompatActivity {
                                     passwordEditText.setText("");
                                 }
                             });
-                            //startActivity(intent);
-                            //finish();
-                            //incorrectUserOrPass.setVisibility(View.VISIBLE);
-                            //incorrectUserOrPass.setText(modifiedSentence);
+
                         } else if (modifiedSentence.equals("NoPermission")) {
                             Intent intent = new Intent(getApplicationContext(), Start_menu.class);
                             Global.signedIn=true;
@@ -192,8 +168,6 @@ public class SignIn extends AppCompatActivity {
                             startActivity(intent);
                             finish();
 
-                            //incorrectUserOrPass.setText(modifiedSentence);
-                            //incorrectUserOrPass.setVisibility(View.VISIBLE);
                         } else if (modifiedSentence.equals("a") || modifiedSentence.equals("u")) {
                             Intent intent = new Intent(getApplicationContext(), Start_menu.class);
                             Global.signedIn=true;
@@ -213,8 +187,6 @@ public class SignIn extends AppCompatActivity {
                             }
                             startActivity(intent);
                             finish();
-                            //incorrectUserOrPass.setVisibility(View.GONE);
-                            //incorrectUserOrPass.setText(modifiedSentence);
                         }
                         clientSocket.close();
                     } catch (IOException e) {
@@ -223,7 +195,6 @@ public class SignIn extends AppCompatActivity {
                     return;
                 }
             }).start();
-
         }
 
     };

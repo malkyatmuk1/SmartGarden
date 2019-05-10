@@ -78,11 +78,9 @@ public class Add_Card extends AppCompatActivity {
         card= (CardView) findViewById(R.id.addCard);
         ip= (TextInputLayout) findViewById(R.id.ipLayout);
         name = (EditText) findViewById(R.id.namePlant);
-        //pouring = (EditText) findViewById(R.id.pouringTimes);
-        newCard = (Button) findViewById(R.id.addButton);
+       newCard = (Button) findViewById(R.id.addButton);
         newCard.setOnClickListener(NewCardListener);
         ipPlant= (EditText) findViewById(R.id.ipPlant);
-
         ipMatch=(CheckBox) findViewById(R.id.ipMatch);
         ipMatch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -122,26 +120,6 @@ public class Add_Card extends AppCompatActivity {
             String nameOfPlant=name.getText().toString();
             String typeOfPlant=typePlant.getText().toString();
 
-            /*if(nameOfPlant.length()!=0 && value.length()!=0) {
-                boolean flag = true;
-                for (int i = 0; i < value.length(); i++) {
-                    if (value.charAt(i) - '0' >= 0 && value.charAt(i) - '0' <= 9) {
-                        continue;
-                    } else {
-                        flag = false;
-                        break;
-                    }
-                }
-                if (flag == false) {
-                    pouring.setText("Need a whole number");
-                } else {
-                    Plants pl = new Plants();
-                    pl.namePlant = nameOfPlant;
-                    pl.pouring = Integer.parseInt(pouring.getText().toString());
-                    Global.myPlants.add(pl);
-                    finish();
-                }
-            }*/
             if(ipMatch.isChecked()) {
                 Plants pl = new Plants();
                 int indexFinal=-1;
@@ -170,7 +148,6 @@ public class Add_Card extends AppCompatActivity {
                 ss="plantIndex"+indx;
                 sp.edit().putInt(ss,pl.index).apply();
                 finish();
-
             }
             else {
 
@@ -192,7 +169,6 @@ public class Add_Card extends AppCompatActivity {
                     pl.ipPlant = ipPlant.getText().toString();
                     pl.index=indexFinal;
                     Global.myPlants.add(pl);
-
                     String indx=String.valueOf(indexFinal);
                     String ss="plantName"+indx;
                     sp.edit().putString(ss,pl.namePlant).apply();
@@ -202,14 +178,12 @@ public class Add_Card extends AppCompatActivity {
                     sp.edit().putString(ss,pl.ipPlant).apply();
                     ss="plantIndex"+indx;
                     sp.edit().putInt(ss,pl.index).apply();
-
                     finish();
                 }
                 else ipPlant.setHint(
                         "     must be entered"
                 );
             }
-
 
         }
     };

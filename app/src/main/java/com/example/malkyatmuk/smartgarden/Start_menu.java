@@ -121,9 +121,6 @@ public class Start_menu<LogoutClickListener> extends AppCompatActivity
         public boolean onMenuItemClick(MenuItem menuItem) {
 
             func();
-            //Intent intent = new Intent(,SignIn.class);
-            //startActivity(intent);
-            //finish();
             return false;
         }
     };
@@ -132,9 +129,7 @@ public class Start_menu<LogoutClickListener> extends AppCompatActivity
 
         public void onClick(View view) {
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
             drawer.closeDrawer(Gravity.LEFT,true);
-            //finish();
         }
     };
     @Override
@@ -193,7 +188,6 @@ public class Start_menu<LogoutClickListener> extends AppCompatActivity
                 break;
         }
 
-
         //replacing the fragment
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -204,5 +198,4 @@ public class Start_menu<LogoutClickListener> extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
-
 }

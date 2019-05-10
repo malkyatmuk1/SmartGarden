@@ -33,7 +33,6 @@ public class Start extends AppCompatActivity {
             Global.setIP(Global.ip,getApplicationContext());
             if(sp.getBoolean("logged",false)){
 
-
                 for(int indxx=0;indxx<=20;indxx++) {
                     Plants pl = new Plants();
                     String indx=String.valueOf(indxx);

@@ -22,7 +22,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
+//TODO trqbva da go opravish
 
 public class Pouring_Info extends Activity {
 
@@ -490,13 +490,11 @@ public class Pouring_Info extends Activity {
                     //+pouringTimes.getText().toString()+" 1";//TODO its for daily only
                     DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
                     inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                    inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                     outToServer.writeBytes(send);
                     outToServer.flush();
                     line = inFromServer.readLine();
                     if(Global.isItFromAuto==false)usedWater.setText(line);
                     clientSocket.close();
-                    //izprastame na servera: <water> <1(1 za automatic - 0 za ednokratno)> <pouring times> <daily/weekly/monthly(1,2,3)>
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

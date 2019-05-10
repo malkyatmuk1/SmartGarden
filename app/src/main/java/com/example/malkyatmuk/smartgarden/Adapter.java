@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by malkyatmuk on 10/24/17.
+ * Created by malkyatmuk on 10/24/18.
  */
 
 
@@ -56,14 +56,12 @@ public class Adapter extends BaseAdapter {
     }
 
     @Override
-
     public View getView(final int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
         //use convertView recycle
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.card, parent, false);
-
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -72,9 +70,7 @@ public class Adapter extends BaseAdapter {
         holder.plantName = (TextView) convertView.findViewById(R.id.name);
         holder.ViewButton = (Button) convertView.findViewById(R.id.button_view);
         holder.DellButton = (Button) convertView.findViewById(R.id.button_dell);
-
         Plants pl = (Plants) this.getItem(position);
-
         holder.plantName.setText(pl.getName());
         holder.PlantImage.setBackgroundResource(R.drawable.plant);
         holder.ViewButton.setOnClickListener(new View.OnClickListener() {
@@ -93,23 +89,22 @@ public class Adapter extends BaseAdapter {
 
             @Override
             public void onClick(View v) {
+
                 Global.toDelete=Global.myPlants.get(position).index;
                 notifyDataSetChanged();
                 mList.remove(position);
-
                 new DeleteSharedPreferences().execute(mContext);
+
             }
 
         });
         return convertView;
 
     }
-
         class ViewHolder {
             TextView plantName;
             Button ViewButton;
             Button DellButton;
             ImageView PlantImage;
         }
-
 }

@@ -17,8 +17,7 @@ public class DeleteSharedPreferences extends AsyncTask<Context, Void, Void> {
          SharedPreferences prefs =
                  context.getSharedPreferences("login", Context.MODE_PRIVATE);
 
-         String myBackgroundPreference = prefs.getString("preference name", "default value");
-
+        String myBackgroundPreference = prefs.getString("preference name", "default value");
         String indx=String.valueOf(Global.toDelete);
         String ss="plantName"+indx;
         prefs.edit().remove(ss).apply();
@@ -40,11 +39,7 @@ public class DeleteSharedPreferences extends AsyncTask<Context, Void, Void> {
          prefs.edit().remove(ss).apply();
         ss="plantNextPouringDay"+indx;
          prefs.edit().remove(ss).apply();
-
-
         Global.fromDeleteShPr=true;
         return null;
     }
-
-
 }

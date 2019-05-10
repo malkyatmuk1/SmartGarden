@@ -24,11 +24,8 @@ public class Contact_Us extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-
         View myFragmentView = inflater.inflate(R.layout.fragment_contact_us, container, false);
-
         return myFragmentView;
-
     }
 
     @Override
@@ -39,13 +36,11 @@ public class Contact_Us extends Fragment {
         sendButton=(Button)getView().findViewById(R.id.submitButton);
         emailAdress=(EditText)getView().findViewById(R.id.email);
         textEmail=(EditText)getView().findViewById(R.id.textEmail);
-
         sendButton.setOnClickListener(SendEmailListener);
     }
     View.OnClickListener SendEmailListener=new View.OnClickListener() {
 
         public void onClick(View view) {
-
 
             Intent i = new Intent(Intent.ACTION_SEND);
             i.setType("message/rfc822");
@@ -54,10 +49,9 @@ public class Contact_Us extends Fragment {
             i.putExtra(Intent.EXTRA_TEXT   , "body of email");
             try {
                 startActivity(Intent.createChooser(i, "Send mail..."));
-            } catch (android.content.ActivityNotFoundException ex) {
             }
+            catch (android.content.ActivityNotFoundException ex) {}
         }
 
     };
-
 }

@@ -42,7 +42,6 @@ public class Change_Password extends Fragment {
         confPass=(EditText) myFragmentView.findViewById(R.id.passwordTwo);
         changePass=(Button) myFragmentView.findViewById(R.id.changePassButton);
         noMatch=(TextView) myFragmentView.findViewById(R.id.noMatching);
-
         changePass.setOnClickListener(ChangePasswordListener);
         return myFragmentView;
 
@@ -74,31 +73,15 @@ public class Change_Password extends Fragment {
                     @Override
                     public void run() {
                         try {
-                            //Log.d("dani","tuk");
-                            //Thread.sleep(2000);
+
                             clientSocket = new Socket(Global.ip, SERVERPORT);
-                            /*
-                                        send = "signin " + usernameEditText.getText() + " " + passwordEditText.getText() + '\n';
-                                        incorrectUserOrPass.setText(send);
-                                        incorrectUserOrPass.setVisibility(View.VISIBLE);
-                                this put here force the program to shut down after clicking on signin button
-                             */
                             send = "setPassWord " + Global.username + " " + oldPassw + " " + newPassw + '\n';
 
                             DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
                             BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                             outToServer.writeBytes(send);
                             outToServer.flush();
-                            /*OutputStreamWriter os=new OutputStreamWriter(clientSocket.getOutputStream());
-                            PrintWriter out=new PrintWriter(os);
-                            out.write(send);
-                            os.flush();
-                            BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                            */
                             modifiedSentence=inFromServer.readLine();
-
-                            //incorrectUserOrPass.setText(modifiedSentence);
-                            //Intent intent = new Intent(getApplicationContext(), Start_menu.class);
                             if (modifiedSentence.equals("Incorect Pass")){
                                 noMatch.post(new Runnable() {
                                     public void run() {
@@ -120,10 +103,6 @@ public class Change_Password extends Fragment {
                                         confPass.setText("");
                                     }
                                 });
-                                //startActivity(intent);
-                                //finish();
-                                //incorrectUserOrPass.setVisibility(View.VISIBLE);
-                                //incorrectUserOrPass.setText(modifiedSentence);
                             }
                             else if (modifiedSentence.equals("ready!")) {
                                 Global.password=newPassw;
@@ -150,8 +129,6 @@ public class Change_Password extends Fragment {
 
                             }
 
-                                //incorrectUserOrPass.setVisibility(View.GONE);
-
                             clientSocket.close();
                         } catch (IOException e) {
                             System.out.println("Exception " + e);
@@ -159,9 +136,7 @@ public class Change_Password extends Fragment {
                         return;
                     }
                 }).start();
-
         }}
 
     };
-
 }

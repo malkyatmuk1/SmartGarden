@@ -23,12 +23,8 @@ public class About_Us extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-
         View  myFragmentView = inflater.inflate(R.layout.fragment_about_us, container, false);
         return myFragmentView;
-
-
-
     }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -36,7 +32,5 @@ public class About_Us extends Fragment {
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTheme(R.style.MyActionBar);
         getActivity().setTitle("About us");
-
-
         }
 }

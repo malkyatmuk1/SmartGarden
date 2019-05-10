@@ -50,7 +50,6 @@ public class Client_List extends Fragment {
                     inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                     outToServer.writeBytes("list " + Global.username + " " + Global.password + '\n');
                     outToServer.flush();
-                    String[] spliter;
                     while (true)
                     {
                         line = inFromServer.readLine();
@@ -76,9 +75,7 @@ public class Client_List extends Fragment {
                 }
                 else{
                     Adapter_List adapter = new Adapter_List(getContext(), Global.users);
-
                     listView.setAdapter(adapter);
-
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -105,8 +102,6 @@ public class Client_List extends Fragment {
             View view = inflater.inflate(R.layout.fragment_users_nopermission, container, false);
             return view;
         }
-
-
     }
 
     @Override

@@ -79,17 +79,8 @@ public class WifiSettings extends Activity {
                 @Override
                 public void run() {
                     try {
-                        //Log.d("dani","tuk");
-                        //Thread.sleep(2000);
                         clientSocket = new Socket(Global.ip, SERVERPORT);
-                        /*
-                                    send = "signin " + usernameEditText.getText() + " " + passwordEditText.getText() + '\n';
-                                    incorrectUserOrPass.setText(send);
-                                    incorrectUserOrPass.setVisibility(View.VISIBLE);
-                            this put here force the program to shut down after clicking on signin button
-                         */
                         send = "setWifi " + wifiName + " " + wifiPass + " " + username + " " + pass + '\n';
-
                         DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
                         BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                         outToServer.writeBytes(send);
